@@ -11,7 +11,7 @@ namespace HsrLikeProject
     internal class Player
     {
 
-        PlayerTeam()
+        class PlayerTeam : Gacha
         {
 
             void displayTeam(Team)
@@ -25,7 +25,7 @@ namespace HsrLikeProject
         }
 
 
-        public ItemList()
+        public class ItemList : Item
         {
 
             var Inventory = new List<int>();
