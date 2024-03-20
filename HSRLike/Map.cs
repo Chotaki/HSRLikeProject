@@ -6,22 +6,20 @@ using System.Threading.Tasks;
 
 namespace HSRLike
 {
-    internal class Map
+    public class Map
     {
 
         static int height = 32;
         static int width = 128;
 
-        public static MapTile[,] map = new MapTile[height, width];
+        public static Map[,] map = new Map[height, width];
 
-        public class MapTile
-        {
-            public char character { get; set; }
+        public char character { get; set; }
 
-            public ConsoleColor colour { get; set; }
-        }
+        public ConsoleColor colour { get; set; }
 
-        public static void FillMap(MapTile tile)
+
+        public static void FillMap(Map tile)
         {
             //ligne
             for (int row = 0; row < height; row++)
@@ -33,5 +31,7 @@ namespace HSRLike
                 }
             }
 
+        }
     }
 }
+

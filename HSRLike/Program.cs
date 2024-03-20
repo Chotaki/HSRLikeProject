@@ -1,6 +1,27 @@
-﻿// See https://aka.ms/new-console-template for more information
-static void Main(string[] args)
+﻿using HSRLike;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+
+namespace Game
 {
-    MapTile defaultTile = 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Map defaultTile = new Map();
+            defaultTile.character = 'o';
+            defaultTile.colour = ConsoleColor.Green;
+
+            Map.FillMap(defaultTile);
+
+        }
+
+    }
 }
+
 
