@@ -1,11 +1,10 @@
-﻿using HsrLikeProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HSRLike
+namespace HSRLikeProject
 {
     internal class Enemy
     {

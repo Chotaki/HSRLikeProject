@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HsrLikeProject
+namespace HSRLikeProject
 {
     internal class Character
     {
@@ -455,7 +455,7 @@ namespace HsrLikeProject
             lynxTec.name = "Snowfield First Aid";
             lynxTec.desc = "Soigne un allié à hauteur de 10% des pv max de Lynx";
 
-            CharacterSkill lynxUlt;
+             CharacterSkill lynxUlt;
             lynxUlt.attackType = 4;
             lynxUlt.multiplier = 0.12F;
             lynxUlt.name = "Outdoor Survival Experience";
@@ -469,6 +469,17 @@ namespace HsrLikeProject
 
 
             return characterList;
+        }
+
+        public bool die()
+        {
+            if (_hp == 0) {
+                _alive = false;
+            } else {
+                _alive = true;
+            }
+
+            return _alive;
         }
     }
 }
