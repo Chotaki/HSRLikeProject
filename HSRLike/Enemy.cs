@@ -40,7 +40,7 @@ namespace HSRLikeProject
             _boss = eBoss;
             _types = eTypes;
         }
-        private struct EnemySkill
+        public struct EnemySkill
         {
             // attackType - 0 : Single Target, 1 : Blast, 2 : AoE, 3 : None
             public int attackType;
@@ -54,7 +54,7 @@ namespace HSRLikeProject
 
             // Magoret - Trotter 
 
-            Enemy magoret = new Enemy(1, "Magoret", 200, 12, true, false, [5, 4, 3]);
+            Enemy magoret = new Enemy(1, "Magoret", 200, 12, true, false, new List<int> { 5, 4, 3 });
 
             enemyList.Add(magoret);
 
