@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +44,8 @@ namespace HSRLikeProject
             public string desc;
         }
 
+        public List<Character> characterList = new List<Character> { };
+
         public Character(int cId, int cCharaType, string cName, int cHp, int cAtk, int cDef, int cType, bool cAlive, int cLvl, int cXp, int cEnergy, CharacterSkill[] cSkillList)
         {
             _id = cId;
@@ -60,8 +64,6 @@ namespace HSRLikeProject
 
         public List<Character> createCharacters()
         {
-            List<Character> characterList = new List<Character> { };
-
 
             // DAN HENG - vent
 
@@ -469,6 +471,21 @@ namespace HSRLikeProject
 
 
             return characterList;
+        }
+
+        public float normalAttack(int attackerId)
+        {
+            float damage;
+
+            damage = 0; 
+            /*  
+            Liste de personnage -> un personnage -> skillSet -> normalAttack -> multiplier
+            Liste de personnage -> un personnage -> atk
+            */
+
+            //PropertyInfo[] properties = typeof(Character).GetType().GetProperties();
+
+            return damage;
         }
 
         public bool die()
