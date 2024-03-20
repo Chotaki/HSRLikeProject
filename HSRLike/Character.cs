@@ -483,7 +483,7 @@ namespace HSRLikeProject
             Liste de personnage -> un personnage -> atk
             */
 
-          /*  for (int i = 0; i < characterList.size; i++)
+            /*for (int i = 0; i < characterList.size; i++)
             {
                 int attacker = characterList.get(i);
                 Character currentAttacker = attacker.get(Character);
@@ -493,12 +493,10 @@ namespace HSRLikeProject
                 }
             }*/
 
-            //PropertyInfo[] properties = typeof(Character).GetType().GetProperties();
-
             return damage;
         }
 
-        public bool die()
+        public bool checkIfDead()
         {
             if (_hp == 0) {
                 _alive = false;
