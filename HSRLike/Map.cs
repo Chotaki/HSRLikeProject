@@ -8,7 +8,11 @@ namespace HSRLike
 {
     internal class Map
     {
-        public static MapTile[,] map = new MapTile[32, 128];
+
+        static int height = 32;
+        static int width = 128;
+
+        public static MapTile[,] map = new MapTile[height, width];
 
         public class MapTile
         {
@@ -17,7 +21,17 @@ namespace HSRLike
             public ConsoleColor colour { get; set; }
         }
 
-
+        public static void FillMap(MapTile tile)
+        {
+            //ligne
+            for (int row = 0; row < height; row++)
+            {
+                //colonne
+                for (int col = 0; col < width; col++)
+                {
+                    map[row, col] = tile;
+                }
+            }
 
     }
 }
