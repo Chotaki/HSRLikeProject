@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HSRLikeProject
 {
-    internal class Character
+    public class Character
     {
         private int _id;
         // characterType : 0 = dps, 1 = healer, 2 = support
@@ -46,7 +46,7 @@ namespace HSRLikeProject
 
         public List<Character> characterList = new List<Character> { };
 
-        public Character(int cId, int cCharaType, string cName, int cHp, int cAtk, int cDef, int cType, bool cAlive, int cLvl, int cXp, int cEnergy, CharacterSkill[] cSkillList)
+        public Character(int cId, int cCharaType, string cName, int cHp, int cAtk, int cDef, int cType, bool cAlive, int cLvl, int cEnergy, CharacterSkill[] cSkillList)
         {
             _id = cId;
             _characterType = cCharaType;
@@ -57,7 +57,6 @@ namespace HSRLikeProject
             _type = cType;
             _alive = cAlive;
             _lvl = cLvl;
-            _xp = cXp;
             _energy = cEnergy;
             _skillList = cSkillList;
         }
@@ -87,7 +86,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] danHengSkills = new[] { danHengNormal, danHengTec, danHengUlt };
 
-            Character danHeng = new Character(0, 0, "Dan Heng", 120, 74, 54, 4, true, 1, 0, 0, danHengSkills);
+            Character danHeng = new Character(0, 0, "Dan Heng", 120, 74, 54, 4, true, 1, 0, danHengSkills);
 
             characterList.Add(danHeng);
 
@@ -114,9 +113,11 @@ namespace HSRLikeProject
 
             CharacterSkill[] jingYuanSkills = new[] { jingYuanNormal, jingYuanTec, jingYuanUlt };
 
-            Character jingYuan = new Character(1, 0, "Jing Yuan", 158, 95, 66, 3, true, 1, 0, 0, jingYuanSkills);
+            Character jingYuan = new Character(1, 0, "Jing Yuan", 158, 95, 66, 3, true, 1, 0, jingYuanSkills);
 
             characterList.Add(jingYuan);
+
+
 
 
             // YANQING - glace
@@ -141,7 +142,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] yanqingSkills = new[] { yanqingNormal, yanqingTec, yanqingUlt };
 
-            Character yanqing = new Character(2, 0, "Yanqing", 121, 92, 56, 2, true, 1, 0, 0, yanqingSkills);
+            Character yanqing = new Character(2, 0, "Yanqing", 121, 92, 56, 2, true, 1, 0, yanqingSkills);
 
             characterList.Add(yanqing);
 
@@ -158,7 +159,7 @@ namespace HSRLikeProject
             acheronTec.attackType = 1;
             acheronTec.multiplier = 1.6F;
             acheronTec.name = "Flash octobolt";
-            acheronTec.desc = "Inflige des dégats de foudre équivalent à 160% de l'attaque d'Acheron à un ennemi et 60% de son atk aux ennemis adjacents";
+            acheronTec.desc = "Inflige des dégats de foudre équivalent à 160% de l'attaque d'Acheron à un ennemi et 60% de son atk aux deux ennemis suivants";
 
             CharacterSkill acheronUlt;
             acheronUlt.attackType = 2;
@@ -168,7 +169,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] acheronSkills = new[] { acheronNormal, acheronTec, acheronUlt };
 
-            Character acheron = new Character(3, 0, "Acheron", 153, 95, 59, 3, true, 1, 0, 0, acheronSkills);
+            Character acheron = new Character(3, 0, "Acheron", 153, 95, 59, 3, true, 1, 0, acheronSkills);
 
             characterList.Add(acheron);
 
@@ -185,7 +186,7 @@ namespace HSRLikeProject
             trailblazerTec.attackType = 1;
             trailblazerTec.multiplier = 1.25F;
             trailblazerTec.name = "Home run final";
-            trailblazerTec.desc = "Inflige des dégats physiques équivalent à 125% de l'attaque du Trailblazer à un ennemi ainsi qu'aux ennemis adjacents";
+            trailblazerTec.desc = "Inflige des dégats physiques équivalent à 125% de l'attaque du Trailblazer à un ennemi ainsi qu'aux deux ennemis suivants";
 
             CharacterSkill trailblazerUlt;
             trailblazerUlt.attackType = 0;
@@ -195,7 +196,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] trailblazerSkills = new[] { trailblazerNormal, trailblazerTec, trailblazerUlt };
 
-            Character trailblazer = new Character(4, 0, "Trailblazer", 164, 84, 62, 0, true, 1, 0, 0, trailblazerSkills);
+            Character trailblazer = new Character(4, 0, "Trailblazer", 164, 84, 62, 0, true, 1, 0, trailblazerSkills);
 
             characterList.Add(trailblazer);
 
@@ -222,7 +223,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] seeleSkills = new[] { seeleNormal, seeleTec, seeleUlt };
 
-            Character seele = new Character(5, 0, "Seele", 127, 87, 49, 5, true, 1, 0, 0, seeleSkills);
+            Character seele = new Character(5, 0, "Seele", 127, 87, 49, 5, true, 1, 0, seeleSkills);
 
             characterList.Add(seele);
 
@@ -249,7 +250,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] marchSkills = new[] { marchNormal, marchTec, marchUlt };
 
-            Character march = new Character(6, 2, "March 7th", 144, 69, 78, 2, true, 1, 0, 0, marchSkills);
+            Character march = new Character(6, 2, "March 7th", 144, 69, 78, 2, true, 1, 0, marchSkills);
 
             characterList.Add(march);
 
@@ -276,7 +277,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] aventurineSkills = new[] { aventurineNormal, aventurineTec, aventurineUlt };
 
-            Character aventurine = new Character(7, 2, "Aventurine", 164, 60, 89, 6, true, 1, 0, 0, aventurineSkills);
+            Character aventurine = new Character(7, 2, "Aventurine", 164, 60, 89, 6, true, 1, 0, aventurineSkills);
 
             characterList.Add(aventurine);
 
@@ -303,7 +304,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] gepardSkills = new[] { gepardNormal, gepardTec, gepardUlt };
 
-            Character gepard = new Character(8, 2, "Gepard", 190, 73, 89, 2, true, 1, 0, 0, gepardSkills);
+            Character gepard = new Character(8, 2, "Gepard", 190, 73, 89, 2, true, 1, 0, gepardSkills);
 
             characterList.Add(gepard);
 
@@ -330,7 +331,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] tingyunSkills = new[] { tingyunNormal, tingyunTec, tingyunUlt };
 
-            Character tingyun = new Character(9, 2, "Tingyun", 115, 72, 54, 3, true, 1, 0, 0, tingyunSkills);
+            Character tingyun = new Character(9, 2, "Tingyun", 115, 72, 54, 3, true, 1, 0, tingyunSkills);
 
             characterList.Add(tingyun);
 
@@ -347,7 +348,7 @@ namespace HSRLikeProject
             astaTec.attackType = 0;
             astaTec.multiplier = 0.6F;
             astaTec.name = "Tempête de météores";
-            astaTec.desc = "Inflige 5 fois des dégats de feu équivalent à 60% de l'attaque d'Asta à une cible unique";
+            astaTec.desc = "Inflige des dégats de feu équivalent à 60% de l'attaque d'Asta 5 fois aléatoirement aux ennemis";
 
             CharacterSkill astaUlt;
             astaUlt.attackType = 3;
@@ -357,7 +358,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] astaSkills = new[] { astaNormal, astaTec, astaUlt };
 
-            Character asta = new Character(10, 2, "Asta", 139, 69, 63, 1, true, 1, 0, 0, astaSkills);
+            Character asta = new Character(10, 2, "Asta", 139, 69, 63, 1, true, 1, 0, astaSkills);
 
             characterList.Add(asta);
 
@@ -384,7 +385,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] hanyaSkills = new[] { hanyaNormal, hanyaTec, hanyaUlt };
 
-            Character hanya = new Character(11, 2, "Hanya", 125, 76, 48, 0, true, 1, 0, 0, hanyaSkills);
+            Character hanya = new Character(11, 2, "Hanya", 125, 76, 48, 0, true, 1, 0, hanyaSkills);
 
             characterList.Add(hanya);
 
@@ -411,7 +412,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] natashaSkills = new[] { natashaNormal, natashaTec, natashaUlt };
 
-            Character natasha = new Character(12, 1, "Natasha", 158, 64, 69, 0, true, 1, 0, 0, natashaSkills);
+            Character natasha = new Character(12, 1, "Natasha", 158, 64, 69, 0, true, 1, 0, natashaSkills);
 
             characterList.Add(natasha);
 
@@ -438,7 +439,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] luochaSkills = new[] { luochaNormal, luochaTec, luochaUlt };
 
-            Character luocha = new Character(13, 1, "Luocha", 174, 102, 49, 6, true, 1, 0, 0, luochaSkills);
+            Character luocha = new Character(13, 1, "Luocha", 174, 102, 49, 6, true, 1, 0, luochaSkills);
 
             characterList.Add(luocha);
 
@@ -465,7 +466,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] lynxSkills = new[] { lynxNormal, lynxTec, lynxUlt };
 
-            Character lynx = new Character(14, 1, "Lynx", 144, 67, 75, 5, true, 1, 0, 0, lynxSkills);
+            Character lynx = new Character(14, 1, "Lynx", 144, 67, 75, 5, true, 1, 0, lynxSkills);
 
             characterList.Add(lynx);
 
@@ -494,6 +495,16 @@ namespace HSRLikeProject
             }*/
 
             return damage;
+        }
+
+        public void levelUp(Player p)
+        {
+            for (int i = 0; i < p.PlayerTeam.Length; i++) { 
+                if (p.WinFight == true && p.WinCount <= 10)
+                {
+                    //p.PlayerTeam[i]._lvl + 1;
+                }
+            }
         }
 
         public bool checkIfDead()
