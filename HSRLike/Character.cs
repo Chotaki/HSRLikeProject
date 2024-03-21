@@ -11,7 +11,7 @@ namespace HSRLikeProject
     public class Character
     {
         private int _id;
-        // characterType : 0 = dps, 1 = healer, 2 = support
+        // characterType : 0 = dps, 1 = healer, 2 = shielder, 3 = buffer
         private int _characterType;
         private string _name;
         private int _hp;
@@ -20,9 +20,19 @@ namespace HSRLikeProject
         private int _type;
         private bool _alive;
         private int _lvl;
-        private int _xp;
         private int _energy;
         private CharacterSkill[] _skillList = new CharacterSkill[3];
+
+        public int Id { get => _id; }
+        public int CharacterType { get => _characterType; }
+        public string Name { get => _name; }
+        public int HP { get => _hp; set => _hp = value; }
+        public int ATK { get => _atk; set => _atk = value; }
+        public int Def { get => _def; set => _def = value; }
+        public int Type { get => _type; }
+        public int Lvl { get => _lvl; set => _lvl = value; }
+        public int Energy { get => _energy; set => _energy = value; }
+        public CharacterSkill[] SkillList { get => _skillList; }
 
         private int _itemBuffType;
         private Dictionary<int, string> _types = new Dictionary<int, string>()
@@ -331,7 +341,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] tingyunSkills = new[] { tingyunNormal, tingyunTec, tingyunUlt };
 
-            Character tingyun = new Character(9, 2, "Tingyun", 115, 72, 54, 3, true, 1, 0, tingyunSkills);
+            Character tingyun = new Character(9, 3, "Tingyun", 115, 72, 54, 3, true, 1, 0, tingyunSkills);
 
             characterList.Add(tingyun);
 
@@ -358,7 +368,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] astaSkills = new[] { astaNormal, astaTec, astaUlt };
 
-            Character asta = new Character(10, 2, "Asta", 139, 69, 63, 1, true, 1, 0, astaSkills);
+            Character asta = new Character(10, 3, "Asta", 139, 69, 63, 1, true, 1, 0, astaSkills);
 
             characterList.Add(asta);
 
@@ -385,7 +395,7 @@ namespace HSRLikeProject
 
             CharacterSkill[] hanyaSkills = new[] { hanyaNormal, hanyaTec, hanyaUlt };
 
-            Character hanya = new Character(11, 2, "Hanya", 125, 76, 48, 0, true, 1, 0, hanyaSkills);
+            Character hanya = new Character(11, 3, "Hanya", 125, 76, 48, 0, true, 1, 0, hanyaSkills);
 
             characterList.Add(hanya);
 
@@ -474,27 +484,22 @@ namespace HSRLikeProject
             return characterList;
         }
 
-        public float normalAttack(int attackerId)
+        public void normalAttack(Player p)
         {
-            float damage;
-
-            damage = 0; 
             /*  
             Liste de personnage -> un personnage -> skillSet -> normalAttack -> multiplier
             Liste de personnage -> un personnage -> atk
             */
 
-            /*for (int i = 0; i < characterList.size; i++)
+            for (int i = 0; i < p.PlayerTeam.Length; i++)
             {
-                int attacker = characterList.get(i);
-                Character currentAttacker = attacker.get(Character);
-                if (attackerId = attacker.get(_id))
-                {
-                    attacker.get(_skillList[0].multiplier);
-                }
-            }*/
+                int damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
+            }
+        }
 
-            return damage;
+        public void takeDamage(int damage)
+        {
+            this.HP -= damage;
         }
 
         public void levelUp(Player p)
@@ -502,7 +507,32 @@ namespace HSRLikeProject
             for (int i = 0; i < p.PlayerTeam.Length; i++) { 
                 if (p.WinFight == true && p.WinCount <= 10)
                 {
-                    //p.PlayerTeam[i]._lvl + 1;
+                    p.PlayerTeam[i].Lvl += 1;
+
+                    if (p.PlayerTeam[i].CharacterType == 0)
+                    {
+                        p.PlayerTeam[i].HP += 63;
+                        p.PlayerTeam[i].ATK += 40;
+                        p.PlayerTeam[i].Def += 26;
+                    }
+                    else if (p.PlayerTeam[i].CharacterType == 1)
+                    {
+                        p.PlayerTeam[i].HP += 71;
+                        p.PlayerTeam[i].ATK += 35;
+                        p.PlayerTeam[i].Def += 29;
+                    }
+                    else if (p.PlayerTeam[i].CharacterType == 2)
+                    {
+                        p.PlayerTeam[i].HP += 75;
+                        p.PlayerTeam[i].ATK += 30;
+                        p.PlayerTeam[i].Def += 38;
+                    }
+                    else if (p.PlayerTeam[i].CharacterType == 3)
+                    {
+                        p.PlayerTeam[i].HP += 57;
+                        p.PlayerTeam[i].ATK += 33;
+                        p.PlayerTeam[i].Def += 24;
+                    }
                 }
             }
         }
@@ -517,5 +547,6 @@ namespace HSRLikeProject
 
             return _alive;
         }
+ 
     }
 }
