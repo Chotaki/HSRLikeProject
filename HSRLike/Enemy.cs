@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,12 +10,15 @@ namespace HSRLikeProject
     public class Enemy
     {
         private int _id;
+        public int Id { get { return _id; } }
         private string _name;
         private int _hp;
         private int _atk;
         private bool _alive;
         private static bool _boss;
         private List<int> _types;
+        private int _attackPattern;
+        public int AttackPattern { get { return _attackPattern; } set => _attackPattern = value; }
 
         private List<EnemySkill> skillList = new List<EnemySkill> { };
         private Dictionary<int, string> enemyTypes = new Dictionary<int, string>
@@ -25,11 +29,10 @@ namespace HSRLikeProject
             {3, "foudre" },
             {4, "vent" },
             {5, "quantique" },
-            {6, "imaginaire" },
-            {7,  "none"}
+            {6, "imaginaire" }
         };
 
-        public Enemy(int eId, string eName, int eHp, int eAtk, bool eAlive, bool eBoss, List<int> eTypes, List<EnemySkill> eSkillList)
+        public Enemy(int eId, string eName, int eHp, int eAtk, bool eAlive, bool eBoss, List<int> eTypes, List<EnemySkill> eSkillList, int attackPattern = 0)
         {
             _id = eId;
             _name = eName;
@@ -39,16 +42,17 @@ namespace HSRLikeProject
             _boss = eBoss;
             _types = eTypes;
             skillList = eSkillList;
+            _attackPattern = attackPattern;
         }
         public struct EnemySkill
         {
-            // attackType - 0 : Single Target, 1 : Blast, 2 : AoE, 3 : None, 4 : Invocation
+            // attackType - 0 : Single Target, 1 : Blast, 2 : AoE, 3 : None
             public int attackType;
             public float damageMultiplier;
             public string name;
         }
 
-        public List<Enemy> createEnemy()
+        public List<Enemy> CreateEnemy()
         {
             List<Enemy> enemyList = new List<Enemy> { };
 
@@ -77,7 +81,7 @@ namespace HSRLikeProject
             //Marcheur de l'ombre de l'Hiver éternel - Everwinter Shadewalker
 
             EnemySkill marcheurSkill;
-            marcheurSkill.attackType = 1;
+            marcheurSkill.attackType = 0;
             marcheurSkill.damageMultiplier = 1.5F;
             marcheurSkill.name = "Écrasement givrant";
 
@@ -89,7 +93,7 @@ namespace HSRLikeProject
             //Engeance de givre - Frostspawn
 
             EnemySkill frostspawnSkill;
-            frostspawnSkill.attackType = 1;
+            frostspawnSkill.attackType = 0;
             frostspawnSkill.damageMultiplier = 1.5F;
             frostspawnSkill.name = "Écrasement givrant";
 
@@ -100,9 +104,9 @@ namespace HSRLikeProject
             //Mimic 
 
             EnemySkill mimicSkill;
-            mimicSkill.attackType = 1;
+            mimicSkill.attackType = 0;
             mimicSkill.damageMultiplier = 1.5F;
-            mimicSkill.name = "Écrasement givrant";
+            mimicSkill.name = "Morsure du coffre";
 
             List<EnemySkill> mimicSkills = new List<EnemySkill>() { mimicSkill };
             Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { 7 }, mimicSkills);
@@ -111,19 +115,19 @@ namespace HSRLikeProject
             //Cocolia
 
             EnemySkill cocoliaFirstSkill;
-            cocoliaFirstSkill.attackType = 1;
-            cocoliaFirstSkill.damageMultiplier = 0;
-            cocoliaFirstSkill.name = "Ç—Ç—Ça fait t—trop peur";
+            cocoliaFirstSkill.attackType = 0;
+            cocoliaFirstSkill.damageMultiplier = 1.5F;
+            cocoliaFirstSkill.name = "Un froid à vous briser les os";
 
             EnemySkill cocoliaSecondSkill;
             cocoliaSecondSkill.attackType = 1;
-            cocoliaSecondSkill.damageMultiplier = 0;
-            cocoliaSecondSkill.name = "À l'aide... À l'aide !";
+            cocoliaSecondSkill.damageMultiplier = 4;
+            cocoliaSecondSkill.name = "Courant glaçant du déchirement d'âme";
 
             EnemySkill cocoliaThirdSkill;
-            cocoliaThirdSkill.attackType = 4;
-            cocoliaThirdSkill.damageMultiplier = 0;
-            cocoliaThirdSkill.name = "Pfiou... Sauvé";
+            cocoliaThirdSkill.attackType = 2;
+            cocoliaThirdSkill.damageMultiplier = 2.5F;
+            cocoliaThirdSkill.name = "Héraut de l'anéantissement";
 
             List<EnemySkill> cocoliaSkills = new List<EnemySkill>() { cocoliaFirstSkill, cocoliaSecondSkill, cocoliaThirdSkill };
 
@@ -132,6 +136,23 @@ namespace HSRLikeProject
 
 
             return enemyList;
+        }
+        public void Attack(Player p)
+        {
+            if (this.skillList.Count() == 3)
+            {
+                if (this.Id == 1)
+                {
+                    if (this.AttackPattern != 2)
+                    {
+                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                        int damage = (int)Math.Round(this._atk * this.skillList[this.AttackPattern].damageMultiplier);
+                        //p.PlayerTeam[p.currentCharacter].takeDamage(damage)
+                        AttackPattern += 1;
+                    }
+                }
+                    
+            }
         }
 
     }
