@@ -16,7 +16,7 @@ namespace Game
         static void Main(string[] args)
         {
 
-            /* Test Gacha :
+            /*// Test Gacha :
             Player player = new Player();
             player.createCharacters();
             Gacha.warp(player);

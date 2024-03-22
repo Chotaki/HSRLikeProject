@@ -20,6 +20,8 @@ namespace HSRLikeProject
         private int _attackPattern;
         public int AttackPattern { get { return _attackPattern; } set => _attackPattern = value; }
         public int HP { get => _hp; set => _hp = value; }
+        public int Atk { get => _atk; set =>  _atk = value; }
+        public bool Alive { get => _alive; set => _alive = value; }
         public List<int> Types { get => _types; }
 
         private List<EnemySkill> skillList = new List<EnemySkill> { };
@@ -48,7 +50,7 @@ namespace HSRLikeProject
         }
         public struct EnemySkill
         {
-            // attackType - 0 : Single Target, 1 : Blast, 2 : AoE, 3 : None
+            // attackType - 0 : Single Target, 1 : Blast, 2 : AoE
             public int attackType;
             public float damageMultiplier;
             public string name;
@@ -61,17 +63,17 @@ namespace HSRLikeProject
             // Magoret - Trotter 
 
             EnemySkill magoretFirstSkill;
-            magoretFirstSkill.attackType = 3;
+            magoretFirstSkill.attackType = 0;
             magoretFirstSkill.damageMultiplier = 0;
             magoretFirstSkill.name = "Ç—Ç—Ça fait t—trop peur";
 
             EnemySkill magoretSecondSkill;
-            magoretSecondSkill.attackType = 3;
+            magoretSecondSkill.attackType = 0;
             magoretSecondSkill.damageMultiplier = 0;
             magoretSecondSkill.name = "À l'aide... À l'aide !";
 
             EnemySkill magoretThirdSkill;
-            magoretThirdSkill.attackType = 3;
+            magoretThirdSkill.attackType = 0;
             magoretThirdSkill.damageMultiplier = 0;
             magoretThirdSkill.name = "Pfiou... Sauvé";
 
@@ -123,7 +125,7 @@ namespace HSRLikeProject
 
             EnemySkill cocoliaSecondSkill;
             cocoliaSecondSkill.attackType = 1;
-            cocoliaSecondSkill.damageMultiplier = 4;
+            cocoliaSecondSkill.damageMultiplier = 0.75F;
             cocoliaSecondSkill.name = "Courant glaçant du déchirement d'âme";
 
             EnemySkill cocoliaThirdSkill;
@@ -141,19 +143,66 @@ namespace HSRLikeProject
         }
         public void Attack(Player p)
         {
+            int damage;
             if (this.skillList.Count() == 3)
             {
                 if (this.Id == 1)
                 {
-                    if (this.AttackPattern != 2)
+                    if (this.AttackPattern < 2)
                     {
                         //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
-                        int damage = (int)Math.Round(this._atk * this.skillList[this.AttackPattern].damageMultiplier);
-                        //p.PlayerTeam[p.currentCharacter].takeDamage(damage)
+                        //comme les magorets n'attaquent pas, ils n'infligent pas de dégâts, therefore pas de dégâts à infliger
                         AttackPattern += 1;
+                    }
+                    else
+                    {
+                        //this.Die();
+                    }
+                }
+                else
+                {
+                    Random randomAttack = new Random();
+                    int result = randomAttack.Next(1, 10);
+                    if (1 <= result && result < 8)
+                    {
+                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                        p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
+                    }
+                    else if (8 <= result && result < 10)
+                    {
+                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                        p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
+                        for (int i = 1; i < 3; i++)
+                        {
+                            if (p.PlayerTeam[p.CurrentCharacter + i].checkIfDead() == false && p.CurrentCharacter + i <= p.PlayerTeam.Length)
+                            {
+                                damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter + i].Def / 100);
+                                p.PlayerTeam[p.CurrentCharacter + i].takeDamage(damage);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                        for (int i = p.CurrentCharacter; i < p.PlayerTeam.Length - p.CurrentCharacter; i++)
+                        {
+                            p.PlayerTeam[i].takeDamage(damage);
+                        }
                     }
                 }
                     
+            }
+            else
+            {
+                damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
             }
         }
 
@@ -161,6 +210,10 @@ namespace HSRLikeProject
         {
             this.HP -= damage;
         }
-
+        /*public void Die() *élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
+        {
+           //to do
+        }
+        */
     }
 }

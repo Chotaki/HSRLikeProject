@@ -24,7 +24,7 @@ namespace HSRLikeProject
         public int WinCount { get => _winCount; set => _winCount = value;  }
         public Character[] PlayerTeam { get => _playerTeam; set => _playerTeam = value; }
         public int CurrentCharacter { get => _currentCharacter; set => _currentCharacter = value; }
-        public List<Enemy> EnemieList { get => _enemyList; set => _enemyList = value; }
+        public List<Enemy> EnemyList { get => _enemyList; set => _enemyList = value; }
         public List<Character> CharacterList { get => _characterList; set => _characterList = value; }
 
         public List<Character> createCharacters()

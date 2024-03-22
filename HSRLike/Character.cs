@@ -489,17 +489,17 @@ namespace HSRLikeProject
         {
             int damage;
 
-            for (int i = 0; i < p.EnemieList[0].Types.Count; i++)
+            for (int i = 0; i < p.EnemyList[0].Types.Count; i++)
             {
-                if (this.CharacterType == p.EnemieList[0].Types[i])
+                if (this.CharacterType == p.EnemyList[0].Types[i])
                 {
                     // If the enemiy's "weakness" is the character's "element", +10% damage
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier * 1.1);
-                    p.EnemieList[0].takeDamage(damage);
+                    p.EnemyList[0].takeDamage(damage);
                 } else
                 {
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
-                    p.EnemieList[0].takeDamage(damage);
+                    p.EnemyList[0].takeDamage(damage);
                 }
             }
         }
@@ -511,18 +511,18 @@ namespace HSRLikeProject
             // 0-Single Target (scale : atk)
             if (this.SkillList[1].attackType == 0)
             {
-                for (int i = 0; i < p.EnemieList[0].Types.Count; i++)
+                for (int i = 0; i < p.EnemyList[0].Types.Count; i++)
                 {
-                    if (this.Type == p.EnemieList[0].Types[i])
+                    if (this.Type == p.EnemyList[0].Types[i])
                     {
                         // If the enemy's "weakness" is the character's "element", +10% damage
                         damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                        p.EnemieList[0].takeDamage(damage);
+                        p.EnemyList[0].takeDamage(damage);
                     }
                     else
                     {
                         damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                        p.EnemieList[0].takeDamage(damage);
+                        p.EnemyList[0].takeDamage(damage);
                     }
                 }
             }
