@@ -143,6 +143,7 @@ namespace HSRLikeProject
         }
         public void Attack(Player p)
         {
+            bool isAttackDone = false;
             int damage;
             if (this.skillList.Count() == 3)
             {
@@ -153,6 +154,7 @@ namespace HSRLikeProject
                         //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
                         //comme les magorets n'attaquent pas, ils n'infligent pas de dégâts, therefore pas de dégâts à infliger
                         AttackPattern += 1;
+                        isAttackDone = true;
                     }
                     else
                     {
@@ -161,41 +163,55 @@ namespace HSRLikeProject
                 }
                 else
                 {
-                    Random randomAttack = new Random();
-                    int result = randomAttack.Next(1, 10);
-                    if (1 <= result && result < 8)
+                    do
                     {
-                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
-                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
-                        p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
-                    }
-                    else if (8 <= result && result < 10)
-                    {
-                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
-                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
-                        p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
-                        for (int i = 1; i < 3; i++)
+                        Random randomAttack = new Random();
+                        int result = randomAttack.Next(1, 10);
+                        if (1 <= result && result < 8)
                         {
-                            if (p.PlayerTeam[p.CurrentCharacter + i].checkIfDead() == false && p.CurrentCharacter + i <= p.PlayerTeam.Length)
-                            {
-                                damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter + i].Def / 100);
-                                p.PlayerTeam[p.CurrentCharacter + i].takeDamage(damage);
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                            damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                            p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
+                            isAttackDone = true;
                         }
-                    }
-                    else
-                    {
-                        //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
-                        damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
-                        for (int i = p.CurrentCharacter; i < p.PlayerTeam.Length - p.CurrentCharacter; i++)
+                        else if (8 <= result && result < 10 && this.AttackPattern != 1)
                         {
-                            p.PlayerTeam[i].takeDamage(damage);
+                            //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                            this.AttackPattern = 1;
+                            damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                            p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
+                            for (int i = 1; i < 3; i++)
+                            {
+                                if (p.PlayerTeam[p.CurrentCharacter + i].checkIfDead() == false && p.CurrentCharacter + i <= p.PlayerTeam.Length)
+                                {
+                                    damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter + i].Def / 100);
+                                    p.PlayerTeam[p.CurrentCharacter + i].takeDamage(damage);                         
+                                    
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            isAttackDone = true;
                         }
-                    }
+                        else if (result == 10 && this.AttackPattern != 2)
+                        {
+                            //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
+                            this.AttackPattern = 2;
+                            damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
+                            for (int i = p.CurrentCharacter; i < p.PlayerTeam.Length - p.CurrentCharacter; i++)
+                            {
+                                p.PlayerTeam[i].takeDamage(damage);
+                            }
+                            isAttackDone = true;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (isAttackDone != true);
+
                 }
                     
             }
