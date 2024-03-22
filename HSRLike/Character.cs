@@ -47,14 +47,15 @@ namespace HSRLikeProject
         };
         public struct CharacterSkill
         {
-            // attackType : ST = 0, Blast = 1, AoE = 2, Buff = 3, Heal = 4, Shield = 5
+            // attackType : ST = 0, Blast = 1, AoE = 2, Buff = 3, Heal = 4, Shield = 5, Bounce = 6
             public int attackType;
             public float multiplier;
             public string name;
             public string desc;
         }
 
-        public List<Character> characterList = new List<Character> { };
+        /*private List<Character> _characterList = new List<Character> { };
+        public List<Character> CharacterList { get => _characterList; set => _characterList = value; }*/
 
         public Character(int cId, int cCharaType, string cName, int cHp, int cAtk, int cDef, int cType, bool cAlive, int cLvl, int cEnergy, CharacterSkill[] cSkillList)
         {
@@ -71,7 +72,7 @@ namespace HSRLikeProject
             _skillList = cSkillList;
         }
 
-        public List<Character> createCharacters()
+        /*public List<Character> createCharacters()
         {
 
             // DAN HENG - vent
@@ -98,7 +99,7 @@ namespace HSRLikeProject
 
             Character danHeng = new Character(0, 0, "Dan Heng", 120, 74, 54, 4, true, 1, 0, danHengSkills);
 
-            characterList.Add(danHeng);
+            CharacterList.Add(danHeng);
 
 
             // JING YUAN - foudre
@@ -125,7 +126,7 @@ namespace HSRLikeProject
 
             Character jingYuan = new Character(1, 0, "Jing Yuan", 158, 95, 66, 3, true, 1, 0, jingYuanSkills);
 
-            characterList.Add(jingYuan);
+            CharacterList.Add(jingYuan);
 
 
 
@@ -154,7 +155,7 @@ namespace HSRLikeProject
 
             Character yanqing = new Character(2, 0, "Yanqing", 121, 92, 56, 2, true, 1, 0, yanqingSkills);
 
-            characterList.Add(yanqing);
+            CharacterList.Add(yanqing);
 
 
             // ACHERON - foudre
@@ -181,7 +182,7 @@ namespace HSRLikeProject
 
             Character acheron = new Character(3, 0, "Acheron", 153, 95, 59, 3, true, 1, 0, acheronSkills);
 
-            characterList.Add(acheron);
+            CharacterList.Add(acheron);
 
 
             // TRAILBLAZER - physique
@@ -208,7 +209,7 @@ namespace HSRLikeProject
 
             Character trailblazer = new Character(4, 0, "Trailblazer", 164, 84, 62, 0, true, 1, 0, trailblazerSkills);
 
-            characterList.Add(trailblazer);
+            CharacterList.Add(trailblazer);
 
 
             // SEELE - quantique
@@ -235,7 +236,7 @@ namespace HSRLikeProject
 
             Character seele = new Character(5, 0, "Seele", 127, 87, 49, 5, true, 1, 0, seeleSkills);
 
-            characterList.Add(seele);
+            CharacterList.Add(seele);
 
 
             // MARCH 7TH - glace
@@ -262,7 +263,7 @@ namespace HSRLikeProject
 
             Character march = new Character(6, 2, "March 7th", 144, 69, 78, 2, true, 1, 0, marchSkills);
 
-            characterList.Add(march);
+            CharacterList.Add(march);
 
 
             // AVENTURINE - imaginaire
@@ -289,7 +290,7 @@ namespace HSRLikeProject
 
             Character aventurine = new Character(7, 2, "Aventurine", 164, 60, 89, 6, true, 1, 0, aventurineSkills);
 
-            characterList.Add(aventurine);
+            CharacterList.Add(aventurine);
 
 
             // GEPARD - glace
@@ -316,7 +317,7 @@ namespace HSRLikeProject
 
             Character gepard = new Character(8, 2, "Gepard", 190, 73, 89, 2, true, 1, 0, gepardSkills);
 
-            characterList.Add(gepard);
+            CharacterList.Add(gepard);
 
 
             // TINGYUN - foudre
@@ -343,7 +344,7 @@ namespace HSRLikeProject
 
             Character tingyun = new Character(9, 3, "Tingyun", 115, 72, 54, 3, true, 1, 0, tingyunSkills);
 
-            characterList.Add(tingyun);
+            CharacterList.Add(tingyun);
 
 
             // ASTA - feu
@@ -355,7 +356,7 @@ namespace HSRLikeProject
             astaNormal.desc = "Inflige des dégats de feu équivalent à 80% de l'attaque d'Asta à une cible unique";
 
             CharacterSkill astaTec;
-            astaTec.attackType = 0;
+            astaTec.attackType = 6;
             astaTec.multiplier = 0.6F;
             astaTec.name = "Tempête de météores";
             astaTec.desc = "Inflige des dégats de feu équivalent à 60% de l'attaque d'Asta 5 fois aléatoirement aux ennemis";
@@ -370,7 +371,7 @@ namespace HSRLikeProject
 
             Character asta = new Character(10, 3, "Asta", 139, 69, 63, 1, true, 1, 0, astaSkills);
 
-            characterList.Add(asta);
+            CharacterList.Add(asta);
 
 
             // HANYA - physique
@@ -397,7 +398,7 @@ namespace HSRLikeProject
 
             Character hanya = new Character(11, 3, "Hanya", 125, 76, 48, 0, true, 1, 0, hanyaSkills);
 
-            characterList.Add(hanya);
+            CharacterList.Add(hanya);
 
 
             // NATASHA - physique
@@ -424,7 +425,7 @@ namespace HSRLikeProject
 
             Character natasha = new Character(12, 1, "Natasha", 158, 64, 69, 0, true, 1, 0, natashaSkills);
 
-            characterList.Add(natasha);
+            CharacterList.Add(natasha);
 
 
             // LUOCHA - imaginaire
@@ -451,7 +452,7 @@ namespace HSRLikeProject
 
             Character luocha = new Character(13, 1, "Luocha", 174, 102, 49, 6, true, 1, 0, luochaSkills);
 
-            characterList.Add(luocha);
+            CharacterList.Add(luocha);
 
 
             // LYNX - quantique
@@ -478,23 +479,78 @@ namespace HSRLikeProject
 
             Character lynx = new Character(14, 1, "Lynx", 144, 67, 75, 5, true, 1, 0, lynxSkills);
 
-            characterList.Add(lynx);
+            CharacterList.Add(lynx);
 
 
-            return characterList;
-        }
+            return CharacterList;
+        }*/
 
         public void normalAttack(Player p)
         {
-            /*  
-            Liste de personnage -> un personnage -> skillSet -> normalAttack -> multiplier
-            Liste de personnage -> un personnage -> atk
-            */
+            int damage;
 
-            for (int i = 0; i < p.PlayerTeam.Length; i++)
+            for (int i = 0; i < p.EnemieList[0].Types.Count; i++)
             {
-                int damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
+                if (this.CharacterType == p.EnemieList[0].Types[i])
+                {
+                    // If the enemiy's "weakness" is the character's "element", +10% damage
+                    damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier * 1.1);
+                    p.EnemieList[0].takeDamage(damage);
+                } else
+                {
+                    damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
+                    p.EnemieList[0].takeDamage(damage);
+                }
             }
+        }
+
+        public void skill(Player p)
+        {
+            int damage;
+
+            // 0-Single Target (scale : atk)
+            if (this.SkillList[1].attackType == 0)
+            {
+                for (int i = 0; i < p.EnemieList[0].Types.Count; i++)
+                {
+                    if (this.Type == p.EnemieList[0].Types[i])
+                    {
+                        // If the enemy's "weakness" is the character's "element", +10% damage
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                        p.EnemieList[0].takeDamage(damage);
+                    }
+                    else
+                    {
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                        p.EnemieList[0].takeDamage(damage);
+                    }
+                }
+            }
+
+            // 1-Blast (if 4-Trailblazer : damage = damage | if 7-Acheron : damage = 60% atk)
+
+            // 2-AoE (scale : atk)
+
+            // 3-Buff on Single Target (scale : atk)
+
+            // 4-Heal on Single Target (scale : mHP | if 13-Luocha, scale : atk)
+
+            // 5-Shield (if 6-March 7th, ST def | if 7-Aventurine, MT def)
+
+            // 6-Bounce (scale : atk)
+        }
+
+        public void ultimate(Player p)
+        {
+            // 0-Single Target (atk | if 7-Aventurine, scale : def)
+
+            // 2-AoE (atk)
+
+            // 3-Buff (if 11-Hanya, ST atk  | if 10-Asta, MT atk | if 9-Tingyun, ST atk + 40 Energy)
+
+            // 4-Heal MT (mHP)
+
+            // 5-Shield MT (def)
         }
 
         public void takeDamage(int damage)
@@ -509,24 +565,28 @@ namespace HSRLikeProject
                 {
                     p.PlayerTeam[i].Lvl += 1;
 
+                    // DPS
                     if (p.PlayerTeam[i].CharacterType == 0)
                     {
                         p.PlayerTeam[i].HP += 63;
                         p.PlayerTeam[i].ATK += 40;
                         p.PlayerTeam[i].Def += 26;
                     }
+                    // Healer
                     else if (p.PlayerTeam[i].CharacterType == 1)
                     {
                         p.PlayerTeam[i].HP += 71;
                         p.PlayerTeam[i].ATK += 35;
                         p.PlayerTeam[i].Def += 29;
                     }
+                    // Shielder
                     else if (p.PlayerTeam[i].CharacterType == 2)
                     {
                         p.PlayerTeam[i].HP += 75;
                         p.PlayerTeam[i].ATK += 30;
                         p.PlayerTeam[i].Def += 38;
                     }
+                    // Buffer
                     else if (p.PlayerTeam[i].CharacterType == 3)
                     {
                         p.PlayerTeam[i].HP += 57;

@@ -19,6 +19,8 @@ namespace HSRLikeProject
         private List<int> _types;
         private int _attackPattern;
         public int AttackPattern { get { return _attackPattern; } set => _attackPattern = value; }
+        public int HP { get => _hp; set => _hp = value; }
+        public List<int> Types { get => _types; }
 
         private List<EnemySkill> skillList = new List<EnemySkill> { };
         private Dictionary<int, string> enemyTypes = new Dictionary<int, string>
@@ -153,6 +155,11 @@ namespace HSRLikeProject
                 }
                     
             }
+        }
+
+        public void takeDamage(int damage)
+        {
+            this.HP -= damage;
         }
 
     }

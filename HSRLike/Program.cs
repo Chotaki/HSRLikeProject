@@ -1,4 +1,5 @@
-﻿using HSRLikeProject;
+﻿using HSRLike;
+using HSRLikeProject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +15,16 @@ namespace Game
     {
         static void Main(string[] args)
         {
+
+            /* Test Gacha :
+            Player player = new Player();
+            player.createCharacters();
+            Gacha.warp(player);
+            Console.WriteLine(player.PlayerTeam[0].Name);
+            Console.WriteLine(player.PlayerTeam[1].Name);
+            Console.WriteLine(player.PlayerTeam[2].Name);
+            Console.WriteLine(player.PlayerTeam[3].Name);*/
+
             bool game = true;
            
 
