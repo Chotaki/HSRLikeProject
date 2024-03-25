@@ -18,6 +18,7 @@ namespace HSRLikeProject
         private static bool _boss;
         private List<int> _types;
         private int _attackPattern;
+        public string Name { get { return _name; } }
         public int AttackPattern { get { return _attackPattern; } set => _attackPattern = value; }
         public int HP { get => _hp; set => _hp = value; }
         public int Atk { get => _atk; set =>  _atk = value; }
@@ -56,7 +57,7 @@ namespace HSRLikeProject
             public string name;
         }
 
-        public List<Enemy> CreateEnemy()
+/*        public List<Enemy> CreateEnemy()
         {
             List<Enemy> enemyList = new List<Enemy> { };
 
@@ -140,7 +141,7 @@ namespace HSRLikeProject
 
 
             return enemyList;
-        }
+        }*/
         public void Attack(Player p)
         {
             bool isAttackDone = false;
@@ -149,16 +150,21 @@ namespace HSRLikeProject
             {
                 if (this.Id == 1)
                 {
-                    if (this.AttackPattern < 2)
+                    if (this.AttackPattern == 0)
                     {
                         //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
                         //comme les magorets n'attaquent pas, ils n'infligent pas de dégâts, therefore pas de dégâts à infliger
                         AttackPattern += 1;
                         isAttackDone = true;
                     }
+                    else if (this.AttackPattern == 1)
+                    {
+                        this.Types.Clear();
+                        isAttackDone = true;
+                    }
                     else
                     {
-                        //this.Die();
+                        this.Die(p);
                     }
                 }
                 else
@@ -200,9 +206,12 @@ namespace HSRLikeProject
                             //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
                             this.AttackPattern = 2;
                             damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
-                            for (int i = p.CurrentCharacter; i < p.PlayerTeam.Length - p.CurrentCharacter; i++)
+                            for (int i = 0; i < p.PlayerTeam.Length - 1; i++)
                             {
-                                p.PlayerTeam[i].takeDamage(damage);
+                                if (!p.PlayerTeam[i].checkIfDead())
+                                {
+                                    p.PlayerTeam[i].takeDamage(damage);
+                                }
                             }
                             isAttackDone = true;
                         }
@@ -226,10 +235,26 @@ namespace HSRLikeProject
         {
             this.HP -= damage;
         }
-        /*public void Die() *élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
+
+        public bool checkIfDead()
         {
-           //to do
+            if (this.HP <= 0)
+            {
+                this.Alive = false;
+            }
+            else
+            {
+                this.Alive = true;
+            }
+
+            return this.Alive;
         }
-        */
+
+        public void Die(Player p) //*élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
+        {
+            Console.WriteLine("{0} est mort au combat", p.FightingEnemyList[0].Name);
+            p.FightingEnemyList.RemoveAt(0);
+        }
+       
     }
 }
