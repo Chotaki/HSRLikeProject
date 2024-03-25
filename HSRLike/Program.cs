@@ -1,6 +1,4 @@
-﻿using HSRLike;
-using HSRLikeProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 
 
-namespace Game
+namespace HSRLikeProject
 {
     class Program
     {
@@ -32,25 +30,22 @@ namespace Game
             defaultTile.character = 'o';
             defaultTile.colour = ConsoleColor.Green;
 
-
             Map.FillMap(defaultTile);
+
+
+            // Set up our water tile
+            Map ground = new Map();
+            ground.character = '^';
+            ground.colour = ConsoleColor.Gray;
+
+            // Create a little lake
+            Map.CreateRectangle(new Point(3, 3), 24, 114, ground);
 
             Map playerCharacter = new Map();
             playerCharacter.colour = ConsoleColor.Red;
             playerCharacter.character = 'P';
 
-            Point playerLocation = new Point(5,5);
-
-            //playerCharacter[playerLocation.X, playerLocation.Y] = defaultTile;
-
-
-            // Set up our water tile
-            Map waterTile = new Map();
-            waterTile.character = '~';
-            waterTile.colour = ConsoleColor.Blue;
-
-            // Create a little lake
-            Map.CreateRectangle(new Point(10, 10), 10, 10, waterTile);
+            Map.CreateRectangle(new Point(15, 20), 1, 1, playerCharacter);
 
             Map.DisplayMap();
 
