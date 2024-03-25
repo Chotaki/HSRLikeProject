@@ -1,15 +1,15 @@
-﻿using HSRLike;
-using HSRLikeProject;
+﻿using HSRLikeProject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 
 
-namespace Game
+namespace HSRLikeProject
 {
     class Program
     {
@@ -24,42 +24,37 @@ namespace Game
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
             Console.WriteLine(player.PlayerTeam[3].Name);*/
-
+                
+            Console.CursorVisible = false;
             bool game = true;
-           
-
-            Map defaultTile = new Map();
-            defaultTile.character = 'o';
-            defaultTile.colour = ConsoleColor.Green;
-
-
-            Map.FillMap(defaultTile);
-
-            Map playerCharacter = new Map();
-            playerCharacter.colour = ConsoleColor.Red;
-            playerCharacter.character = 'P';
-
-            Point playerLocation = new Point(5,5);
-
-            //playerCharacter[playerLocation.X, playerLocation.Y] = defaultTile;
-
-
-            // Set up our water tile
-            Map waterTile = new Map();
-            waterTile.character = '~';
-            waterTile.colour = ConsoleColor.Blue;
-
-            // Create a little lake
-            Map.CreateRectangle(new Point(10, 10), 10, 10, waterTile);
-
             Map.DisplayMap();
 
             while (game)
             {
-                Console.CursorVisible = false;
-                ConsoleKeyInfo input = Console.ReadKey(true);
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        Console.SetCursorPosition(0, 0);
+                        break;
 
-                Map.DisplayMap();
+                    case ConsoleKey.DownArrow:
+                        Console.SetCursorPosition(0, 0);
+                        break;
+
+                    case ConsoleKey.LeftArrow:
+                        Console.SetCursorPosition(0, 0);
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                        Console.SetCursorPosition(0, 0);
+                        break;
+
+                }
+
+
+                
+
+                
 
 
             }
