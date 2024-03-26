@@ -16,8 +16,9 @@ namespace HSRLikeProject
 
             /*// Test Gacha :
             Player player = new Player();
-            player.createCharacters();
-            Gacha.warp(player);
+            Initialize init = new Initialize();
+            init.createCharacters();
+            Gacha.warp(init, player);
             Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
@@ -55,6 +56,11 @@ namespace HSRLikeProject
                 ConsoleKeyInfo input = Console.ReadKey(true);
 
                 Map.DisplayMap();
+                switch(input.Key) 
+                {
+                    case ConsoleKey.UpArrow:
+                        break;
+                }
 
 
             }
