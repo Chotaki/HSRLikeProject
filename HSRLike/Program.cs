@@ -61,6 +61,11 @@ namespace Game
                 ConsoleKeyInfo input = Console.ReadKey(true);
 
                 Map.DisplayMap();
+                switch(input.Key) 
+                {
+                    case ConsoleKey.UpArrow:
+                        break;
+                }
 
 
             }
