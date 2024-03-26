@@ -17,24 +17,24 @@ namespace HSRLike
         public static List<Character> SupportList { get => _supportList; set => _supportList = value; }
         public static List<Character> HealerList { get => _healerList; set => _healerList = value; }
 
-        public static void warp(Player p)
+        public static void warp(Initialize init, Player p)
         {
-            for (int i = 0; i < p.CharacterList.Count; i++)
+            for (int i = 0; i < init.CharacterList.Count; i++)
             {
                 // Fill DPS List
-                if (p.CharacterList[i].CharacterType == 0)
+                if (init.CharacterList[i].CharacterType == 0)
                 {
-                    DpsList.Add(p.CharacterList[i]);
+                    DpsList.Add(init.CharacterList[i]);
                 }
                 // Fill Healer List
-                else if (p.CharacterList[i].CharacterType == 1)
+                else if (init.CharacterList[i].CharacterType == 1)
                 {
-                    HealerList.Add(p.CharacterList[i]);
+                    HealerList.Add(init.CharacterList[i]);
                 }
                 // Fill Support List
-                else if (p.CharacterList[i].CharacterType == 2 || p.CharacterList[i].CharacterType == 3)
+                else if (init.CharacterList[i].CharacterType == 2 || init.CharacterList[i].CharacterType == 3)
                 {
-                    SupportList.Add(p.CharacterList[i]);
+                    SupportList.Add(init.CharacterList[i]);
                 }
             }
 

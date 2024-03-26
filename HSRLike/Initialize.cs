@@ -14,9 +14,12 @@ namespace HSRLike
 
         private List<Enemy> _enemyList = new List<Enemy>();
         private List<Character> _characterList = new List<Character> { };
+        private List<Item> _itemList = new List<Item>();
 
         public List<Enemy> EnemyList { get => _enemyList; set => _enemyList = value; }
         public List<Character> CharacterList { get => _characterList; set => _characterList = value; }
+        public List<Item> ItemList { get => _itemList; set => _itemList = value; }
+
         public List<Character> createCharacters()
         {
 
@@ -513,6 +516,43 @@ namespace HSRLike
             enemyList.Add(cocolia);
 
             return enemyList;
+        }
+
+        public List<Item> createItems()
+        {
+            // 0 = 2 star; 1 = 3 star; 2 = 4 star
+
+            Item brasCinétique = new Item(0, "Bras Cinétique Jetable",
+                "Après utilisation, donne un boost de 325 d'attaque à tous les membres de l'équipe pour le prochain combat",
+                0, 0, 325, 0, 2);
+            ItemList.Add(brasCinétique);
+
+            Item cone = new Item(1, "Cône de Rêves (Trois Parfums)",
+                "Après utilisation, donne un boost de 60% d'attaque à tous les membres de l'équipe pour le prochain combat",
+                0, 1, 0, 0.6F, 2);
+            ItemList.Add(cone);
+
+            Item generator = new Item(2, "Générateur de Champ d'Antimatière",
+                "Après utilisation, donne un boost de 260 d'attaque à tous les membres de l'équipe pour le prochain combat", 
+                0, 0, 260, 0, 1);
+            ItemList.Add(generator);
+
+            Item gratteDos = new Item(3, "Gratte-dos",
+                "Après utilisation, donne un boost de 190 d'attaque à tous les membres de l'équipe pour le prochain combat", 
+                0, 0, 190, 0, 1);
+            ItemList.Add(gratteDos);
+
+            Item amuseBouche = new Item(4, "Amuse-bouche à la Confiture de Vivaneau",
+                "Après utilisation, donne un boost de 5% d'attaque et un extra 170 d'attaque à tous les membres de l'équipe pour le prochain combat",
+                0, 2, 170, 0.5F, 0);
+            ItemList.Add(amuseBouche);
+
+            Item soda = new Item(5, "Soda aux haricots mungo",
+                "Après utilisation, donne un boost de 5% d'attaque et un extra 170 d'attaque à tous les membres de l'équipe pour le prochain combat",
+                0, 2, 170, 0.5F, 0);
+            ItemList.Add(soda);
+
+            return ItemList;
         }
     }
 }

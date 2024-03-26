@@ -17,6 +17,7 @@ namespace HSRLikeProject
         private int _hp;
         private int _maxHp;
         private int _atk;
+        private int _baseAtk;
         private int _def;
         private int _type;
         private bool _alive;
@@ -30,6 +31,7 @@ namespace HSRLikeProject
         public int HP { get => _hp; set => _hp = value; }
         public int MaxHP { get => _maxHp; set => _maxHp = value; }
         public int ATK { get => _atk; set => _atk = value; }
+        public int BaseATK { get => _baseAtk; set => _baseAtk = value; }
         public int Def { get => _def; set => _def = value; }
         public int Type { get => _type; }
         public int Lvl { get => _lvl; set => _lvl = value; }
@@ -882,28 +884,28 @@ namespace HSRLikeProject
                     if (p.PlayerTeam[i].CharacterType == 0)
                     {
                         p.PlayerTeam[i].MaxHP += 63;
-                        p.PlayerTeam[i].ATK += 40;
+                        p.PlayerTeam[i].BaseATK += 40;
                         p.PlayerTeam[i].Def += 26;
                     }
                     // Healer
                     else if (p.PlayerTeam[i].CharacterType == 1)
                     {
                         p.PlayerTeam[i].MaxHP += 71;
-                        p.PlayerTeam[i].ATK += 35;
+                        p.PlayerTeam[i].BaseATK += 35;
                         p.PlayerTeam[i].Def += 29;
                     }
                     // Shielder
                     else if (p.PlayerTeam[i].CharacterType == 2)
                     {
                         p.PlayerTeam[i].MaxHP += 75;
-                        p.PlayerTeam[i].ATK += 30;
+                        p.PlayerTeam[i].BaseATK += 30;
                         p.PlayerTeam[i].Def += 38;
                     }
                     // Buffer
                     else if (p.PlayerTeam[i].CharacterType == 3)
                     {
                         p.PlayerTeam[i].MaxHP += 57;
-                        p.PlayerTeam[i].ATK += 33;
+                        p.PlayerTeam[i].BaseATK += 33;
                         p.PlayerTeam[i].Def += 24;
                     }
                 }
