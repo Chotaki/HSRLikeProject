@@ -1,4 +1,5 @@
-﻿using HSRLikeProject;
+﻿using HSRLike;
+using HSRLikeProject;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -48,13 +49,15 @@ namespace HSRLikeProject
                         Console.SetCursorPosition(0, 0);
                         break;
 
-                    case ConsoleKey.RightArrow:
-                        Console.SetCursorPosition(0, 0);
-                        break;
+            //playerCharacter[playerLocation.X, playerLocation.Y] = defaultTile;
 
                 }
                 Map.DisplayMap(player.PlayerTeam, map);
 
+            // Set up our water tile
+            Map waterTile = new Map();
+            waterTile.character = '~';
+            waterTile.colour = ConsoleColor.Blue;
 
 
 
