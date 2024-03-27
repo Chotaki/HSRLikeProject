@@ -25,7 +25,35 @@ namespace HSRLikeProject
         public Character[] PlayerTeam { get => _playerTeam; set => _playerTeam = value; }
         public List<Item> Inventory { get => _inventory; set => _inventory = value; }
         public int CurrentCharacter { get => _currentCharacter; set => _currentCharacter = value; }
-        public List<Enemy> FightingEnemyList { get => _fightingEnemyList; set => _fightingEnemyList = value; }
+        public List<Enemy> FightingEnemyList { get => _fightingEnemyList; set => _fightingEnemyList = value; } 
 
+        public Player (int winCount)
+        {
+            WinCount = winCount;
+        }
+
+        public void fight(int fightType)
+        {
+            InFight = true;
+
+            // Fight against normal mobs
+            if (fightType == 0)
+            {
+                Random rnd = new Random();
+
+            } 
+
+            // Fight against a mimic
+            else if (fightType == 1)
+            {
+
+            }
+            
+            // Fight against Cocolia
+            else if (fightType == 2)
+            {
+
+            }
+        }
     }
 }

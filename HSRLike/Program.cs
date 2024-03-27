@@ -20,6 +20,7 @@ namespace HSRLikeProject
             Player player = new Player();
             Initialize init = new Initialize();
             init.createCharacters();
+            init.createNPCs();
             Gacha.warp(init, player);
 
             string[] map = LoadMap();
