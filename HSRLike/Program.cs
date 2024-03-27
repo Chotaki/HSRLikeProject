@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
-
+using HSRLike;
 
 namespace HSRLikeProject
 {
@@ -16,22 +15,25 @@ namespace HSRLikeProject
         static void Main(string[] args)
         {
 
-            /*// Test Gacha :
+            // Test Gacha :
             Player player = new Player();
             Initialize init = new Initialize();
             init.createCharacters();
             Gacha.warp(init, player);
-            Console.WriteLine(player.PlayerTeam[0].Name);
-            Console.WriteLine(player.PlayerTeam[1].Name);
-            Console.WriteLine(player.PlayerTeam[2].Name);
-            Console.WriteLine(player.PlayerTeam[3].Name);*/
+
+            string[] map = LoadMap();
                 
             Console.CursorVisible = false;
             bool game = true;
-            Map.DisplayMap();
+
+            int UI = 1;
+
+            Map.DisplayMap(player.PlayerTeam, map);
 
             while (game)
             {
+
+                
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -41,7 +43,7 @@ namespace HSRLikeProject
                     case ConsoleKey.DownArrow:
                         Console.SetCursorPosition(0, 0);
                         break;
-
+                        
                     case ConsoleKey.LeftArrow:
                         Console.SetCursorPosition(0, 0);
                         break;
@@ -51,14 +53,24 @@ namespace HSRLikeProject
                         break;
 
                 }
+                Map.DisplayMap(player.PlayerTeam, map);
 
 
-                
 
-                
+
 
 
             }
+        }
+
+        private static string[] LoadMap()
+        {
+            string[] content;
+            using (StreamReader file = new StreamReader("../../../Map.txt"))
+            {
+               content = file.ReadToEnd().Split("\r\n");
+            }
+            return content;
         }
     }
 }
