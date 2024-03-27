@@ -61,7 +61,7 @@ namespace HSRLikeProject
                 }
             }
 
-            this.Quantity -= 1;
+            p.Inventory.Remove(this);
         }
     }
 }

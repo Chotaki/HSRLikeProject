@@ -16,17 +16,20 @@ namespace Game
         static void Main(string[] args)
         {
 
-            /*// Test Gacha :
-            Player player = new Player();
+            // Test Gacha :
+            Player player = new Player(0);
             Initialize init = new Initialize();
             init.createCharacters();
+            init.createNPCs();
             Gacha.warp(init, player);
             Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
-            Console.WriteLine(player.PlayerTeam[3].Name);*/
+            Console.WriteLine(player.PlayerTeam[3].Name);
 
-            bool game = true;
+            init.NPCList[1].startDialog(init, init.NPCList[3], player);
+
+            /*bool game = true;
            
 
             Map defaultTile = new Map();
@@ -68,7 +71,7 @@ namespace Game
                 }
 
 
-            }
+            }*/
         }
     }
 }

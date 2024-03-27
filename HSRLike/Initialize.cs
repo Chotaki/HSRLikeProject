@@ -11,14 +11,17 @@ namespace HSRLike
 {
     internal class Initialize
     {
-
         private List<Enemy> _enemyList = new List<Enemy>();
         private List<Character> _characterList = new List<Character> { };
         private List<Item> _itemList = new List<Item>();
+        private List<Chest> _chestList = new List<Chest>();
+        private List<NPC> _npcList = new List<NPC>();
 
         public List<Enemy> EnemyList { get => _enemyList; set => _enemyList = value; }
         public List<Character> CharacterList { get => _characterList; set => _characterList = value; }
         public List<Item> ItemList { get => _itemList; set => _itemList = value; }
+        public List<Chest> ChestList { get => _chestList; set => _chestList = value; }
+        public List<NPC> NPCList { get => _npcList; set => _npcList = value; }
 
         public List<Character> createCharacters()
         {
@@ -111,19 +114,19 @@ namespace HSRLike
             CharacterSkill acheronNormal;
             acheronNormal.attackType = 0;
             acheronNormal.multiplier = 0.8F;
-            acheronNormal.name = "Wiltcross trilatéral";
+            acheronNormal.name = "Flétrissement des trois sagesses";
             acheronNormal.desc = "Inflige des dégats de foudre équivalent à 80% de l'attaque d'Acheron à une cible unique";
 
             CharacterSkill acheronTec;
             acheronTec.attackType = 1;
             acheronTec.multiplier = 1.6F;
-            acheronTec.name = "Flash octobolt";
+            acheronTec.name = "Eclair multiple";
             acheronTec.desc = "Inflige des dégats de foudre équivalent à 160% de l'attaque d'Acheron à un ennemi et 60% de son atk aux deux ennemis suivants";
 
             CharacterSkill acheronUlt;
             acheronUlt.attackType = 2;
             acheronUlt.multiplier = 4;
-            acheronUlt.name = "Un rêve coupé pleure en rouge";
+            acheronUlt.name = "Rêve flétri écarlate";
             acheronUlt.desc = "Inflige des dégats de foudre équivalent à 400% de l'attaque d'Acheron à tous les ennemis";
 
             CharacterSkill[] acheronSkills = new[] { acheronNormal, acheronTec, acheronUlt };
@@ -225,13 +228,13 @@ namespace HSRLike
             CharacterSkill aventurineTec;
             aventurineTec.attackType = 5;
             aventurineTec.multiplier = 0.9F;
-            aventurineTec.name = "Pierre angulaire de luxe";
+            aventurineTec.name = "Pierre angulaire de la prospérité";
             aventurineTec.desc = "Applique un bouclier équivalent à 90% de la défense d'Aventurine à tous les alliés";
 
             CharacterSkill aventurineUlt;
             aventurineUlt.attackType = 0;
             aventurineUlt.multiplier = 2.9F;
-            aventurineUlt.name = "La roulette du requin";
+            aventurineUlt.name = "Roi de la roulette";
             aventurineUlt.desc = "Inflige des dégats imaginaires équivalent à 290% de la défense d'Aventurine à une cible unique";
 
             CharacterSkill[] aventurineSkills = new[] { aventurineNormal, aventurineTec, aventurineUlt };
@@ -524,35 +527,97 @@ namespace HSRLike
 
             Item brasCinétique = new Item(0, "Bras Cinétique Jetable",
                 "Après utilisation, donne un boost de 325 d'attaque à tous les membres de l'équipe pour le prochain combat",
-                0, 0, 325, 0, 2);
+                1, 0, 325, 0, 2);
             ItemList.Add(brasCinétique);
 
             Item cone = new Item(1, "Cône de Rêves (Trois Parfums)",
                 "Après utilisation, donne un boost de 60% d'attaque à tous les membres de l'équipe pour le prochain combat",
-                0, 1, 0, 0.6F, 2);
+                1, 1, 0, 0.6F, 2);
             ItemList.Add(cone);
 
             Item generator = new Item(2, "Générateur de Champ d'Antimatière",
                 "Après utilisation, donne un boost de 260 d'attaque à tous les membres de l'équipe pour le prochain combat", 
-                0, 0, 260, 0, 1);
+                1, 0, 260, 0, 1);
             ItemList.Add(generator);
 
             Item gratteDos = new Item(3, "Gratte-dos",
                 "Après utilisation, donne un boost de 190 d'attaque à tous les membres de l'équipe pour le prochain combat", 
-                0, 0, 190, 0, 1);
+                1, 0, 190, 0, 1);
             ItemList.Add(gratteDos);
 
             Item amuseBouche = new Item(4, "Amuse-bouche à la Confiture de Vivaneau",
                 "Après utilisation, donne un boost de 5% d'attaque et un extra 170 d'attaque à tous les membres de l'équipe pour le prochain combat",
-                0, 2, 170, 0.5F, 0);
+                1, 2, 170, 0.5F, 0);
             ItemList.Add(amuseBouche);
 
             Item soda = new Item(5, "Soda aux haricots mungo",
                 "Après utilisation, donne un boost de 5% d'attaque et un extra 170 d'attaque à tous les membres de l'équipe pour le prochain combat",
-                0, 2, 170, 0.5F, 0);
+                1, 2, 170, 0.5F, 0);
             ItemList.Add(soda);
 
             return ItemList;
+        }
+
+        public List<Chest> createChests()
+        {
+            Chest chest1 = new Chest(ItemList[0], false);
+            ChestList.Add(chest1);
+
+            Chest chest2 = new Chest(ItemList[1], false);
+            ChestList.Add(chest2);
+
+            Chest chest3 = new Chest(ItemList[2], false);
+            ChestList.Add(chest3);
+
+            Chest chest4 = new Chest(ItemList[3], false);
+            ChestList.Add(chest4);
+
+            Chest chest5 = new Chest(ItemList[4], false);
+            ChestList.Add(chest5);
+
+            Chest chest6 = new Chest(ItemList[5], false);
+            ChestList.Add(chest6);
+
+            return ChestList;
+        }
+
+        public List<NPC> createNPCs()
+        {
+            string wDialog1 = "Bienvenue sur Jarvilo-VI";
+            string wDialog2 = "Cette planète a été ravagée par le gel éternel";
+            string wDialog3 = "Mais il reste un espoir pour le peuple de cette planète";
+            string wDialog4 = "La gardienne suprême, Cocolia, est à l'origine du gel éternel";
+            string wDialog5 = "Cocolia dirige Belobog, la ville habritant le peuple de Jarvilo-VI";
+            string wDialog6 = "Essaye de la raisonner pour mettre un terme à ce désastre";
+            List<string> wDialogs = new List<string>() { wDialog1, wDialog2, wDialog3, wDialog4, wDialog5, wDialog6 };
+
+            NPC welt = new NPC(0, "Welt Yang", wDialogs, false);
+            NPCList.Add(welt);
+
+            string sDialog1 = "Salut l'ami ! Mon nom est Sampo Koski.";
+            string sDialog2 = "Si tu as le cash j'ai le... Tu as pas de cash ?!";
+            List<string> sDialogs = new List<string>() { sDialog1, sDialog2 };
+
+            NPC sampo = new NPC(1, "Sampo", sDialogs, false);
+            NPCList.Add(sampo);
+
+            string ccDialog = "Tu es trop faible pour oser me parler...";
+            List<string> ccDialogs = new List<string>() { ccDialog };
+
+            NPC cocoliaBully = new NPC(2, "Cocolia", ccDialogs, false);
+            NPCList.Add(cocoliaBully);
+
+            string cDialog1 = "Qui es-tu ?";
+            string cDialog2 = "Tu n'as rien à dire ?";
+            string cDialog3 = "Tu ne viens pas de ce monde, tu ne peux pas comprendre se qui se passe ici";
+            string cDialog4 = "Le gel éternel est une fatalité, rien ne peux l'arrêter";
+            string cDialog5 = "Maintenant disparait !";
+            List<string> cDialogs = new List<string>() { cDialog1, cDialog2, cDialog3, cDialog4, cDialog5 };
+
+            NPC cocolia = new NPC(3, "Cocolia", cDialogs, true);
+            NPCList.Add(cocolia);
+
+            return NPCList;
         }
     }
 }
