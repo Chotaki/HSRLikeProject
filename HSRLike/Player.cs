@@ -31,6 +31,17 @@ namespace HSRLikeProject
         {
             WinCount = winCount;
         }
+        
+        public static void PlayerCharacter()
+        {
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.Write('P');
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
 
         public void fight(int fightType)
         {

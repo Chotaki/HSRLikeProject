@@ -29,12 +29,13 @@ namespace HSRLikeProject
 
         public void startDialog(Initialize init, NPC npc, Player p)
         {
-            for (int i =  0; i < init.NPCList.Count; i++)
+            for (int i = 0; i < init.NPCList.Count; i++)
             {
                 if (init.NPCList[i].ID == npc.ID)
                 {
                     int j = 0;
-                    do {
+                    do
+                    {
                         Console.WriteLine(init.NPCList[i].Dialogs[j]);
                         ConsoleKeyInfo space = Console.ReadKey(true);
                         if (space.Key == ConsoleKey.Spacebar)
@@ -42,7 +43,7 @@ namespace HSRLikeProject
                             j++;
                             if (init.NPCList[i].IsBoss == true && j == 5)
                             {
-                                p.fight(2);
+                                //p.fight(2);
                             }
                         }
                     } while (j != init.NPCList[i].Dialogs.Count);

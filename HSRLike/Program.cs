@@ -15,10 +15,10 @@ namespace HSRLikeProject
         {
 
             // Test Gacha :
-            Player player = new Player();
+            Player player = new Player(0);
             Initialize init = new Initialize();
             init.createCharacters();
-            init.createNPCs();
+            //init.createNPCs();
             Gacha.warp(init, player);
 
             string[] map = LoadMap();
@@ -30,42 +30,43 @@ namespace HSRLikeProject
 
             Map.DisplayMap(player.PlayerTeam, map);
 
+            Console.SetCursorPosition(158, 14);
+            Player.PlayerCharacter();
+  
+
+
             while (game)
             {
 
-                
-                switch (Console.ReadKey(true).Key)
+
+                InputManager.Events(Console.ReadKey(true).Key, player); 
                 {
-                    case ConsoleKey.UpArrow:
-                        Console.SetCursorPosition(0, 0);
+                    /*case ConsoleKey.UpArrow:
+                        Map.DisplayMap(player.PlayerTeam, map);
+                        player.PlayerLocation(0, -1, map);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        Console.SetCursorPosition(0, 0);
+                        Map.DisplayMap(player.PlayerTeam, map);
+                        player.PlayerLocation(0, 1, map);
                         break;
                         
                     case ConsoleKey.LeftArrow:
-                        Console.SetCursorPosition(0, 0);
+                        Map.DisplayMap(player.PlayerTeam, map);
+                        player.PlayerLocation(-1, 0, map);
                         break;
+                    case ConsoleKey.RightArrow:
+                        Map.DisplayMap(player.PlayerTeam, map);
+                        player.PlayerLocation(1, 0, map);
+                        break;*/
 
-            //playerCharacter[playerLocation.X, playerLocation.Y] = defaultTile;
 
                 }
-                Map.DisplayMap(player.PlayerTeam, map);
-
-            // Set up our water tile
-            Map waterTile = new Map();
-            waterTile.character = '~';
-            waterTile.colour = ConsoleColor.Blue;
-
-
-
-
 
             }
         }
 
-        private static string[] LoadMap()
+        public static string[] LoadMap()
         {
             string[] content;
             using (StreamReader file = new StreamReader("../../../Map.txt"))

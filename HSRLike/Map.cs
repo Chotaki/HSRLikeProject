@@ -22,19 +22,18 @@ namespace HSRLikeProject
 
 
 
-            int iMin = 60;
+            int iMin = 20;
             int iMax = iMin +40;
 
-            int jMin = 50;
+            int jMin = 110;
             int jMax = jMin + 130;
 
 
             int down = 0;
 
-            bool mapFinished = false;
             
 
-                for (int i = 20; i <= 60; i++)   
+                for (int i = iMin; i <= iMax; i++)   
                     {
 
                     Console.SetCursorPosition(50, 0 + down);
@@ -59,10 +58,10 @@ namespace HSRLikeProject
             while (nmTeam != 4) { 
                 for (int i = 0; i < 4; i++)
                     {
-                        Console.SetCursorPosition(200, 12 + 3);
+                        Console.SetCursorPosition(200, 12 + i);
                         Console.WriteLine(playerTeam[i].Name);
-                        Console.SetCursorPosition(202, 12+3);
-                        Console.Write("Lvl : " + playerTeam[i].Lvl);
+                        Console.SetCursorPosition(195, 12+i);
+                        Console.Write("Lvl:" + playerTeam[i].Lvl);
                         nmTeam++;
                     }
             }
@@ -73,9 +72,18 @@ namespace HSRLikeProject
 
         }
 
-        public static void Move() 
+        public static void Move(int moveSide, int moveUpDown) 
         {
 
+            int positionX = 158;
+            int positionY = 14;
+
+            Console.SetCursorPosition(positionX + moveSide, positionY + moveUpDown);
+
+            Player.PlayerCharacter();
+
+            moveSide = moveSide + moveSide;
+            moveUpDown = moveUpDown + moveUpDown;
         }
 
     }
