@@ -17,39 +17,40 @@ namespace HSRLikeProject
 
         public static void DisplayMap()
         {
+
             
-            StreamReader file = new StreamReader("../../../Map.txt");
+            StreamReader file = new("../../../Map.txt");
 
-            Console.SetCursorPosition(50, 0);
+            int widthLeft = 50;
 
-            int witdhL = 575;
             string ln;
-            int counter = 0;
+            
+            Console.SetCursorPosition(widthLeft, 0);
 
-            ln = file.ReadLine();
 
-            while (ln != null)
+            while ((ln = file.ReadLine()) != null)
             {
-                for (int i = 0; i < 63; i++)
+                for (int i = 0; i < 40; i++)
                 {
                     ln = file.ReadLine();
-                    Console.SetCursorPosition(50, i);
+                    Console.SetCursorPosition(widthLeft, i);
 
-                    for (int j = 0; j < 101; j++) 
+                    for (int j = 0; j < 120; j++) 
                     {
                         Console.Write(ln[j]);
 
-
                     }
+
                 }
-
-
                 
+
             }
 
             file.Close();
-            
+            Console.ReadLine();
+
         }
+
         public static void Move() 
         {
 
