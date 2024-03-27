@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using System.IO;
+using HSRLike;
 
 namespace HSRLikeProject
 {
@@ -14,42 +14,65 @@ namespace HSRLikeProject
         static void Main(string[] args)
         {
 
-            /*// Test Gacha :
+            // Test Gacha :
             Player player = new Player();
             Initialize init = new Initialize();
             init.createCharacters();
+            init.createNPCs();
             Gacha.warp(init, player);
-            Console.WriteLine(player.PlayerTeam[0].Name);
-            Console.WriteLine(player.PlayerTeam[1].Name);
-            Console.WriteLine(player.PlayerTeam[2].Name);
-            Console.WriteLine(player.PlayerTeam[3].Name);*/
 
-            bool game = true;
+            string[] map = LoadMap();
+                
             Console.CursorVisible = false;
+            bool game = true;
 
-            Map.DisplayMap();
+            int UI = 1;
 
-            ConsoleKeyInfo input = Console.ReadKey(true);
+            Map.DisplayMap(player.PlayerTeam, map);
 
             while (game)
             {
 
-                Map.DisplayMap();
-                switch(input.Key) 
+                
+                switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.UpArrow:
+                        Console.SetCursorPosition(0, 0);
                         break;
+
                     case ConsoleKey.DownArrow:
-                        break ;
+                        Console.SetCursorPosition(0, 0);
+                        break;
+                        
                     case ConsoleKey.LeftArrow:
-                        break ;
-                    case ConsoleKey.RightArrow:
-                        break ;
+                        Console.SetCursorPosition(0, 0);
+                        break;
+
+            //playerCharacter[playerLocation.X, playerLocation.Y] = defaultTile;
 
                 }
+                Map.DisplayMap(player.PlayerTeam, map);
+
+            // Set up our water tile
+            Map waterTile = new Map();
+            waterTile.character = '~';
+            waterTile.colour = ConsoleColor.Blue;
+
+
+
 
 
             }
+        }
+
+        private static string[] LoadMap()
+        {
+            string[] content;
+            using (StreamReader file = new StreamReader("../../../Map.txt"))
+            {
+               content = file.ReadToEnd().Split("\r\n");
+            }
+            return content;
         }
     }
 }
