@@ -9,48 +9,57 @@ namespace HSRLike
 {
     public class InputManager
     {
-        public void Move(string direction)
+        public void Events(ConsoleKey key, Player p)
         {
-            switch (direction)
+            if (p.InFight == false)
             {
-                case "up":
-                     Console.WriteLine("Moved up");
-                    break;
-                case "down":
-                    Console.WriteLine("Moved down");
-                    break;
-                case "left":
-                    Console.WriteLine("Moved left");
-                    break;
-                case "right":
-                    Console.WriteLine("Moved right");
-                    break;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        Map.Move(); //move one tile up
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Map.Move(); //move one tile down
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        Map.Move(); //move one tile left
+                        break;
+                    case ConsoleKey.RightArrow:
+                        Map.Move(); //move one tile right
+                        break;
+                    case ConsoleKey.B:
+                        //UI.displayInventory();
+                        break;
+                    case ConsoleKey.T:
+                        //UI.displayTeam();
+                        break;
+                    case ConsoleKey.F:
+                        /*switch (Map.InteractionRadar)
+                        {
+                            case <= 3: // NPCs (Cocolia boss not included)
+                                //init.NPCList[Map.InteractionRadar].startDialog(init, init.NPCList[Map.InteractionRadar], p);
+                                break;
+                            case 4: // Chest
+                                Chest.open(p);
+                                break;
+                            case 5: //Mimic
+                                p.fight(1);
+                                break;
+                        }*/
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-
-        public void Interact(int interactionId, Player p) 
-        {
-            switch (interactionId) //different cases - 1 : NPC / 2 : Chest / 3 : Mimic / 4 : Boss (Condition to start fight)
-            {
-                case 1:
-                    Console.WriteLine("Interact with NPC");
-                    break;
-                case 2:
-                    Console.WriteLine("Interact with Chest");
-                    break;
-                case 3:
-                    Console.WriteLine("Interact with Mimic");
-                    break;
-                case 4:
-                    if (p.WinCount < 10)
-                    {
-                        Console.WriteLine("...");      
-                    }
-                    else
-                    {
-                        Console.WriteLine("Interact with Boss - Fight Enhanced");
-                    }
-                    break;
+            else { 
+            
+                switch(key) 
+                {
+                    case ConsoleKey.A:
+                        p.CurrentCharacter = 0;
+                        break;
+                    //Z, E, R pour les current characters
+                }
             }
         }
     }
