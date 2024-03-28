@@ -25,6 +25,7 @@ namespace HSRLikeProject
         private int[] _position = new int[2];
         private bool _waitAction;
         private int _enemyCount;
+        private int _detectedChestId;
 
         public bool WinFight { get => _winFight; set => _winFight = value; }
         public bool InFight { get => _inFight; set => _inFight = value; }
@@ -39,6 +40,8 @@ namespace HSRLikeProject
         public int[] Position { get => _position; set => _position = value; }
         public bool WaitAction { get => _waitAction; set => _waitAction = value; }
         public int EnemyCount { get => _enemyCount; set => _enemyCount = value; }
+
+        public int DetectedChestId { get => _detectedChestId; set => _detectedChestId = value; }
 
         public Player (int winCount)
         {
@@ -106,10 +109,10 @@ namespace HSRLikeProject
                                 {
                                     ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                                     ConsoleKey pressedKey = pressedKeyInfo.Key;
-                                    InputManager.Events(pressedKey, p);
+                                    InputManager.Events(pressedKey, p, init);
                                     if (WaitAction == false)
                                     {
-                                        p.PlayerTeam[j].attack(p);
+                                        p.PlayerTeam[j].attack(p, init);
                                         Console.WriteLine(p.PlayerTeam[j].Name);
                                         Console.WriteLine(p.PlayerTeam[j].HP);
                                         for (int l = 0; l < FightingEnemyList.Count; l++)
@@ -171,10 +174,10 @@ namespace HSRLikeProject
                             {
                                 ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                                 ConsoleKey pressedKey = pressedKeyInfo.Key;
-                                InputManager.Events(pressedKey, p);
+                                InputManager.Events(pressedKey, p, init);
                                 if (WaitAction == false)
                                 {
-                                    p.PlayerTeam[i].attack(p);
+                                    p.PlayerTeam[i].attack(p, init);
                                     Console.WriteLine(p.PlayerTeam[i].Name);
                                     Console.WriteLine(p.PlayerTeam[i].HP);
                                     Console.WriteLine(p.PlayerTeam[i].Id);
@@ -218,10 +221,10 @@ namespace HSRLikeProject
                             {
                                 ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                                 ConsoleKey pressedKey = pressedKeyInfo.Key;
-                                InputManager.Events(pressedKey, p);
+                                InputManager.Events(pressedKey, p, init);
                                 if (WaitAction == false)
                                 {
-                                    p.PlayerTeam[i].attack(p);
+                                    p.PlayerTeam[i].attack(p, init);
                                     Console.WriteLine(p.PlayerTeam[i].Name);
                                     Console.WriteLine(p.PlayerTeam[i].HP);
                                     Console.WriteLine(p.PlayerTeam[i].Id);
