@@ -9,7 +9,7 @@ using static HSRLikeProject.Enemy;
 
 namespace HSRLike
 {
-    internal class Initialize
+    public class Initialize
     {
         private List<Enemy> _enemyList = new List<Enemy>();
         private List<Character> _characterList = new List<Character> { };
@@ -438,7 +438,6 @@ namespace HSRLike
 
         public List<Enemy> CreateEnemy()
         {
-            List<Enemy> enemyList = new List<Enemy> { };
 
             // Magoret - Trotter 
 
@@ -460,7 +459,7 @@ namespace HSRLike
             List<EnemySkill> magoretSkills = new List<EnemySkill>() { magoretFirstSkill, magoretSecondSkill, magoretThirdSkill };
 
             Enemy magoret = new Enemy(1, "Magoret", 200, 12, true, false, new List<int> { 5, 4, 3 }, magoretSkills);
-            enemyList.Add(magoret);
+            _enemyList.Add(magoret);
 
             //Marcheur de l'ombre de l'Hiver éternel - Everwinter Shadewalker
 
@@ -472,7 +471,7 @@ namespace HSRLike
             List<EnemySkill> marcheurSkills = new List<EnemySkill>() { marcheurSkill };
 
             Enemy marcheur = new Enemy(2, "Marcheur de l'ombre de l'Hiver éternel", 112, 12, true, false, new List<int> { 0, 1, 5 }, marcheurSkills);
-            enemyList.Add(marcheur);
+            _enemyList.Add(marcheur);
 
             //Engeance de givre - Frostspawn
 
@@ -483,7 +482,7 @@ namespace HSRLike
 
             List<EnemySkill> frostspawnSkills = new List<EnemySkill>() { marcheurSkill };
             Enemy frostspawn = new Enemy(3, "Engeance de givre", 45, 12, true, false, new List<int> { 1, 4 }, frostspawnSkills);
-            enemyList.Add(frostspawn);
+            _enemyList.Add(frostspawn);
 
             //Mimic 
 
@@ -494,7 +493,7 @@ namespace HSRLike
 
             List<EnemySkill> mimicSkills = new List<EnemySkill>() { mimicSkill };
             Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { 7 }, mimicSkills);
-            enemyList.Add(mimic);
+            _enemyList.Add(mimic);
 
             //Cocolia
 
@@ -515,10 +514,10 @@ namespace HSRLike
 
             List<EnemySkill> cocoliaSkills = new List<EnemySkill>() { cocoliaFirstSkill, cocoliaSecondSkill, cocoliaThirdSkill };
 
-            Enemy cocolia = new Enemy(5, "Cocolia", 1302, 12, true, true, new List<int> { 1, 5, 3 }, cocoliaSkills);
-            enemyList.Add(cocolia);
+            Enemy cocolia = new Enemy(5, "Cocolia", 25000, 100, true, true, new List<int> { 1, 5, 3 }, cocoliaSkills);
+            _enemyList.Add(cocolia);
 
-            return enemyList;
+            return _enemyList;
         }
 
         public List<Item> createItems()

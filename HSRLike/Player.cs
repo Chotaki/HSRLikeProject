@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HSRLike;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using static HSRLikeProject.Character;
-
-
 
 namespace HSRLikeProject
 {
@@ -43,7 +43,7 @@ namespace HSRLikeProject
 
         }
 
-        public void fight(int fightType)
+        public void fight(Initialize init, Player p, int fightType)
         {
             InFight = true;
 
@@ -51,19 +51,47 @@ namespace HSRLikeProject
             if (fightType == 0)
             {
                 Random rnd = new Random();
+                int enemyCount = rnd.Next(1, 5);
 
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    FightingEnemyList.Add(init.EnemyList[rnd.Next(1, 3)]);
+                }
+                if (enemyCount < 4)
+                {
+                    int trotter = rnd.Next(11);
+                    if (trotter == 3)
+                    {
+                        FightingEnemyList.Add(init.EnemyList[0]);
+                    }
+                }
+                for (int i = 0; i < FightingEnemyList.Count; i++)
+                {
+                    Console.WriteLine(FightingEnemyList[i].Name);
+                }
+
+                for (int i = 0;i < FightingEnemyList.Count; i++)
+                {
+                    for (int j = 0; j < p.PlayerTeam.Length; j++)
+                    {
+                        while (FightingEnemyList[i].checkIfDead() == false && p.PlayerTeam[j].checkIfDead() == false)
+                        {
+
+                        }
+                    }
+                }
             } 
 
             // Fight against a mimic
             else if (fightType == 1)
             {
-
+                FightingEnemyList.Add(init.EnemyList[3]);
             }
             
             // Fight against Cocolia
             else if (fightType == 2)
             {
-
+                FightingEnemyList.Add(init.EnemyList[4]);
             }
         }
     }

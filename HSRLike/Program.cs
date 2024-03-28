@@ -14,7 +14,12 @@ namespace HSRLikeProject
         static void Main(string[] args)
         {
 
-            // Test Gacha :
+            Player player = new Player(0);
+            Initialize init = new Initialize();
+            init.CreateEnemy();
+            player.fight(init, player, 0);
+
+            /*// Test Gacha :
             Player player = new Player(0);
             Initialize init = new Initialize();
             init.createCharacters();
@@ -66,16 +71,16 @@ namespace HSRLikeProject
             }
         }
 
-        public static string[] LoadMap()
-        {
-            string[] content;
-            using (StreamReader file = new StreamReader("../../../Map.txt"))
-            {
-               content = file.ReadToEnd().Split("\r\n");
-            }
-            return content;
-        }
+/*public static string[] LoadMap()
+{
+    string[] content;
+    using (StreamReader file = new StreamReader("../../../Map.txt"))
+    {
+       content = file.ReadToEnd().Split("\r\n");
     }
+    return content;
 }
+}
+}*/
 
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HSRLikeProject
 {
-    internal class Chest
+    public class Chest
     {
         private Item _reward;
         private bool _isOpen;
