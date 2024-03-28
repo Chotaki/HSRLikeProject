@@ -38,7 +38,7 @@ namespace HSRLikeProject
             while (game)
             {
                 //MAP
-                Map.UpdateMap(player,map)
+                Map.UpdateMap(player, map);
                 Map.OtherCharacter();
                 Player.PlayerCharacter(player);
                 InputManager.Events(Console.ReadKey(true).Key, player);
