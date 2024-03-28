@@ -20,7 +20,7 @@ namespace HSRLikeProject
 
 
             Console.SetCursorPosition(10 , 10);
-            Console.Write("Parametre (p)");
+            Console.Write("Pause (p)");
             Console.SetCursorPosition(10, 15);
             Console.Write("Inventaire (b)");
             Console.SetCursorPosition(10, 20);

@@ -40,9 +40,7 @@ namespace HSRLikeProject
             Console.WriteLine(player.PlayerTeam[2].ATK);
             Console.WriteLine(player.PlayerTeam[3].ATK);*/
 
-            //player.fight(init, player, 2);
-
-            
+            string[] map = LoadMap();
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.CursorVisible = false;
@@ -50,7 +48,7 @@ namespace HSRLikeProject
 
             int UI = 1;
 
-            Map.DisplayMap(player.PlayerTeam, init.map);
+            Map.DisplayMap(player.PlayerTeam, map);
 
             Console.SetCursorPosition(player.Position[0], player.Position[1]);
             Player.PlayerCharacter(player);
@@ -59,13 +57,26 @@ namespace HSRLikeProject
 
             while (game)
             {
-                //Map.DisplayMap(player.PlayerTeam, map);
-                Map.UpdateMap(player, init.map);
+                //MAP
+                Map.UpdateMap(player, map);
                 Map.OtherCharacter(init);
-                InputManager.Events(Console.ReadKey(true).Key, player, init);
                 Player.PlayerCharacter(player);
-                
-                
+                InputManager.Events(Console.ReadKey(true).Key, player, init);
+
+                //BATTLE
+                //UI.DisplayFight(player);
+
+                //TEAM
+                //UI.DisplayTeam(player,0);
+
+                //INVENTAIRE
+                //UI.DisplayInventory(player);
+
+                //PAUSE
+                //UI.DisplayPause();
+
+
+
             }
         }
 
