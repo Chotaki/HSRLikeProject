@@ -14,12 +14,7 @@ namespace HSRLikeProject
         static void Main(string[] args)
         {
 
-            Player player = new Player(0);
-            Initialize init = new Initialize();
-            init.CreateEnemy();
-            player.fight(init, player, 0);
-
-            /*// Test Gacha :
+            // Test Gacha :
             Player player = new Player(0);
             Initialize init = new Initialize();
             init.createCharacters();

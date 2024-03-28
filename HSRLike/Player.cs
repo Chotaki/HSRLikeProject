@@ -33,9 +33,6 @@ namespace HSRLikeProject
         public int CurrentAction { get => _currentAction; set => _currentAction = value; }
         public int SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
         public bool WaitInput { get => _waitInput; set => _waitInput = value; }
-        private int[] _position = new int[2];
-        public int[] Position { get => _position; set => _position = value; }
-        public List<Enemy> FightingEnemyList { get => _fightingEnemyList; set => _fightingEnemyList = value; }
         public int[] Position { get => _position; set => _position = value; }
 
         public Player(int winCount)
@@ -44,8 +41,6 @@ namespace HSRLikeProject
             Position = new[] { 160, 30 };
         }
         
-        public static void PlayerCharacter(Player p)
-
 
         public static void PlayerCharacter(Player p)
         {
