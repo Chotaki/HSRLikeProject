@@ -67,6 +67,7 @@ namespace HSRLikeProject
                 // Fight against normal mobs
                 if (fightType == 0)
                 {
+                    /* Tentative de création d'équipe ennemi de taille et composition aléatoire :
                     Random rnd = new Random();
                     EnemyCount = rnd.Next(1, 5);
 
@@ -81,7 +82,12 @@ namespace HSRLikeProject
                         {
                             FightingEnemyList.Add(init.EnemyList[0]);
                         }
-                    }
+                    }*/
+
+                    FightingEnemyList.Add(init.EnemyList[0]);
+                    FightingEnemyList.Add(init.EnemyList[1]);
+                    FightingEnemyList.Add(init.EnemyList[2]);
+
                     for (int i = 0; i < FightingEnemyList.Count; i++)
                     {
                         Console.WriteLine(FightingEnemyList[i].Name);
@@ -91,38 +97,58 @@ namespace HSRLikeProject
                     {
                         for (int j = 0; j < p.PlayerTeam.Length; j++)
                         {
-                            if (FightingEnemyList[i].checkIfDead() == true && p.PlayerTeam[j].checkIfDead() == true)
+                            if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[j].checkIfDead() == true)
                             {
-                                for (int k = 0; k < PlayerTeam.Length; k++)
+                                CurrentCharacter = j;
+                                Console.WriteLine("stp attak mon reufg");
+                                WaitAction = true;
+                                while (WaitAction == true)
                                 {
-                                    if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                                    ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                                    ConsoleKey pressedKey = pressedKeyInfo.Key;
+                                    InputManager.Events(pressedKey, p);
+                                    if (WaitAction == false)
                                     {
-                                        CurrentCharacter = p.PlayerTeam[i].Id;
-                                        Console.WriteLine("stp attak mon reufg");
-                                        WaitAction = true;
-                                        while (WaitAction == true)
-                                        {
-                                            ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
-                                            ConsoleKey pressedKey = pressedKeyInfo.Key;
-                                            InputManager.Events(pressedKey, p);
-                                            if (WaitAction == false)
-                                            {
-                                                p.PlayerTeam[k].attack(p);
-                                                Console.WriteLine(p.PlayerTeam[k].Name);
-                                                Console.WriteLine(p.PlayerTeam[k].HP);
-                                            }
-                                        }
+                                        p.PlayerTeam[j].attack(p);
+                                        Console.WriteLine(p.PlayerTeam[j].Name);
+                                        Console.WriteLine(p.PlayerTeam[j].HP);
                                         for (int l = 0; l < FightingEnemyList.Count; l++)
                                         {
-                                            FightingEnemyList[l].Attack(p);
-                                            Console.WriteLine(FightingEnemyList[l].Name);
-                                            Console.WriteLine(FightingEnemyList[l].HP);
-                                        }
-                                        if (FightingEnemyList.Count == 0)
-                                        {
-
+                                            if (p.FightingEnemyList[l].HP <= 0)
+                                            {
+                                                p.FightingEnemyList[l].die(p);
+                                            }
                                         }
                                     }
+                                }
+                                if (FightingEnemyList.Count > 0)
+                                {
+                                    if (FightingEnemyList.Count > 1)
+                                    {
+                                        FightingEnemyList[i].Attack(p);
+                                        Console.WriteLine(FightingEnemyList[i].Name);
+                                        Console.WriteLine(FightingEnemyList[i].HP);
+                                    } else if (FightingEnemyList.Count == 1)
+                                    {
+                                        FightingEnemyList[0].Attack(p);
+                                        Console.WriteLine(FightingEnemyList[0].Name);
+                                        Console.WriteLine(FightingEnemyList[0].HP);
+                                    }
+                                }
+                                else if (FightingEnemyList.Count == 0 && p.PlayerTeam[j].checkIfDead() == true)
+                                {
+                                    WinFight = true;
+                                    WinCount += 1;
+                                    InFight = false;
+                                    p.PlayerTeam[j].levelUp(p);
+                                    break;
+                                }
+                                else if (FightingEnemyList.Count > 0 && p.PlayerTeam[j].checkIfDead() == false)
+                                {
+                                    InFight = false;
+                                    p.PlayerTeam[j].HP = p.PlayerTeam[j].MaxHP;
+                                    p.PlayerTeam[j].ATK = p.PlayerTeam[j].BaseATK;
+                                    break;
                                 }
                             }
                         }
@@ -137,7 +163,7 @@ namespace HSRLikeProject
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
                         {
-                            CurrentCharacter = p.PlayerTeam[i].Id;
+                            CurrentCharacter = i;
                             Console.WriteLine("Current character id" + CurrentCharacter);
                             Console.WriteLine("stp attak mon reufg");
                             WaitAction = true;
@@ -158,6 +184,21 @@ namespace HSRLikeProject
                             Console.WriteLine(FightingEnemyList[0].Name);
                             Console.WriteLine(FightingEnemyList[0].HP);
                         }
+                        if (FightingEnemyList[0].checkIfDead() == false && p.PlayerTeam[i].checkIfDead() == true)
+                        {
+                            WinFight = true;
+                            WinCount += 1;
+                            InFight = false;
+                            p.PlayerTeam[i].levelUp(p);
+                            break;
+                        }
+                        else if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == false)
+                        {
+                            InFight = false;
+                            p.PlayerTeam[i].HP = p.PlayerTeam[i].MaxHP;
+                            p.PlayerTeam[i].ATK = p.PlayerTeam[i].BaseATK;
+                            break;
+                        }
                     }
                 }
             
@@ -169,7 +210,7 @@ namespace HSRLikeProject
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
                         {
-                            CurrentCharacter = p.PlayerTeam[i].Id;
+                            CurrentCharacter = i;
                             Console.WriteLine("Current character id" + CurrentCharacter);
                             Console.WriteLine("stp attak mon reufg");
                             WaitAction = true;
@@ -191,6 +232,21 @@ namespace HSRLikeProject
                                 FightingEnemyList[0].Attack(p);
                                 Console.WriteLine(FightingEnemyList[0].HP);
                             }
+                        }
+                        if (FightingEnemyList[0].checkIfDead() == false && p.PlayerTeam[i].checkIfDead() == true)
+                        {
+                            WinFight = true;
+                            WinCount += 1;
+                            InFight = false;
+                            p.PlayerTeam[i].levelUp(p);
+                            break;
+                        }
+                        else if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == false)
+                        {
+                            InFight = false;
+                            p.PlayerTeam[i].HP = p.PlayerTeam[i].MaxHP;
+                            p.PlayerTeam[i].ATK = p.PlayerTeam[i].BaseATK;
+                            break;
                         }
                     }
                 }
