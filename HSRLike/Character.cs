@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HSRLike;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -879,9 +880,15 @@ namespace HSRLikeProject
                 if (this.SkillList[1].attackType == 3 || this.SkillList[1].attackType == 4 || this.SkillList[1].attackType == 5 && this.Id != 7)
                 {
                     p.WaitInput = true;
-                    if (p.WaitInput == false)
+                    while (p.WaitInput == true)
                     {
-                        this.skill(p);
+                        ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                        ConsoleKey pressedKey = pressedKeyInfo.Key;
+                        InputManager.Events(pressedKey, p);
+                        if (p.WaitInput == false)
+                        {
+                            this.skill(p);
+                        }
                     }
                 } else
                 {
