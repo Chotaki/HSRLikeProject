@@ -43,7 +43,7 @@ namespace HSRLikeProject
                             j++;
                             if (init.NPCList[i].IsBoss == true && j == 5)
                             {
-                                p.fight(init, 2);
+                                p.fight(init, p, 2);
                             }
                         }
                     } while (j != init.NPCList[i].Dialogs.Count);

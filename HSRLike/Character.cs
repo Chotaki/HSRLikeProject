@@ -62,14 +62,15 @@ namespace HSRLikeProject
         /*private List<Character> _characterList = new List<Character> { };
         public List<Character> CharacterList { get => _characterList; set => _characterList = value; }*/
 
-        public Character(int cId, int cCharaType, string cName, int cMaxHp, int cAtk, int cDef, int cType, bool cAlive, int cLvl, int cEnergy, CharacterSkill[] cSkillList)
+        public Character(int cId, int cCharaType, string cName, int cMaxHp, int cBaseAtk, int cDef, int cType, bool cAlive, int cLvl, int cEnergy, CharacterSkill[] cSkillList)
         {
             _id = cId;
             _characterType = cCharaType;
             _name = cName;
             _hp = cMaxHp;
             _maxHp = cMaxHp;
-            _atk = cAtk;
+            _atk = cBaseAtk;
+            _baseAtk = cBaseAtk;
             _def = cDef;
             _type = cType;
             _alive = cAlive;
@@ -947,6 +948,8 @@ namespace HSRLikeProject
                         p.PlayerTeam[i].Def += 24;
                     }
                 }
+                p.PlayerTeam[i].HP = p.PlayerTeam[i].MaxHP;
+                p.PlayerTeam[i].ATK = p.PlayerTeam[i].BaseATK;
             }
         }
 

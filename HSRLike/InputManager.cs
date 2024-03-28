@@ -53,23 +53,26 @@ namespace HSRLike
             }
             else { 
             
-                if (!p.WaitInput)
+                if (!p.WaitInput && p.WaitAction)
 
                 {
                     switch (key)
                     {
                     case ConsoleKey.I:
                         p.CurrentAction = 0;
+                        p.WaitAction = false;
                         break;
                     case ConsoleKey.O:
                         p.CurrentAction = 1;
+                        p.WaitAction = false;
                         break;
 
                     case ConsoleKey.P:
                         p.CurrentAction = 2;
+                        p.WaitAction = false;
                         break;
                     }
-                } else
+                } else if (p.WaitInput && !p.WaitAction)
                 {
                     switch(key)
                     {

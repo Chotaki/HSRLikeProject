@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace HSRLikeProject
         private int _selectedCharacter;
         private int _currentAction;
         private bool _waitInput;
+        private int[] _position = new int[2];
+        private bool _waitAction;
 
         public bool WinFight { get => _winFight; set => _winFight = value; }
         public bool InFight { get => _inFight; set => _inFight = value; }
@@ -32,8 +35,8 @@ namespace HSRLikeProject
         public int CurrentAction { get => _currentAction; set => _currentAction = value; }
         public int SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
         public bool WaitInput { get => _waitInput; set => _waitInput = value; }
-        private int[] _position = new int[2];
         public int[] Position { get => _position; set => _position = value; }
+        public bool WaitAction { get => _waitAction; set => _waitAction = value; }
 
         public Player (int winCount)
         {
@@ -83,7 +86,7 @@ namespace HSRLikeProject
                 {
                     for (int j = 0; j < p.PlayerTeam.Length; j++)
                     {
-                        while (FightingEnemyList[i].checkIfDead() == false && p.PlayerTeam[j].checkIfDead() == false)
+                        if (FightingEnemyList[i].checkIfDead() == true && p.PlayerTeam[j].checkIfDead() == true)
                         {
 
                         }
@@ -95,12 +98,59 @@ namespace HSRLikeProject
             else if (fightType == 1)
             {
                 FightingEnemyList.Add(init.EnemyList[3]);
+                for (int i = 0; i < PlayerTeam.Length; i++)
+                {
+                    if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                    {
+                        Console.WriteLine("stp attak mon reufg");
+                        WaitAction = true;
+                        while (WaitAction == true)
+                        {
+                            ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                            ConsoleKey pressedKey = pressedKeyInfo.Key;
+                            InputManager.Events(pressedKey, p);
+                            if (WaitAction == false)
+                            {
+                                p.PlayerTeam[i].attack(p);
+                                Console.WriteLine(p.PlayerTeam[i].Name);
+                                Console.WriteLine(p.PlayerTeam[i].HP);
+                            }
+                        }
+                        FightingEnemyList[0].Attack(p);
+                        Console.WriteLine(FightingEnemyList[0].Name);
+                        Console.WriteLine(FightingEnemyList[0].HP);
+                    }
+                }
             }
             
             // Fight against Cocolia
             else if (fightType == 2)
             {
                 FightingEnemyList.Add(init.EnemyList[4]);
+                for (int i = 0; i < PlayerTeam.Length; i++)
+                {
+                    if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                    {
+                        WaitAction = true;
+                        while (WaitAction == true)
+                        {
+                            ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                            ConsoleKey pressedKey = pressedKeyInfo.Key;
+                            InputManager.Events(pressedKey, p);
+                            if (WaitAction == false)
+                            {
+                                p.PlayerTeam[i].attack(p);
+                                Console.WriteLine(p.PlayerTeam[i].Name);
+                                Console.WriteLine(p.PlayerTeam[i].HP);
+                            }
+                        }
+                        if (i % 2 != 0) 
+                        {
+                            FightingEnemyList[0].Attack(p);
+                            Console.WriteLine(FightingEnemyList[0].HP);
+                        }
+                    }
+                }
             }
         }
     }
