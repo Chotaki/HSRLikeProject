@@ -6,26 +6,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Numerics;
-
+using System.Runtime.CompilerServices;
 
 namespace HSRLikeProject
 {
     public class Map
     {
+        private int _iMin;
+        private int _jMin;
 
         public string[,] playerlocation = new string[241, 64];
+        public int iMin { get => _iMin; set => _iMin = value; }
+        public int jMin { get => _jMin; set => _jMin = value; }
 
-        
+        public Map () 
+        {
+            iMin = 10;
+            jMin = 70;
+        }
 
         public static void DisplayMap(Character[] playerTeam, string[] lines)
         {
 
 
 
-            int iMin = 20;
-            int iMax = iMin +40;
+            int iMin = 5;
+            int iMax = iMin + 40;
 
-            int jMin = 110;
+            int jMin = 50;
             int jMax = jMin + 130;
 
 
@@ -72,18 +80,38 @@ namespace HSRLikeProject
 
         }
 
-        public static void Move(int moveSide, int moveUpDown) 
+        public static void Move(int moveSide, int moveUpDown, Player p) 
         {
+ 
+            if (moveSide == 1)
+            {
+                Console.Write('.');
+                p.Position[0] += 1;
+                Player.PlayerCharacter(p);
 
-            int positionX = 158;
-            int positionY = 14;
+            }
+            else if (moveSide == -1) 
+            {
+                Console.Write ('.');
+                p.Position[0] -= 1;
+                Console.SetCursorPosition(p.Position[0], p.Position[1]);
+                Player.PlayerCharacter(p);
+            }
+            if (moveUpDown == -1)
+            {
+                Console.Write(".");
+                p.Position[1] -= 1;
+                Player.PlayerCharacter(p);
+            }
+            else if (moveUpDown == 1) 
+            {
+                Console.Write(".");
+                p.Position[1] += 1;
+                Player.PlayerCharacter(p);
+            }
+                    
+            Console.CursorLeft--;
 
-            Console.SetCursorPosition(positionX + moveSide, positionY + moveUpDown);
-
-            Player.PlayerCharacter();
-
-            moveSide = moveSide + moveSide;
-            moveUpDown = moveUpDown + moveUpDown;
         }
 
     }
