@@ -23,6 +23,8 @@ namespace HSRLike
         public List<Chest> ChestList { get => _chestList; set => _chestList = value; }
         public List<NPC> NPCList { get => _npcList; set => _npcList = value; }
 
+        public string[] map = Program.LoadMap();
+
         public List<Character> createCharacters()
         {
 

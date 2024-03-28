@@ -28,10 +28,52 @@ namespace HSRLike
                         Map.Move(1, 0, p, init); //move one tile right
                         break;
                     case ConsoleKey.B:
-                        //UI.displayInventory();
+                        UI.DisplayInventory();
+                        switch(key)
+                        {
+                            case ConsoleKey.A:
+                                p.Inventory[0].use(p);
+                                break;
+                            case ConsoleKey.Z:
+                                p.Inventory[1].use(p);
+                                break;
+                            case ConsoleKey.E:
+                                p.Inventory[2].use(p);
+                                break;
+                            case ConsoleKey.R:
+                                p.Inventory[3].use(p);
+                                break;
+                            case ConsoleKey.T:
+                                p.Inventory[4].use(p);
+                                break;
+                            case ConsoleKey.Y:
+                                p.Inventory[5].use(p);
+                                break;
+                            case ConsoleKey.Escape:
+
+                                Map.DisplayMap(p.PlayerTeam, init.map);
+                                break;
+                        }
                         break;
                     case ConsoleKey.T:
-                        //UI.displayTeam();
+                        UI.DisplayTeam(p, 0);
+                        switch (key)
+                        {
+                            case ConsoleKey.A:
+                                UI.DisplayTeam(p, 0);
+                                break;
+                            case ConsoleKey.Z:
+                                UI.DisplayTeam(p, 1);
+                                break;
+                            case ConsoleKey.E:
+                                UI.DisplayTeam(p, 2);
+                                break;
+                            case ConsoleKey.R:
+                                UI.DisplayTeam(p, 3);
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.P:
                         break;
                     case ConsoleKey.F:
                         switch (Map.interactionRadar(p))
