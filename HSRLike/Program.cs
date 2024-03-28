@@ -19,6 +19,9 @@ namespace HSRLikeProject
             Initialize init = new Initialize();
             init.CreateEnemy();
             init.createCharacters();
+            init.createNPCs();
+            init.createItems();
+            init.createChests();
             Gacha.warp(init, player);
             /*Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
@@ -57,12 +60,12 @@ namespace HSRLikeProject
             while (game)
             {
                 //Map.DisplayMap(player.PlayerTeam, map);
-                Map.UpdateMap(player,map);
-                Map.OtherCharacter();
+                Map.UpdateMap(player, map);
+                Map.OtherCharacter(init);
+                InputManager.Events(Console.ReadKey(true).Key, player, init);
                 Player.PlayerCharacter(player);
-                InputManager.Events(Console.ReadKey(true).Key, player);
-
-
+                
+                
             }
         }
 

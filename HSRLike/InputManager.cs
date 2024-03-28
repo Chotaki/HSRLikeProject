@@ -9,23 +9,23 @@ namespace HSRLike
 {
     public class InputManager
     {
-        public static void Events(ConsoleKey key, Player p)
+        public static void Events(ConsoleKey key, Player p, Initialize init)
         {
             if (p.InFight == false)
             {
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        Map.Move(0,-1, p); //move one tile up
+                        Map.Move(0,-1, p, init); //move one tile up
                         break;
                     case ConsoleKey.DownArrow:
-                        Map.Move(0, 1, p); //move one tile down
+                        Map.Move(0, 1, p, init); //move one tile down
                         break;
                     case ConsoleKey.LeftArrow:
-                        Map.Move(-1, 0, p); //move one tile left
+                        Map.Move(-1, 0, p, init); //move one tile left
                         break;
                     case ConsoleKey.RightArrow:
-                        Map.Move(1, 0, p); //move one tile right
+                        Map.Move(1, 0, p, init); //move one tile right
                         break;
                     case ConsoleKey.B:
                         //UI.displayInventory();
@@ -34,18 +34,20 @@ namespace HSRLike
                         //UI.displayTeam();
                         break;
                     case ConsoleKey.F:
-                        /*switch (Map.InteractionRadar)
+                        switch (Map.interactionRadar(p))
                         {
-                            case <= 3: // NPCs (Cocolia boss not included)
-                                //init.NPCList[Map.InteractionRadar].startDialog(init, init.NPCList[Map.InteractionRadar], p);
+                            case <= 3: // NPCs (Cocolia boss included, condition in startDialog())
+                                init.NPCList[Map.interactionRadar(p)].startDialog(init, init.NPCList[Map.interactionRadar(p)], p);
                                 break;
                             case 4: // Chest
-                                Chest.open(p);
+                                init.ChestList[p.DetectedChestId].open(p, p.DetectedChestId);
                                 break;
                             case 5: //Mimic
-                                p.fight(1);
+                                p.fight(init, p, 1);
                                 break;
-                        }*/
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         break;

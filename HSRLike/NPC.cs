@@ -36,11 +36,19 @@ namespace HSRLikeProject
                     int j = 0;
                     do
                     {
+                        Console.SetCursorPosition(100, 44);
+                        Console.WriteLine(init.NPCList[i].Name);
+                        Console.SetCursorPosition(50, 46);
                         Console.WriteLine(init.NPCList[i].Dialogs[j]);
                         ConsoleKeyInfo space = Console.ReadKey(true);
                         if (space.Key == ConsoleKey.Spacebar)
                         {
                             j++;
+                            Console.SetCursorPosition(50, 46);
+                            for (int k = 50; k < 180;  k++)
+                            {
+                                Console.Write(" ");
+                            }
                             if (init.NPCList[i].IsBoss == true && j == 5)
                             {
                                 p.fight(init, p, 2);
@@ -49,6 +57,22 @@ namespace HSRLikeProject
                     } while (j != init.NPCList[i].Dialogs.Count);
                 }
             }
+            //clearing after dialogues
+            for (int i = 44; i <= 46; i++)
+            {
+
+                Console.SetCursorPosition(50, 0 + i);
+
+
+                for (int j = 50; j < 180; j++)
+                {
+
+                    Console.Write(" ");
+
+                }
+
+            }
+            
         }
     }
 }

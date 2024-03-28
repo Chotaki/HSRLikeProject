@@ -12,19 +12,24 @@ namespace HSRLikeProject
     {
         private Item _reward;
         private bool _isOpen;
-
+        private int _id;
+        private int[] _position = new int[2];
         public Item Reward { get => _reward; set => _reward = value;  }
         public bool IsOpen { get => _isOpen; set => _isOpen = value; } 
+        public int Id { get => _id; set => _id = value; }
+        public int[] Position { get => _position; set => _position = value; }
 
-        public Chest(Item reward, bool isOpen) {
-            _reward = reward;
-            _isOpen = isOpen;
+        public Chest(int id, Item reward, bool isOpen, int[] position) {
+            Id = id;
+            Reward = reward;
+            IsOpen = isOpen;
+            Position = position;
         }
 
-        public void open(Player p)
+        public void open(Player p, int detectedChestId)
         {
             p.Inventory.Add(this.Reward);
-            IsOpen = true;
+            this.IsOpen = true;
         }
     }
 }

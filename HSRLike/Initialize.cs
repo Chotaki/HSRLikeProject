@@ -559,22 +559,22 @@ namespace HSRLike
 
         public List<Chest> createChests()
         {
-            Chest chest1 = new Chest(ItemList[0], false);
+            Chest chest1 = new Chest(0, ItemList[0], false, new [] { 70, 37 });
             ChestList.Add(chest1);
 
-            Chest chest2 = new Chest(ItemList[1], false);
+            Chest chest2 = new Chest(1, ItemList[1], false, new[] { 110, 30 });
             ChestList.Add(chest2);
 
-            Chest chest3 = new Chest(ItemList[2], false);
+            Chest chest3 = new Chest(2, ItemList[2], false, new[] { 80, 15 });
             ChestList.Add(chest3);
 
-            Chest chest4 = new Chest(ItemList[3], false);
+            Chest chest4 = new Chest(3, ItemList[3], false, new[] { 150, 22 });
             ChestList.Add(chest4);
 
-            Chest chest5 = new Chest(ItemList[4], false);
+            Chest chest5 = new Chest(4, ItemList[4], false, new[] { 161, 5 });
             ChestList.Add(chest5);
 
-            Chest chest6 = new Chest(ItemList[5], false);
+            Chest chest6 = new Chest(5, ItemList[5], false, new[] { 169, 38 });
             ChestList.Add(chest6);
 
             return ChestList;

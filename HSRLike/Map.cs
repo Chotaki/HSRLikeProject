@@ -7,23 +7,13 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using HSRLike;
 
 namespace HSRLikeProject
 {
     public class Map
     {
-        private int _iMin;
-        private int _jMin;
 
-        public string[,] playerlocation = new string[241, 64];
-        public int iMin { get => _iMin; set => _iMin = value; }
-        public int jMin { get => _jMin; set => _jMin = value; }
-
-        public Map () 
-        {
-            iMin = 10;
-            jMin = 70;
-        }
 
         public static void DisplayMap(Character[] playerTeam, string[] lines)
         {
@@ -68,15 +58,15 @@ namespace HSRLikeProject
 
 
 
-            Console.SetCursorPosition(200, 12);
+            Console.SetCursorPosition(197, 12);
             int nmTeam = 0;
             int espacement = 3;
             while (nmTeam != 4) { 
                 for (int i = 0; i < 4; i++)
                     {
-                        Console.SetCursorPosition(200, 8 + espacement);
+                        Console.SetCursorPosition(197, 8 + espacement);
                         Console.WriteLine(playerTeam[i].Name);
-                        Console.SetCursorPosition(193, 8 + espacement);
+                        Console.SetCursorPosition(190, 8 + espacement);
                         Console.Write("Lvl:" + playerTeam[i].Lvl);
                         nmTeam++;
                         espacement += 3;
@@ -86,53 +76,39 @@ namespace HSRLikeProject
 
         }
 
-        public static void OtherCharacter()
+        public static void OtherCharacter(Initialize init)
         {
 
             //NPC
             //Cocolia
             Console.SetCursorPosition (66, 5);
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("C");
             Console.ForegroundColor = ConsoleColor.Gray;
 
             //Sampo
             Console.SetCursorPosition(115, 3);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("C");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("S");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            //Wellt
+            //Welt
             Console.SetCursorPosition(160, 35);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("C");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("W");
             Console.ForegroundColor = ConsoleColor.Gray;
 
             //coffre
-            Console.SetCursorPosition(70, 37);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.SetCursorPosition(110, 30);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.SetCursorPosition(80, 15);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.SetCursorPosition(150, 22);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.SetCursorPosition(161, 5);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.Gray;
+            foreach(Chest coffre in init.ChestList)
+            {
+                if (!coffre.IsOpen)
+                {
+                    Console.SetCursorPosition(coffre.Position[0], coffre.Position[1]);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("#");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+            }
 
             //Mimic
 
@@ -177,38 +153,34 @@ namespace HSRLikeProject
         }
 
 
-        public static void Move(int moveSide, int moveUpDown, Player p) 
+        public static void Move(int moveSide, int moveUpDown, Player p, Initialize init) 
         {
- 
-            if (moveSide == 1)
+            if (p.Position[0] == 66 && p.Position[1] == 6 && moveUpDown == -1 || p.Position[0] == 66 && p.Position[1] == 4 && moveUpDown == 1 || p.Position[0] == 65 && p.Position[1] == 5 && moveSide == 1 || p.Position[0] == 67 && p.Position[1] == 5 && moveSide == -1
+            //positions de : Cocolia (dessus) & Sampo (dessous)
+            || p.Position[0] == 115 && p.Position[1] == 4 && moveUpDown == -1 || p.Position[0] == 115 && p.Position[1] == 2 && moveUpDown == 1 || p.Position[0] == 114 && p.Position[1] == 3 && moveSide == 1 || p.Position[0] == 116 && p.Position[1] == 3 && moveSide == -1
+            //position de Welt
+            || p.Position[0] == 160 && p.Position[1] == 36 && moveUpDown == -1 || p.Position[0] == 160 && p.Position[1] == 34 && moveUpDown == 1 || p.Position[0] == 159 && p.Position[1] == 35 && moveSide == 1 || p.Position[0] == 161 && p.Position[1] == 35 && moveSide == -1
+            //position du premier coffre (si non ouvert)
+            || p.Position[0] == 70 && p.Position[1] == 38 && moveUpDown == -1 && init.ChestList[0].IsOpen == false || p.Position[0] == 70 && p.Position[1] == 36 && moveUpDown == 1 && init.ChestList[0].IsOpen == false || p.Position[0] == 69 && p.Position[1] == 37 && moveSide == 1 && init.ChestList[0].IsOpen == false || p.Position[0] == 71 && p.Position[1] == 37 && moveSide == -1 && init.ChestList[0].IsOpen == false
+            //position du deuxième coffre (si non ouvert)
+            || p.Position[0] == 110 && p.Position[1] == 31 && moveUpDown == -1 && init.ChestList[1].IsOpen == false || p.Position[0] == 110 && p.Position[1] == 29 && moveUpDown == 1 && init.ChestList[1].IsOpen == false || p.Position[0] == 109 && p.Position[1] == 30 && moveSide == 1 && init.ChestList[1].IsOpen == false || p.Position[0] == 111 && p.Position[1] == 30 && moveSide == -1 && init.ChestList[1].IsOpen == false
+            //position du troisième coffre (si non ouvert)
+            || p.Position[0] == 80 && p.Position[1] == 16 && moveUpDown == -1 && init.ChestList[2].IsOpen == false || p.Position[0] == 80 && p.Position[1] == 14 && moveUpDown == 1 && init.ChestList[2].IsOpen == false || p.Position[0] == 79 && p.Position[1] == 15 && moveSide == 1 && init.ChestList[2].IsOpen == false || p.Position[0] == 81 && p.Position[1] == 15 && moveSide == -1 && init.ChestList[2].IsOpen == false
+            //position du quatrième coffre (si non ouvert)
+            || p.Position[0] == 150 && p.Position[1] == 23 && moveUpDown == -1 && init.ChestList[3].IsOpen == false || p.Position[0] == 150 && p.Position[1] == 21 && moveUpDown == 1 && init.ChestList[3].IsOpen == false || p.Position[0] == 149 && p.Position[1] == 22 && moveSide == 1 && init.ChestList[3].IsOpen == false || p.Position[0] == 151 && p.Position[1] == 22 && moveSide == -1 && init.ChestList[3].IsOpen == false
+            //position du cinquième coffre (si non ouvert)
+            || p.Position[0] == 161 && p.Position[1] == 6 && moveUpDown == -1 && init.ChestList[4].IsOpen == false || p.Position[0] == 161 && p.Position[1] == 4 && moveUpDown == 1 && init.ChestList[4].IsOpen == false || p.Position[0] == 160 && p.Position[1] == 5 && moveSide == 1 && init.ChestList[4].IsOpen == false || p.Position[0] == 162 && p.Position[1] == 5 && moveSide == -1 && init.ChestList[4].IsOpen == false
+            //position du sixième coffre (si non ouvert)
+            || p.Position[0] == 169 && p.Position[1] == 39 && moveUpDown == -1 && init.ChestList[5].IsOpen == false || p.Position[0] == 169 && p.Position[1] == 37 && moveUpDown == 1 && init.ChestList[5].IsOpen == false || p.Position[0] == 168 && p.Position[1] == 38 && moveSide == 1 && init.ChestList[5].IsOpen == false || p.Position[0] == 170 && p.Position[1] == 38 && moveSide == -1 && init.ChestList[5].IsOpen == false
+            //position du mimic
+            || p.Position[0] == 155 && p.Position[1] == 31 && moveUpDown == -1 || p.Position[0] == 155 && p.Position[1] == 29 && moveUpDown == 1 || p.Position[0] == 154 && p.Position[1] == 30 && moveSide == 1 || p.Position[0] == 156 && p.Position[1] == 30 && moveSide == -1)
             {
-
-                p.Position[0] += 1;
-                Console.SetCursorPosition(p.Position[0], p.Position[1]);
-                
-
+                moveSide = 0;
+                moveUpDown = 0;
             }
-
-            else if (moveSide == -1) 
-            {
-                p.Position[0] -= 1;
-                Console.SetCursorPosition(p.Position[0], p.Position[1]);
-              
-            }
-
-            if (moveUpDown == -1)
-            {
-                p.Position[1] -= 1;
-                Console.SetCursorPosition(p.Position[0], p.Position[1]);
-               
-            }
-
-            else if (moveUpDown == 1) 
-            {
-                p.Position[1] += 1;
-                Console.SetCursorPosition(p.Position[0], p.Position[1]);
-                
-            }
+            p.Position[0] += moveSide;
+            p.Position[1] += moveUpDown;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
 
             if (p.Position[0] <= 51)
             {
@@ -229,9 +201,78 @@ namespace HSRLikeProject
                 p.Position[1] = 39;
             }
 
-
             Console.CursorLeft--;
 
+        }
+
+        public static int interactionRadar(Player p)
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                for (int j = 0; j <= 2; j++)
+                {
+                    //NPCs
+                    if (p.Position[0] + i - 1 == 160 && p.Position[1] + j - 1 == 35)
+                    {
+                        p.DetectedChestId = 0; //npc
+                        return 0;
+                    }
+                    else if (p.Position[0] + i - 1 == 115 && p.Position[1] + j - 1 == 3)
+                    {
+                        p.DetectedChestId = 0;
+                        return 1;
+                    }
+                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount < 10)
+                    {
+                        p.DetectedChestId = 0;
+                        return 2;
+                    }
+                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount >= 10)
+                    {
+                        p.DetectedChestId = 0;
+                        return 3;
+                    }
+
+                    //Chests/Mimic
+                    if (p.Position[0] + i - 1 == 70 && p.Position[1] + j - 1 == 37)
+                    {
+                        p.DetectedChestId = 0; //chest
+                        return 4;
+                    }
+                    else if (p.Position[0] + i - 1 == 110 && p.Position[1] + j - 1 == 30)
+                    {
+                        p.DetectedChestId = 1;
+                        return 4;
+                    }
+                    else if (p.Position[0] + i - 1 == 80 && p.Position[1] + j - 1 == 15)
+                    { 
+                        p.DetectedChestId = 2;
+                        return 4;
+                    }
+                    else if (p.Position[0] + i - 1 == 150 && p.Position[1] + j - 1 == 22)
+                    {
+                        p.DetectedChestId = 3;
+                        return 4;
+                    }
+                
+                    else if (p.Position[0] + i - 1 == 161 && p.Position[1] + j - 1 == 5)
+                    {
+                        p.DetectedChestId = 4;
+                        return 4;
+                    }
+                    else if (p.Position[0] + i - 1 == 169 && p.Position[1] + j - 1 == 38)
+                    {
+                        p.DetectedChestId = 5;
+                        return 4;
+                    }
+                    else if (p.Position[0] + i - 1 == 155 && p.Position[1] + j - 1 == 30)
+                    {
+                        p.DetectedChestId = 1;
+                        return 5;
+                    }
+                }
+            }
+            return 0;
         }
 
     }
