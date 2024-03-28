@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HSRLikeProject
 {
-    internal class NPC
+    public class NPC
     {
         private int _id;
         private string _name;
@@ -43,7 +43,7 @@ namespace HSRLikeProject
                             j++;
                             if (init.NPCList[i].IsBoss == true && j == 5)
                             {
-                                //p.fight(2);
+                                p.fight(init, 2);
                             }
                         }
                     } while (j != init.NPCList[i].Dialogs.Count);
