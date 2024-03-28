@@ -504,10 +504,12 @@ namespace HSRLikeProject
                     // If the enemiy's "weakness" is the character's "element", +10% damage
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier * 1.1);
                     p.FightingEnemyList[0].takeDamage(damage);
+                    break;
                 } else
                 {
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
                     p.FightingEnemyList[0].takeDamage(damage);
+                    break;
                 }
             }
 

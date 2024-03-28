@@ -161,9 +161,10 @@ namespace HSRLikeProject
                     else if (this.AttackPattern == 1)
                     {
                         this.Types.Clear();
+                        AttackPattern += 1;
                         isAttackDone = true;
                     }
-                    else
+                    else if (this.AttackPattern == 2)
                     {
                         this.die(p);
                     }
@@ -253,18 +254,18 @@ namespace HSRLikeProject
 
         public void die(Player p) //*élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
         {
-            Console.WriteLine("{0} est mort au combat", p.FightingEnemyList[0].Name);
-            p.FightingEnemyList.RemoveAt(0);
+                Console.WriteLine("{0} est mort au combat", p.FightingEnemyList[0].Name);
+                p.FightingEnemyList.Remove(p.FightingEnemyList[0]);
         }
        
-        /*public void levelBalance (Initialize init)
+        public void levelBalance (Initialize init)
         {
             for (int i = 0;  i < init.EnemyList.Count - 1; i++)
             {
                 init.EnemyList[i].HP += 67;
                 init.EnemyList[i].Atk += 25;
             }
-        }*/
+        }
 
     }
 }
