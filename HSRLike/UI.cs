@@ -10,8 +10,25 @@ namespace HSRLike
     internal class UI
     {
 
-        public static void DisplayInventory()
+        public static void DisplayInventory(Player p)
         {
+            Console.SetCursorPosition(20, 5);
+            Console.Write("Ton inventaire :");
+
+            string[] Touche = new[] { "(A)", "(Z)", "(E)", "(R)" ,"(T)", "(y)" };
+            int espacement = 6;
+            for (int i = 0; i < p.Inventory.Count; i++)
+            {
+                Console.SetCursorPosition(55, 10 + espacement);
+                Console.Write("Utiliser "+ Touche[i]+ " : " + p.Inventory[i].Name);
+                Console.SetCursorPosition(70, 12 + espacement);
+                Console.Write("Description :");
+                Console.SetCursorPosition(70, 13 + espacement);
+                Console.Write(p.Inventory[i].Description);
+                espacement += 6;
+            }
+
+
 
         }
 
@@ -20,14 +37,15 @@ namespace HSRLike
             Console.SetCursorPosition(20, 5);
             Console.Write("Ton equipe :");
 
+            string[] Touche = new[] { "(A)", "(Z)", "(E)", "(R)" };
             int espacement = 6;
             for (int i = 0; i < 4; i++)
             {
-                Console.SetCursorPosition(25, 4 + espacement);
+                Console.SetCursorPosition(22, 4 + espacement);
                 if (i == selection)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(p.PlayerTeam[i].Name);
+                    Console.WriteLine(Touche[i] + p.PlayerTeam[i].Name);
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
                 else
@@ -37,15 +55,15 @@ namespace HSRLike
                 espacement += 6;
             }
 
-            Console.SetCursorPosition(90, 10);
+            Console.SetCursorPosition(70, 10);
             Console.Write("Nom : " + p.PlayerTeam[selection].Name + "   " + "Type : " + p.PlayerTeam[selection].CharacterTypes[p.PlayerTeam[selection].Type]);
 
             Console.SetCursorPosition(70, 13);
             Console.Write("Lvl : " + p.PlayerTeam[selection].Lvl + "   " + "Hp : " + p.PlayerTeam[selection].MaxHP + "  " + "ATK : " + p.PlayerTeam[selection].BaseATK + "  " + "Def : " + p.PlayerTeam[selection].Def);
 
             espacement = 6;
-            string[] Nom = new[] { "Attaque basic : ", "Techquenique", "(E)", "(R)" };
-            for (int i = 0;i < 2; i++)
+            string[] Nom = new[] { "Attaque normale : ", "Technique : ", "Ultime : "};
+            for (int i = 0;i < 3; i++)
             {
             Console.SetCursorPosition(70, 10 + espacement);
             Console.Write(Nom[i] + p.PlayerTeam[selection].SkillList[i].name);
@@ -153,9 +171,15 @@ namespace HSRLike
 
         }
 
-        public static void DisplayParametre()
+        public static void DisplayPause()
         {
+            Console.SetCursorPosition(20, 20);
+            Console.Write("PAUSE");
 
+            int sizeCursor = Console.CursorSize ;
+            sizeCursor = 1 ;
+            Console.SetCursorPosition(20, 21);
+            Console.Write("(oui faut encore travailler dessus)");
         }
 
 
