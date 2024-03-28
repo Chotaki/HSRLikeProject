@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HSRLike;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -164,7 +165,7 @@ namespace HSRLikeProject
                     }
                     else
                     {
-                        this.Die(p);
+                        this.die(p);
                     }
                 }
                 else
@@ -250,11 +251,20 @@ namespace HSRLikeProject
             return this.Alive;
         }
 
-        public void Die(Player p) //*élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
+        public void die(Player p) //*élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
         {
             Console.WriteLine("{0} est mort au combat", p.FightingEnemyList[0].Name);
             p.FightingEnemyList.RemoveAt(0);
         }
        
+        /*public void levelBalance (Initialize init)
+        {
+            for (int i = 0;  i < init.EnemyList.Count - 1; i++)
+            {
+                init.EnemyList[i].HP += 67;
+                init.EnemyList[i].Atk += 25;
+            }
+        }*/
+
     }
 }
