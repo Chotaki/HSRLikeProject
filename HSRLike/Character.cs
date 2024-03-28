@@ -697,30 +697,30 @@ namespace HSRLikeProject
             // 3-Buff on Single Target (scale : atk)
             if (this.SkillList[1].attackType == 3)
             {
-                //selectedCharacter.ATK += (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                p.PlayerTeam[p.SelectedCharacter].ATK += (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
             }
 
             // 4-Heal on Single Target (scale : mHP | if 13-Luocha, scale : atk)
             if (this.SkillList[1].attackType == 4 && this.Id != 13)
             {
-                /*if (selectedCharacter.HP < selectedCharacter.MaxHP)
+                if (p.PlayerTeam[p.SelectedCharacter].HP < p.PlayerTeam[p.SelectedCharacter].MaxHP)
                 {
-                    selectedCharacter.HP += (int)Math.Round(this.MaxHP * this.SkillList[1].multiplier);
-                    if (selectedCharacter.HP > MaxHP) { selectedCharacter.HP = selectedCharacter.MaxHP; }
-                }*/
+                    p.PlayerTeam[p.SelectedCharacter].HP += (int)Math.Round(this.MaxHP * this.SkillList[1].multiplier);
+                    if (p.PlayerTeam[p.SelectedCharacter].HP > MaxHP) { p.PlayerTeam[p.SelectedCharacter].HP = p.PlayerTeam[p.SelectedCharacter].MaxHP; }
+                }
             } else if (this.SkillList[1].attackType == 4 && this.Id == 13)
             {
-                /*if (selectedCharacter.HP < selectedCharacter.MaxHP)
+                if (p.PlayerTeam[p.SelectedCharacter].HP < p.PlayerTeam[p.SelectedCharacter].MaxHP)
                 {
-                    selectedCharacter.HP += (int)Math.Round(this.MaxHP * this.SkillList[1].multiplier);
-                    if (selectedCharacter.HP > MaxHP) { selectedCharacter.HP = selectedCharacter.MaxHP; }
-                }*/
+                    p.PlayerTeam[p.SelectedCharacter].HP += (int)Math.Round(this.MaxHP * this.SkillList[1].multiplier);
+                    if (p.PlayerTeam[p.SelectedCharacter].HP > MaxHP) { p.PlayerTeam[p.SelectedCharacter].HP = p.PlayerTeam[p.SelectedCharacter].MaxHP; }
+                }
             }
 
             // 5-Shield (if 6-March 7th, ST def | if 7-Aventurine, MT def)
             if (this.SkillList[1].attackType == 5 && this.Id == 6)
             {
-                //selectedCharacter.HP += (int)Math.Round(this.Def * this.SkillList[1].multiplier);
+                p.PlayerTeam[p.SelectedCharacter].HP += (int)Math.Round(this.Def * this.SkillList[1].multiplier);
             } else if (this.SkillList[1].attackType == 4 && this.Id == 7)
             {
                 for (int i = 0; i < p.PlayerTeam.Length; i++)
@@ -824,7 +824,7 @@ namespace HSRLikeProject
             // 3-Buff (if 11-Hanya, ST atk  | if 10-Asta, MT atk | if 9-Tingyun, ST atk + 40 Energy)
             if (this.SkillList[2].attackType == 3 && this.Id == 11)
             {
-                //selectedCharacter.ATK += (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
+                p.PlayerTeam[p.SelectedCharacter].ATK += (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
             } else if (this.SkillList[2].attackType == 3 && this.Id == 10)
             {
                 for (int i = 0; i < p.PlayerTeam.Length; i++)
@@ -836,8 +836,8 @@ namespace HSRLikeProject
                 }
             } else if (this.SkillList[2].attackType == 3 && this.Id == 9)
             {
-                //selectedCharacter.ATK += (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
-                //selectedCharacter.Energy += 40;
+                p.PlayerTeam[p.SelectedCharacter].ATK += (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
+                p.PlayerTeam[p.SelectedCharacter].Energy += 40;
             }
 
             // 4-Heal MT (mHP)
@@ -866,6 +866,44 @@ namespace HSRLikeProject
             }
 
             this.Energy = 0;
+        }
+
+        public void attack(Player p)
+        {
+            if (p.CurrentAction == 0)
+            {
+                this.normalAttack(p);
+            }
+            else if (p.CurrentAction == 1) {
+                if (this.SkillList[1].attackType == 3 || this.SkillList[1].attackType == 4 || this.SkillList[1].attackType == 5 && this.Id != 7)
+                {
+                    p.WaitInput = true;
+                    if (p.WaitInput == false)
+                    {
+                        this.skill(p);
+                    }
+                } else
+                {
+                    this.skill(p);
+                }
+            }
+            else if (p.CurrentAction == 2)
+            {
+                if (this.Energy == 100)
+                {
+                    if (this.Id == 11 || this.Id == 9)
+                    {
+                        p.WaitInput = true;
+                        if (p.WaitInput == false)
+                        {
+                            this.skill(p);
+                        }
+                    } else
+                    {
+                        this.ultimate(p);
+                    }
+                }
+            }
         }
 
         public void takeDamage(int damage)

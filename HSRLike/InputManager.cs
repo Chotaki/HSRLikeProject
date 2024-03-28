@@ -53,7 +53,7 @@ namespace HSRLike
             }
             else { 
             
-                /*if (!p.WaitInput)
+                if (!p.WaitInput)
 
                 {
                     switch (key)
@@ -75,18 +75,22 @@ namespace HSRLike
                     {
                         case ConsoleKey.A:
                             p.SelectedCharacter = 0;
+                            p.WaitInput = false;
                             break;
                         case ConsoleKey.Z:
                             p.SelectedCharacter = 1;
+                            p.WaitInput = false;
                             break;
                         case ConsoleKey.E:
                             p.SelectedCharacter = 2;
+                            p.WaitInput = false;
                             break;
                         case ConsoleKey.R:
                             p.SelectedCharacter = 3;
+                            p.WaitInput = false;
                             break;
                     }
-                }*/
+                }
 
             }
         }
