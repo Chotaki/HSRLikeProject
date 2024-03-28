@@ -871,7 +871,7 @@ namespace HSRLikeProject
             this.Energy = 0;
         }
 
-        public void attack(Player p)
+        public void attack(Player p, Initialize init)
         {
             if (p.CurrentAction == 0)
             {
@@ -885,7 +885,7 @@ namespace HSRLikeProject
                     {
                         ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                         ConsoleKey pressedKey = pressedKeyInfo.Key;
-                        InputManager.Events(pressedKey, p);
+                        InputManager.Events(pressedKey, p, init);
                         if (p.WaitInput == false)
                         {
                             this.skill(p);
@@ -907,7 +907,7 @@ namespace HSRLikeProject
                         {
                             ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                             ConsoleKey pressedKey = pressedKeyInfo.Key;
-                            InputManager.Events(pressedKey, p);
+                            InputManager.Events(pressedKey, p, init);
                             if (p.WaitInput == false)
                             {
                                 this.ultimate(p);

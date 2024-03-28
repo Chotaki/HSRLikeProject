@@ -19,12 +19,26 @@ namespace HSRLikeProject
             Initialize init = new Initialize();
             init.CreateEnemy();
             init.createCharacters();
-            Gacha.warp(init, player);
-
+            init.createNPCs();
             init.createItems();
-            player.Inventory.Add(init.ItemList[2]);
-            player.Inventory.Add(init.ItemList[3]);
-            player.Inventory.Add(init.ItemList[1]);
+            init.createChests();
+            Gacha.warp(init, player);
+            /*Console.WriteLine(player.PlayerTeam[0].Name);
+            Console.WriteLine(player.PlayerTeam[1].Name);
+            Console.WriteLine(player.PlayerTeam[2].Name);
+            Console.WriteLine(player.PlayerTeam[3].Name);
+
+            for (int i = 0; i < 9; i++)
+            {
+                player.WinFight = true;
+                player.PlayerTeam[0].levelUp(player);
+            }
+            Console.WriteLine(player.PlayerTeam[0].Lvl);*/
+
+            /*Console.WriteLine(player.PlayerTeam[0].ATK);
+            Console.WriteLine(player.PlayerTeam[1].ATK);
+            Console.WriteLine(player.PlayerTeam[2].ATK);
+            Console.WriteLine(player.PlayerTeam[3].ATK);*/
 
             string[] map = LoadMap();
 
@@ -32,12 +46,13 @@ namespace HSRLikeProject
             Console.CursorVisible = false;
             bool game = true;
 
+            int UI = 1;
 
             Map.DisplayMap(player.PlayerTeam, map);
 
             Console.SetCursorPosition(player.Position[0], player.Position[1]);
             Player.PlayerCharacter(player);
-
+  
 
 
             while (game)
@@ -67,12 +82,12 @@ namespace HSRLikeProject
 
         public static string[] LoadMap()
         {
-        string[] content;
-        using (StreamReader file = new StreamReader("../../../Map.txt"))
-        {
-           content = file.ReadToEnd().Split("\r\n");
-        }
-        return content;
+            string[] content;
+            using (StreamReader file = new StreamReader("../../../Map.txt"))
+            {
+               content = file.ReadToEnd().Split("\r\n");
+            }
+            return content;
         }
 
     }
