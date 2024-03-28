@@ -26,8 +26,8 @@ namespace HSRLikeProject
         public bool Alive { get => _alive; set => _alive = value; }
         public List<int> Types { get => _types; }
 
-        private List<EnemySkill> skillList = new List<EnemySkill> { };
-        private Dictionary<int, string> enemyTypes = new Dictionary<int, string>
+        public List<EnemySkill> skillList = new List<EnemySkill> { };
+        public Dictionary<int, string> enemyTypes = new Dictionary<int, string>
         {
             {0, "physique" },
             {1, "feu" },

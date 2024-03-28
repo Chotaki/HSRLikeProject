@@ -20,6 +20,14 @@ namespace HSRLikeProject
             init.CreateEnemy();
             init.createCharacters();
             Gacha.warp(init, player);
+
+            Random rnd = new Random();
+            player.EnemyCount = rnd.Next(1, 5);
+
+            for (int i = 0; i < player.EnemyCount; i++)
+            {
+                player.FightingEnemyList.Add(init.EnemyList[rnd.Next(1, 3)]);
+            }
             /*Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
@@ -45,22 +53,28 @@ namespace HSRLikeProject
             Console.CursorVisible = false;
             bool game = true;
 
-            int UI = 1;
 
-            Map.DisplayMap(player.PlayerTeam, map);
+            /*Map.DisplayMap(player.PlayerTeam, map);
 
             Console.SetCursorPosition(player.Position[0], player.Position[1]);
-            Player.PlayerCharacter(player);
+            Player.PlayerCharacter(player);*/
   
 
 
             while (game)
             {
-                //Map.DisplayMap(player.PlayerTeam, map);
-                Map.UpdateMap(player,map);
+                //MAP
+                /*Map.UpdateMap(player,map);
+                 * 
                 Map.OtherCharacter();
                 Player.PlayerCharacter(player);
-                InputManager.Events(Console.ReadKey(true).Key, player);
+                InputManager.Events(Console.ReadKey(true).Key, player);*/
+
+                //BATTLE
+                //UI.DisplayFight(player);
+
+                //TEAM
+                UI.DisplayTeam(player,0);
 
 
             }
