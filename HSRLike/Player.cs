@@ -18,6 +18,7 @@ namespace HSRLikeProject
         private List<Item> _inventory = new List<Item>();
         private int _currentCharacter;
         private List<Enemy> _fightingEnemyList = new List<Enemy>();
+        private int[] _position = new int[2];
 
         public bool WinFight { get => _winFight; set => _winFight = value; }
         public bool InFight { get => _inFight; set => _inFight = value; }
@@ -25,15 +26,19 @@ namespace HSRLikeProject
         public Character[] PlayerTeam { get => _playerTeam; set => _playerTeam = value; }
         public List<Item> Inventory { get => _inventory; set => _inventory = value; }
         public int CurrentCharacter { get => _currentCharacter; set => _currentCharacter = value; }
-        public List<Enemy> FightingEnemyList { get => _fightingEnemyList; set => _fightingEnemyList = value; } 
+        public List<Enemy> FightingEnemyList { get => _fightingEnemyList; set => _fightingEnemyList = value; }
+        public int[] Position { get => _position; set => _position = value; }
 
-        public Player (int winCount)
+        public Player(int winCount)
         {
             WinCount = winCount;
+            Position = new[] { 160, 30 };
         }
-        
-        public static void PlayerCharacter()
+
+
+        public static void PlayerCharacter(Player p)
         {
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
 
             Console.ForegroundColor = ConsoleColor.Red;
 

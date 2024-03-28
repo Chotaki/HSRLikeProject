@@ -37,12 +37,16 @@ namespace HSRLikeProject
 
             while (game)
             {
-                //Map.DisplayMap(player.PlayerTeam, map);
+
+                Player.PlayerCharacter(player);
+                Map.UpdateMap(player, map);  
                 InputManager.Events(Console.ReadKey(true).Key, player);
 
 
             }
+        
         }
+
 
         public static string[] LoadMap()
         {

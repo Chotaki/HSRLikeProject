@@ -62,54 +62,105 @@ namespace HSRLikeProject
 
             Console.SetCursorPosition(200, 12);
             int nmTeam = 0;
-
+            int espacement = 3;
             while (nmTeam != 4) { 
                 for (int i = 0; i < 4; i++)
                     {
-                        Console.SetCursorPosition(200, 12 + i);
+                        Console.SetCursorPosition(200, 12 + espacement);
                         Console.WriteLine(playerTeam[i].Name);
-                        Console.SetCursorPosition(195, 12+i);
+                        Console.SetCursorPosition(193, 12+espacement);
                         Console.Write("Lvl:" + playerTeam[i].Lvl);
                         nmTeam++;
+                        espacement += 3;
                     }
             }
 
-
-
-
-
         }
+
+        public static void UpdateMap(Player p, string[] uptdateCharacter)
+        {
+            p.Position[0] += 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5 ][p.Position[0] ]);
+            p.Position[1] += 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0] ]);
+            p.Position[0] -= 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]);
+            p.Position[0] -= 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);    
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]);
+            p.Position[1] -= 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]);
+            p.Position[1] -= 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]);
+            p.Position[0] += 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]);
+            p.Position[0] += 1;
+            Console.SetCursorPosition(p.Position[0], p.Position[1]);
+            Console.Write(uptdateCharacter[p.Position[1] + 5][p.Position[0]]); 
+            p.Position[0] -= 1;
+            p.Position[1] += 1;
+        }
+
 
         public static void Move(int moveSide, int moveUpDown, Player p) 
         {
  
             if (moveSide == 1)
             {
-                Console.Write('.');
+
                 p.Position[0] += 1;
-                Player.PlayerCharacter(p);
+                Console.SetCursorPosition(p.Position[0], p.Position[1]);
+                
 
             }
+
             else if (moveSide == -1) 
             {
-                Console.Write ('.');
                 p.Position[0] -= 1;
                 Console.SetCursorPosition(p.Position[0], p.Position[1]);
-                Player.PlayerCharacter(p);
+              
             }
+
             if (moveUpDown == -1)
             {
-                Console.Write(".");
                 p.Position[1] -= 1;
-                Player.PlayerCharacter(p);
+                Console.SetCursorPosition(p.Position[0], p.Position[1]);
+               
             }
+
             else if (moveUpDown == 1) 
             {
-                Console.Write(".");
                 p.Position[1] += 1;
-                Player.PlayerCharacter(p);
+                Console.SetCursorPosition(p.Position[0], p.Position[1]);
+                
             }
-                    
+
+            if (p.Position[0] <= 51)
+            {
+                p.Position[0] = 51;
+            }
+
+            else if (p.Position[0] >= 178) 
+            {
+                p.Position[0] = 178; 
+            }
+
+            if (p.Position[1] <= 1)
+            {
+                p.Position[1] = 1;
+            }
+            else if (p.Position[1] >= 39)
+            {
+                p.Position[1] = 39;
+            }
+
+
             Console.CursorLeft--;
 
         }

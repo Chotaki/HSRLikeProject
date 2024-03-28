@@ -16,16 +16,16 @@ namespace HSRLike
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        Map.Move(0,-1); //move one tile up
+                        Map.Move(0,-1,p); //move one tile up
                         break;
                     case ConsoleKey.DownArrow:
-                        Map.Move(0,1); //move one tile down
+                        Map.Move(0,1, p); //move one tile down
                         break;
                     case ConsoleKey.LeftArrow:
-                        Map.Move(-1,0); //move one tile left
+                        Map.Move(-1,0, p); //move one tile left
                         break;
                     case ConsoleKey.RightArrow:
-                        Map.Move(1,0); //move one tile right
+                        Map.Move(1,0, p); //move one tile right
                         break;
                     case ConsoleKey.B:
                         //UI.displayInventory();
