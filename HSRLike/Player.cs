@@ -93,11 +93,41 @@ namespace HSRLikeProject
                         {
                             if (FightingEnemyList[i].checkIfDead() == true && p.PlayerTeam[j].checkIfDead() == true)
                             {
+                                for (int k = 0; k < PlayerTeam.Length; k++)
+                                {
+                                    if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                                    {
+                                        CurrentCharacter = p.PlayerTeam[i].Id;
+                                        Console.WriteLine("stp attak mon reufg");
+                                        WaitAction = true;
+                                        while (WaitAction == true)
+                                        {
+                                            ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                                            ConsoleKey pressedKey = pressedKeyInfo.Key;
+                                            InputManager.Events(pressedKey, p);
+                                            if (WaitAction == false)
+                                            {
+                                                p.PlayerTeam[k].attack(p);
+                                                Console.WriteLine(p.PlayerTeam[k].Name);
+                                                Console.WriteLine(p.PlayerTeam[k].HP);
+                                            }
+                                        }
+                                        for (int l = 0; l < FightingEnemyList.Count; l++)
+                                        {
+                                            FightingEnemyList[l].Attack(p);
+                                            Console.WriteLine(FightingEnemyList[l].Name);
+                                            Console.WriteLine(FightingEnemyList[l].HP);
+                                        }
+                                        if (FightingEnemyList.Count == 0)
+                                        {
 
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                } 
+                }
 
                 // Fight against a mimic
                 else if (fightType == 1)
@@ -107,6 +137,8 @@ namespace HSRLikeProject
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
                         {
+                            CurrentCharacter = p.PlayerTeam[i].Id;
+                            Console.WriteLine("Current character id" + CurrentCharacter);
                             Console.WriteLine("stp attak mon reufg");
                             WaitAction = true;
                             while (WaitAction == true)
@@ -119,6 +151,7 @@ namespace HSRLikeProject
                                     p.PlayerTeam[i].attack(p);
                                     Console.WriteLine(p.PlayerTeam[i].Name);
                                     Console.WriteLine(p.PlayerTeam[i].HP);
+                                    Console.WriteLine(p.PlayerTeam[i].Id);
                                 }
                             }
                             FightingEnemyList[0].Attack(p);
@@ -136,6 +169,9 @@ namespace HSRLikeProject
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
                         {
+                            CurrentCharacter = p.PlayerTeam[i].Id;
+                            Console.WriteLine("Current character id" + CurrentCharacter);
+                            Console.WriteLine("stp attak mon reufg");
                             WaitAction = true;
                             while (WaitAction == true)
                             {
@@ -147,6 +183,7 @@ namespace HSRLikeProject
                                     p.PlayerTeam[i].attack(p);
                                     Console.WriteLine(p.PlayerTeam[i].Name);
                                     Console.WriteLine(p.PlayerTeam[i].HP);
+                                    Console.WriteLine(p.PlayerTeam[i].Id);
                                 }
                             }
                             if (i % 2 != 0) 

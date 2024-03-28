@@ -40,8 +40,7 @@ namespace HSRLikeProject
         public bool Alive { get => _alive; set => _alive = value; }
         public CharacterSkill[] SkillList { get => _skillList; }
 
-        private int _itemBuffType;
-        private Dictionary<int, string> _types = new Dictionary<int, string>()
+        public Dictionary<int, string> CharacterTypes = new Dictionary<int, string>()
         {
             { 0, "physique" },
             { 1, "feu" },
@@ -550,9 +549,9 @@ namespace HSRLikeProject
                     switch (enemyCount)
                     {
                         case 1:
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
+                            for (int j = 0; j < p.FightingEnemyList[0].Types.Count; j++)
                             {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
+                                if (this.Type == p.FightingEnemyList[0].Types[j])
                                 {
                                     damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
                                     p.FightingEnemyList[0].takeDamage(damage);
@@ -902,9 +901,15 @@ namespace HSRLikeProject
                     if (this.Id == 11 || this.Id == 9)
                     {
                         p.WaitInput = true;
-                        if (p.WaitInput == false)
+                        while (p.WaitInput == true)
                         {
-                            this.skill(p);
+                            ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
+                            ConsoleKey pressedKey = pressedKeyInfo.Key;
+                            InputManager.Events(pressedKey, p);
+                            if (p.WaitInput == false)
+                            {
+                                this.ultimate(p);
+                            }
                         }
                     } else
                     {
