@@ -21,37 +21,16 @@ namespace HSRLikeProject
             init.createCharacters();
             Gacha.warp(init, player);
 
-            Console.WriteLine(player.PlayerTeam[0].Name);
-            Console.WriteLine(player.PlayerTeam[1].Name);
-            Console.WriteLine(player.PlayerTeam[2].Name);
-            Console.WriteLine(player.PlayerTeam[3].Name);
-
-            /*for (int i = 0; i < 9; i++)
-            {
-                player.WinFight = true;
-                player.PlayerTeam[0].levelUp(player);
-            }*/
-            Console.WriteLine(player.PlayerTeam[0].Lvl);
-
-            /*Console.WriteLine(player.PlayerTeam[0].ATK);
-            Console.WriteLine(player.PlayerTeam[1].ATK);
-            Console.WriteLine(player.PlayerTeam[2].ATK);
-            Console.WriteLine(player.PlayerTeam[3].ATK);*/
-
-            player.fight(init, player, 1);
-
-            /*string[] map = LoadMap();
+            string[] map = LoadMap();
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.CursorVisible = false;
             bool game = true;
 
 
-            /*Map.DisplayMap(player.PlayerTeam, map);
+            Map.DisplayMap(player.PlayerTeam, map);
 
             Console.SetCursorPosition(player.Position[0], player.Position[1]);
-            Player.PlayerCharacter(player);*/
-  
             Player.PlayerCharacter(player);
 
 
@@ -59,23 +38,22 @@ namespace HSRLikeProject
             while (game)
             {
                 //MAP
-                /*Map.UpdateMap(player,map);
-                 * 
+                Map.UpdateMap(player,map)
                 Map.OtherCharacter();
                 Player.PlayerCharacter(player);
-                InputManager.Events(Console.ReadKey(true).Key, player);*/
+                InputManager.Events(Console.ReadKey(true).Key, player);
 
                 //BATTLE
                 //UI.DisplayFight(player);
 
                 //TEAM
-                UI.DisplayTeam(player,0);
+                //UI.DisplayTeam(player,0);
 
 
             }
         }
 
-        /*public static string[] LoadMap()
+        public static string[] LoadMap()
         {
         string[] content;
         using (StreamReader file = new StreamReader("../../../Map.txt"))
@@ -83,7 +61,7 @@ namespace HSRLikeProject
            content = file.ReadToEnd().Split("\r\n");
         }
         return content;
-        }*/
+        }
 
     }
 }
