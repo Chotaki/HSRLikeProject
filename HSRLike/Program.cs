@@ -30,38 +30,16 @@ namespace HSRLikeProject
 
             Map.DisplayMap(player.PlayerTeam, map);
 
-            Console.SetCursorPosition(158, 14);
-            Player.PlayerCharacter();
+            Console.SetCursorPosition(player.Position[0], player.Position[1]);
+            Player.PlayerCharacter(player);
   
 
 
             while (game)
             {
+                //Map.DisplayMap(player.PlayerTeam, map);
+                InputManager.Events(Console.ReadKey(true).Key, player);
 
-
-                InputManager.Events(Console.ReadKey(true).Key, player); 
-                {
-                    /*case ConsoleKey.UpArrow:
-                        Map.DisplayMap(player.PlayerTeam, map);
-                        player.PlayerLocation(0, -1, map);
-                        break;
-
-                    case ConsoleKey.DownArrow:
-                        Map.DisplayMap(player.PlayerTeam, map);
-                        player.PlayerLocation(0, 1, map);
-                        break;
-                        
-                    case ConsoleKey.LeftArrow:
-                        Map.DisplayMap(player.PlayerTeam, map);
-                        player.PlayerLocation(-1, 0, map);
-                        break;
-                    case ConsoleKey.RightArrow:
-                        Map.DisplayMap(player.PlayerTeam, map);
-                        player.PlayerLocation(1, 0, map);
-                        break;*/
-
-
-                }
 
             }
         }
