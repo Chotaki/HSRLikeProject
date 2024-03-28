@@ -29,6 +29,14 @@ namespace HSRLikeProject
         {
 
 
+            Console.SetCursorPosition(10 , 10);
+            Console.Write("Parametre (p)");
+            Console.SetCursorPosition(10, 15);
+            Console.Write("Inventaire (b)");
+            Console.SetCursorPosition(10, 20);
+            Console.Write("Team (t)");
+
+
 
             int iMin = 5;
             int iMax = iMin + 40;
@@ -66,14 +74,75 @@ namespace HSRLikeProject
             while (nmTeam != 4) { 
                 for (int i = 0; i < 4; i++)
                     {
-                        Console.SetCursorPosition(200, 12 + espacement);
+                        Console.SetCursorPosition(200, 8 + espacement);
                         Console.WriteLine(playerTeam[i].Name);
-                        Console.SetCursorPosition(193, 12+espacement);
+                        Console.SetCursorPosition(193, 8 + espacement);
                         Console.Write("Lvl:" + playerTeam[i].Lvl);
                         nmTeam++;
                         espacement += 3;
                     }
             }
+
+
+        }
+
+        public static void OtherCharacter()
+        {
+
+            //NPC
+            //Cocolia
+            Console.SetCursorPosition (66, 5);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("C");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //Sampo
+            Console.SetCursorPosition(115, 3);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("C");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //Wellt
+            Console.SetCursorPosition(160, 35);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("C");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //coffre
+            Console.SetCursorPosition(70, 37);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.SetCursorPosition(110, 30);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.SetCursorPosition(80, 15);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.SetCursorPosition(150, 22);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.SetCursorPosition(161, 5);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //Mimic
+
+            Console.SetCursorPosition(155, 30);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("#");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            //Enemy
+
 
         }
 

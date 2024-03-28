@@ -48,11 +48,11 @@ namespace HSRLikeProject
         {
             Console.SetCursorPosition(p.Position[0], p.Position[1]);
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Green;
 
             Console.Write('P');
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
 
         }
 

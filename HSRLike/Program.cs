@@ -20,7 +20,7 @@ namespace HSRLikeProject
             init.CreateEnemy();
             init.createCharacters();
             Gacha.warp(init, player);
-            Console.WriteLine(player.PlayerTeam[0].Name);
+            /*Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
             Console.WriteLine(player.PlayerTeam[3].Name);
@@ -30,17 +30,18 @@ namespace HSRLikeProject
                 player.WinFight = true;
                 player.PlayerTeam[0].levelUp(player);
             }
-            Console.WriteLine(player.PlayerTeam[0].Lvl);
+            Console.WriteLine(player.PlayerTeam[0].Lvl);*/
 
             /*Console.WriteLine(player.PlayerTeam[0].ATK);
             Console.WriteLine(player.PlayerTeam[1].ATK);
             Console.WriteLine(player.PlayerTeam[2].ATK);
             Console.WriteLine(player.PlayerTeam[3].ATK);*/
 
-            player.fight(init, player, 2);
+            //player.fight(init, player, 2);
 
-            /*string[] map = LoadMap();
-                
+            string[] map = LoadMap();
+
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.CursorVisible = false;
             bool game = true;
 
@@ -56,13 +57,16 @@ namespace HSRLikeProject
             while (game)
             {
                 //Map.DisplayMap(player.PlayerTeam, map);
+                Map.UpdateMap(player,map);
+                Map.OtherCharacter();
+                Player.PlayerCharacter(player);
                 InputManager.Events(Console.ReadKey(true).Key, player);
 
 
-            }*/
+            }
         }
 
-        /*public static string[] LoadMap()
+        public static string[] LoadMap()
         {
             string[] content;
             using (StreamReader file = new StreamReader("../../../Map.txt"))
@@ -70,7 +74,7 @@ namespace HSRLikeProject
                content = file.ReadToEnd().Split("\r\n");
             }
             return content;
-        }*/
+        }
 
     }
 }
