@@ -53,13 +53,41 @@ namespace HSRLike
             }
             else { 
             
-                switch(key) 
+                /*if (!p.WaitInput)
+
                 {
-                    case ConsoleKey.A:
-                        p.CurrentCharacter = 0;
+                    switch (key)
+                    {
+                    case ConsoleKey.I:
+                        p.CurrentAction = 0;
                         break;
-                    //Z, E, R pour les current characters
-                }
+                    case ConsoleKey.O:
+                        p.CurrentAction = 1;
+                        break;
+
+                    case ConsoleKey.P:
+                        p.CurrentAction = 2;
+                        break;
+                    }
+                } else
+                {
+                    switch(key)
+                    {
+                        case ConsoleKey.A:
+                            p.SelectedCharacter = 0;
+                            break;
+                        case ConsoleKey.Z:
+                            p.SelectedCharacter = 1;
+                            break;
+                        case ConsoleKey.E:
+                            p.SelectedCharacter = 2;
+                            break;
+                        case ConsoleKey.R:
+                            p.SelectedCharacter = 3;
+                            break;
+                    }
+                }*/
+
             }
         }
     }
