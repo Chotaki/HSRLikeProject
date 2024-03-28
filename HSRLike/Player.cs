@@ -41,6 +41,7 @@ namespace HSRLikeProject
         public Player (int winCount)
         {
             WinCount = winCount;
+            Position = new[] { 160, 30 };
         }
         
         public static void PlayerCharacter(Player p)
