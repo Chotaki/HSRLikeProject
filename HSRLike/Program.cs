@@ -59,9 +59,9 @@ namespace HSRLikeProject
             {
                 //MAP
                 Map.UpdateMap(player, map);
-                Map.OtherCharacter();
+                Map.OtherCharacter(init);
                 Player.PlayerCharacter(player);
-                InputManager.Events(Console.ReadKey(true).Key, player);
+                InputManager.Events(Console.ReadKey(true).Key, player, init);
 
                 //BATTLE
                 //UI.DisplayFight(player);
