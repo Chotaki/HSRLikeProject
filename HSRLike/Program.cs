@@ -21,6 +21,11 @@ namespace HSRLikeProject
             init.createCharacters();
             Gacha.warp(init, player);
 
+            init.createItems();
+            player.Inventory.Add(init.ItemList[2]);
+            player.Inventory.Add(init.ItemList[3]);
+            player.Inventory.Add(init.ItemList[1]);
+
             string[] map = LoadMap();
 
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -48,6 +53,13 @@ namespace HSRLikeProject
 
                 //TEAM
                 //UI.DisplayTeam(player,0);
+
+                //INVENTAIRE
+                //UI.DisplayInventory(player);
+
+                //PAUSE
+                //UI.DisplayPause();
+
 
 
             }
