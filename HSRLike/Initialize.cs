@@ -22,6 +22,7 @@ namespace HSRLike
         public List<Item> ItemList { get => _itemList; set => _itemList = value; }
         public List<Chest> ChestList { get => _chestList; set => _chestList = value; }
         public List<NPC> NPCList { get => _npcList; set => _npcList = value; }
+        public bool IsDisplayEnd = false;
 
         public string[] map = Program.LoadMap();
 
@@ -494,7 +495,7 @@ namespace HSRLike
             mimicSkill.name = "Morsure du coffre";
 
             List<EnemySkill> mimicSkills = new List<EnemySkill>() { mimicSkill };
-            Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { }, mimicSkills);
+            Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { 1 }, mimicSkills);
             _enemyList.Add(mimic);
 
             //Cocolia

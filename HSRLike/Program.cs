@@ -37,7 +37,7 @@ namespace HSRLikeProject
   
 
 
-            while (game)
+            while (!init.IsDisplayEnd)
             {
                 //MAP
                 Map.UpdateMap(player, init.map);
@@ -47,14 +47,7 @@ namespace HSRLikeProject
 
                 //BATTLE
                 map.startFight(player,init);
-                if (player.InFight == true)
-                {
-                    Console.Clear();
 
-                    UI.DisplayFight(player);
-
-                    Console.Clear();
-                }
 
 
             }

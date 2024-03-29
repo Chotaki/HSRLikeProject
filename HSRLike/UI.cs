@@ -79,6 +79,23 @@ namespace HSRLike
 
         public static void DisplayFight( Player p )
         {
+
+            for (int i = 2; i <= 58; i++)
+            {
+
+                Console.SetCursorPosition(2, 0 + i);
+
+
+                for (int j = 10; j < 220; j++)
+                {
+
+                    Console.Write(" ");
+
+                }
+
+
+            }
+
             //Tour
 
             string[] Touche = new[] {"(A)","(Z)","(E)","(R)"};
@@ -129,7 +146,7 @@ namespace HSRLike
             for (int i = 0; i < p.FightingEnemyList.Count; i++)
             {
                 Console.SetCursorPosition(160, 10 + espacement);
-                Console.Write(p.FightingEnemyList[i].Name);
+                Console.Write(p.FightingEnemyList[i].Name + " " + p.FightingEnemyList[i].HP);
                 Console.SetCursorPosition(160, 11 + espacement);
                 for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
                 {
@@ -180,6 +197,13 @@ namespace HSRLike
             sizeCursor = 1 ;
             Console.SetCursorPosition(20, 21);
             Console.Write("Cliquez sur Echap pour revenir au jeu.");
+        }
+
+        public static void DisplayEnd(Initialize init)
+        {
+            init.IsDisplayEnd = true;
+            Console.SetCursorPosition(50, 30);
+            Console.Write("Felicitation Vous avez sauve Jarvilo-VI");
         }
 
 

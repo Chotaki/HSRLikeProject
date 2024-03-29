@@ -115,10 +115,13 @@ namespace HSRLikeProject
 
             //Mimic
 
-            Console.SetCursorPosition(155, 30);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.DarkGray;      
+            if (init.EnemyList[3].Alive == true )
+            {
+                Console.SetCursorPosition(155, 30);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("#");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
 
 
         }
@@ -173,7 +176,7 @@ namespace HSRLikeProject
             //position du sixième coffre (si non ouvert)
             || p.Position[0] == 169 && p.Position[1] == 39 && moveUpDown == -1 && init.ChestList[5].IsOpen == false || p.Position[0] == 169 && p.Position[1] == 37 && moveUpDown == 1 && init.ChestList[5].IsOpen == false || p.Position[0] == 168 && p.Position[1] == 38 && moveSide == 1 && init.ChestList[5].IsOpen == false || p.Position[0] == 170 && p.Position[1] == 38 && moveSide == -1 && init.ChestList[5].IsOpen == false
             //position du mimic
-            || p.Position[0] == 155 && p.Position[1] == 31 && moveUpDown == -1 || p.Position[0] == 155 && p.Position[1] == 29 && moveUpDown == 1 || p.Position[0] == 154 && p.Position[1] == 30 && moveSide == 1 || p.Position[0] == 156 && p.Position[1] == 30 && moveSide == -1)
+            || p.Position[0] == 155 && p.Position[1] == 31 && moveUpDown == -1 && init.EnemyList[3].Alive == true || p.Position[0] == 155 && p.Position[1] == 29 && moveUpDown == 1 && init.EnemyList[3].Alive == true || p.Position[0] == 154 && p.Position[1] == 30 && moveSide == 1 && init.EnemyList[3].Alive == true  || p.Position[0] == 156 && p.Position[1] == 30 && moveSide == -1 && init.EnemyList[3].Alive == true)
             {
                 moveSide = 0;
                 moveUpDown = 0;
@@ -222,12 +225,12 @@ namespace HSRLikeProject
                         p.DetectedChestId = 0;
                         return 1;
                     }
-                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount < 10)
+                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount < 9)
                     {
                         p.DetectedChestId = 0;
                         return 2;
                     }
-                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount >= 10)
+                    else if (p.Position[0] + i - 1 == 66 && p.Position[1] + j - 1 == 5 && p.WinCount >= 9)
                     {
                         p.DetectedChestId = 0;
                         return 3;
@@ -272,7 +275,7 @@ namespace HSRLikeProject
                     }
                 }
             }
-            return 0;
+            return -1;
         }
 
         public void startFight(Player p, Initialize init)
@@ -320,7 +323,7 @@ namespace HSRLikeProject
                 Fights[6] = true;
             }
 
-            else if (p.Position[0] > 115 && p.Position[0] < 118 && p.Position[1] > 4 && p.Position[1] < 7 && Fights[7] == false)
+            else if (p.Position[0] > 55 && p.Position[0] < 60 && p.Position[1] > 25 && p.Position[1] < 29 && Fights[7] == false)
             {
                 p.fight(init, p, 0);
                 Fights[7] = true;
