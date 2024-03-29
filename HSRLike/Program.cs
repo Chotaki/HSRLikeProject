@@ -22,7 +22,7 @@ namespace HSRLikeProject
             init.createNPCs();
             init.createItems();
             init.createChests();
-            Gacha.warp(init, player);
+            Gacha.warp(init, player);  
             /*Console.WriteLine(player.PlayerTeam[0].Name);
             Console.WriteLine(player.PlayerTeam[1].Name);
             Console.WriteLine(player.PlayerTeam[2].Name);
@@ -39,6 +39,8 @@ namespace HSRLikeProject
             Console.WriteLine(player.PlayerTeam[1].ATK);
             Console.WriteLine(player.PlayerTeam[2].ATK);
             Console.WriteLine(player.PlayerTeam[3].ATK);*/
+
+            //player.fight(init, player, 2);
 
             string[] map = LoadMap();
 

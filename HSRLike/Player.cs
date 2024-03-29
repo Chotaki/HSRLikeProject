@@ -86,10 +86,12 @@ namespace HSRLikeProject
                             FightingEnemyList.Add(init.EnemyList[0]);
                         }
                     }*/
+                    Console.Clear();
 
                     FightingEnemyList.Add(init.EnemyList[0]);
                     FightingEnemyList.Add(init.EnemyList[1]);
                     FightingEnemyList.Add(init.EnemyList[2]);
+                    UI.DisplayFight(p);
 
                     for (int i = 0; i < FightingEnemyList.Count; i++)
                     {
@@ -162,6 +164,8 @@ namespace HSRLikeProject
                 else if (fightType == 1)
                 {
                     FightingEnemyList.Add(init.EnemyList[3]);
+                    Console.Clear();
+                    UI.DisplayFight(p);
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
@@ -209,6 +213,8 @@ namespace HSRLikeProject
                 else if (fightType == 2)
                 {
                     FightingEnemyList.Add(init.EnemyList[4]);
+                    Console.Clear();
+                    UI.DisplayFight(p);
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
@@ -254,6 +260,8 @@ namespace HSRLikeProject
                     }
                 }
             }
+            Console.Clear();
+            Map.DisplayMap(p.PlayerTeam, init.map);
         }
     }
 }
