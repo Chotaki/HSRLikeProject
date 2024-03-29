@@ -50,7 +50,7 @@ namespace HSRLike
                 }
                 else
                 { 
-                    Console.WriteLine(p.PlayerTeam[i].Name);
+                    Console.WriteLine(Touche[i] + p.PlayerTeam[i].Name);
                 }
                 espacement += 6;
             }
@@ -179,7 +179,7 @@ namespace HSRLike
             int sizeCursor = Console.CursorSize ;
             sizeCursor = 1 ;
             Console.SetCursorPosition(20, 21);
-            Console.Write("(oui faut encore travailler dessus)");
+            Console.Write("Cliquez sur Echap pour revenir au jeu.");
         }
 
 

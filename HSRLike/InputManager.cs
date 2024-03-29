@@ -28,52 +28,95 @@ namespace HSRLike
                         Map.Move(1, 0, p, init); //move one tile right
                         break;
                     case ConsoleKey.B:
-                        UI.DisplayInventory();
-                        switch(key)
+                        Console.Clear();
+                        bool isDisplayingInventory = true;
+                        UI.DisplayInventory(p);
+                        while (isDisplayingInventory)
                         {
-                            case ConsoleKey.A:
-                                p.Inventory[0].use(p);
-                                break;
-                            case ConsoleKey.Z:
-                                p.Inventory[1].use(p);
-                                break;
-                            case ConsoleKey.E:
-                                p.Inventory[2].use(p);
-                                break;
-                            case ConsoleKey.R:
-                                p.Inventory[3].use(p);
-                                break;
-                            case ConsoleKey.T:
-                                p.Inventory[4].use(p);
-                                break;
-                            case ConsoleKey.Y:
-                                p.Inventory[5].use(p);
-                                break;
-                            case ConsoleKey.Escape:
+                            key = Console.ReadKey(true).Key;
+                            Events(key, p, init);
+                            switch (key)
+                            {
+                            
+                                case ConsoleKey.A:
+                                    if (p.Inventory.Count >= 1) { p.Inventory[0].use(p); }
+                                    break;
+                                case ConsoleKey.Z:
+                                    if (p.Inventory.Count >= 2) { p.Inventory[1].use(p); }
+                                    break;
+                                case ConsoleKey.E:
+                                    if (p.Inventory.Count >= 3) { p.Inventory[2].use(p); } 
+                                    p.Inventory[2].use(p);
+                                    break;
+                                case ConsoleKey.R:
+                                    if (p.Inventory.Count >= 4) { p.Inventory[3].use(p); }
+                                    break;
+                                case ConsoleKey.T:
+                                    if (p.Inventory.Count >= 5) { p.Inventory[4].use(p); }
+                                    break;
+                                case ConsoleKey.Y:
+                                    if (p.Inventory.Count >= 6) { p.Inventory[5].use(p); }
+                                    break;
+                                case ConsoleKey.Escape:
+                                    isDisplayingInventory = false;
+                                    Console.Clear();
+                                    Map.DisplayMap(p.PlayerTeam, init.map);
+                                    break;
 
-                                Map.DisplayMap(p.PlayerTeam, init.map);
-                                break;
+                            }
                         }
-                        break;
+                            break;
                     case ConsoleKey.T:
+                        Console.Clear();
+                        bool isDisplayingTeam = true;
                         UI.DisplayTeam(p, 0);
-                        switch (key)
+                        while(isDisplayingTeam)
                         {
-                            case ConsoleKey.A:
-                                UI.DisplayTeam(p, 0);
-                                break;
-                            case ConsoleKey.Z:
-                                UI.DisplayTeam(p, 1);
-                                break;
-                            case ConsoleKey.E:
-                                UI.DisplayTeam(p, 2);
-                                break;
-                            case ConsoleKey.R:
-                                UI.DisplayTeam(p, 3);
-                                break;
+                            key = Console.ReadKey(true).Key;
+                            Events(key, p, init);
+                            switch (key)
+                            {
+                                case ConsoleKey.A:
+                                    Console.Clear();
+                                    UI.DisplayTeam(p, 0);
+                                    break;
+                                case ConsoleKey.Z:
+                                    Console.Clear();
+                                    UI.DisplayTeam(p, 1);
+                                    break;
+                                case ConsoleKey.E:
+                                    Console.Clear();
+                                    UI.DisplayTeam(p, 2);
+                                    break;
+                                case ConsoleKey.R:
+                                    Console.Clear();
+                                    UI.DisplayTeam(p, 3);
+                                    break;
+                                case ConsoleKey.Escape:
+                                    isDisplayingTeam = false;
+                                    Console.Clear();
+                                    Map.DisplayMap(p.PlayerTeam, init.map);
+                                    break;
+                            }
                         }
                         break;
                     case ConsoleKey.P:
+                        Console.Clear();
+                        bool isDisplayingPause = true;
+                        UI.DisplayPause();
+                        while (isDisplayingPause)
+                        {
+                            key = Console.ReadKey(true).Key;
+                            Events(key, p, init);
+                            switch (key)
+                            {
+                                case ConsoleKey.Escape:
+                                    isDisplayingPause = false;
+                                    Console.Clear();
+                                    Map.DisplayMap(p.PlayerTeam, init.map);
+                                    break;
+                            }
+                        }
                         break;
                     case ConsoleKey.F:
                         switch (Map.interactionRadar(p))
