@@ -63,6 +63,8 @@ namespace HSRLikeProject
 
         public void fight(Initialize init, Player p, int fightType)
         {
+            bool cocoliaFightWin = false;
+
             InFight = true;
 
             while (InFight) {
@@ -70,6 +72,7 @@ namespace HSRLikeProject
                 // Fight against normal mobs
                 if (fightType == 0)
                 {
+                    Console.Clear();
                     /* Tentative de création d'équipe ennemi de taille et composition aléatoire :
                     Random rnd = new Random();
                     EnemyCount = rnd.Next(1, 5);
@@ -86,26 +89,28 @@ namespace HSRLikeProject
                             FightingEnemyList.Add(init.EnemyList[0]);
                         }
                     }*/
-                    Console.Clear();
-
-                    FightingEnemyList.Add(init.EnemyList[0]);
-                    FightingEnemyList.Add(init.EnemyList[1]);
-                    FightingEnemyList.Add(init.EnemyList[2]);
-                    UI.DisplayFight(p);
-
-                    for (int i = 0; i < FightingEnemyList.Count; i++)
+                    if (!FightingEnemyList.Contains(init.EnemyList[0]))
                     {
-                        Console.WriteLine(FightingEnemyList[i].Name);
+                        FightingEnemyList.Add(init.EnemyList[0]);
                     }
+                    if (!FightingEnemyList.Contains(init.EnemyList[1]))
+                    {
+                        FightingEnemyList.Add(init.EnemyList[1]);
+                    }
+                    if (!FightingEnemyList.Contains(init.EnemyList[2]))
+                    {
+                        FightingEnemyList.Add(init.EnemyList[2]);
+                    }
+
 
                     for (int i = 0;i < FightingEnemyList.Count; i++)
                     {
                         for (int j = 0; j < p.PlayerTeam.Length; j++)
                         {
-                            if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[j].checkIfDead() == true)
+                            if (FightingEnemyList.Count > 0 && p.PlayerTeam[j].checkIfDead() == true)
                             {
                                 CurrentCharacter = j;
-                                Console.WriteLine("stp attak mon reufg");
+                                UI.DisplayFight(p);
                                 WaitAction = true;
                                 while (WaitAction == true)
                                 {
@@ -115,14 +120,9 @@ namespace HSRLikeProject
                                     if (WaitAction == false)
                                     {
                                         p.PlayerTeam[j].attack(p, init);
-                                        Console.WriteLine(p.PlayerTeam[j].Name);
-                                        Console.WriteLine(p.PlayerTeam[j].HP);
                                         for (int l = 0; l < FightingEnemyList.Count; l++)
                                         {
-                                            if (p.FightingEnemyList[l].HP <= 0)
-                                            {
-                                                p.FightingEnemyList[l].die(p);
-                                            }
+                                            p.FightingEnemyList[0].die(p);
                                         }
                                     }
                                 }
@@ -131,13 +131,9 @@ namespace HSRLikeProject
                                     if (FightingEnemyList.Count > 1)
                                     {
                                         FightingEnemyList[i].Attack(p);
-                                        Console.WriteLine(FightingEnemyList[i].Name);
-                                        Console.WriteLine(FightingEnemyList[i].HP);
                                     } else if (FightingEnemyList.Count == 1)
                                     {
                                         FightingEnemyList[0].Attack(p);
-                                        Console.WriteLine(FightingEnemyList[0].Name);
-                                        Console.WriteLine(FightingEnemyList[0].HP);
                                     }
                                 }
                                 else if (FightingEnemyList.Count == 0 && p.PlayerTeam[j].checkIfDead() == true)
@@ -146,6 +142,7 @@ namespace HSRLikeProject
                                     WinCount += 1;
                                     InFight = false;
                                     p.PlayerTeam[j].levelUp(p);
+                                    init.EnemyList[0].levelBalance(init);
                                     break;
                                 }
                                 else if (FightingEnemyList.Count > 0 && p.PlayerTeam[j].checkIfDead() == false)
@@ -153,6 +150,14 @@ namespace HSRLikeProject
                                     InFight = false;
                                     p.PlayerTeam[j].HP = p.PlayerTeam[j].MaxHP;
                                     p.PlayerTeam[j].ATK = p.PlayerTeam[j].BaseATK;
+                                    init.EnemyList[i].HP = init.EnemyList[i].MaxHP;
+                                    init.EnemyList[i].AttackPattern = 0;
+                                    if (i == 0)
+                                    {
+                                        init.EnemyList[i].Types.Add(5);
+                                        init.EnemyList[i].Types.Add(4);
+                                        init.EnemyList[i].Types.Add(3);
+                                    }
                                     break;
                                 }
                             }
@@ -163,16 +168,19 @@ namespace HSRLikeProject
                 // Fight against a mimic
                 else if (fightType == 1)
                 {
-                    FightingEnemyList.Add(init.EnemyList[3]);
+                    if (!FightingEnemyList.Contains(init.EnemyList[3]))
+                    {
+                        FightingEnemyList.Add(init.EnemyList[3]);
+                    }
+
                     Console.Clear();
-                    UI.DisplayFight(p);
+
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
-                        if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                        if (FightingEnemyList.Count > 0 && p.PlayerTeam[i].checkIfDead() == true)
                         {
                             CurrentCharacter = i;
-                            Console.WriteLine("Current character id" + CurrentCharacter);
-                            Console.WriteLine("stp attak mon reufg");
+                            UI.DisplayFight(p);
                             WaitAction = true;
                             while (WaitAction == true)
                             {
@@ -182,28 +190,38 @@ namespace HSRLikeProject
                                 if (WaitAction == false)
                                 {
                                     p.PlayerTeam[i].attack(p, init);
-                                    Console.WriteLine(p.PlayerTeam[i].Name);
-                                    Console.WriteLine(p.PlayerTeam[i].HP);
-                                    Console.WriteLine(p.PlayerTeam[i].Id);
+
+                                    p.FightingEnemyList[0].die(p);
+
                                 }
                             }
-                            FightingEnemyList[0].Attack(p);
-                            Console.WriteLine(FightingEnemyList[0].Name);
-                            Console.WriteLine(FightingEnemyList[0].HP);
+                            if (FightingEnemyList.Count > 0)
+                            {
+                                FightingEnemyList[0].Attack(p);
+                            }
                         }
-                        if (FightingEnemyList[0].checkIfDead() == false && p.PlayerTeam[i].checkIfDead() == true)
+                        if (FightingEnemyList.Count == 0 && p.PlayerTeam[i].checkIfDead() == true)
                         {
                             WinFight = true;
                             WinCount += 1;
                             InFight = false;
                             p.PlayerTeam[i].levelUp(p);
+                            init.EnemyList[0].levelBalance(init); 
                             break;
                         }
-                        else if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == false)
+                        else if (FightingEnemyList.Count > 0 && p.PlayerTeam[i].checkIfDead() == false)
                         {
                             InFight = false;
                             p.PlayerTeam[i].HP = p.PlayerTeam[i].MaxHP;
                             p.PlayerTeam[i].ATK = p.PlayerTeam[i].BaseATK;
+                            init.EnemyList[i].HP = init.EnemyList[i].MaxHP;
+                            init.EnemyList[i].AttackPattern = 0;
+                            if (i == 0)
+                            {
+                                init.EnemyList[i].Types.Add(5);
+                                init.EnemyList[i].Types.Add(4);
+                                init.EnemyList[i].Types.Add(3);
+                            }
                             break;
                         }
                     }
@@ -212,16 +230,19 @@ namespace HSRLikeProject
                 // Fight against Cocolia
                 else if (fightType == 2)
                 {
-                    FightingEnemyList.Add(init.EnemyList[4]);
+                    if (!FightingEnemyList.Contains(init.EnemyList[4]))
+                    { 
+                        FightingEnemyList.Add(init.EnemyList[4]);
+                    }
+
                     Console.Clear();
-                    UI.DisplayFight(p);
+
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
-                        if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
+                        if (FightingEnemyList.Count > 0 && p.PlayerTeam[i].checkIfDead() == true)
                         {
                             CurrentCharacter = i;
-                            Console.WriteLine("Current character id" + CurrentCharacter);
-                            Console.WriteLine("stp attak mon reufg");
+                            UI.DisplayFight(p);
                             WaitAction = true;
                             while (WaitAction == true)
                             {
@@ -231,37 +252,46 @@ namespace HSRLikeProject
                                 if (WaitAction == false)
                                 {
                                     p.PlayerTeam[i].attack(p, init);
-                                    Console.WriteLine(p.PlayerTeam[i].Name);
-                                    Console.WriteLine(p.PlayerTeam[i].HP);
-                                    Console.WriteLine(p.PlayerTeam[i].Id);
+
+                                    p.FightingEnemyList[0].die(p);
+                                    
                                 }
                             }
                             if (i % 2 != 0) 
                             {
-                                FightingEnemyList[0].Attack(p);
-                                Console.WriteLine(FightingEnemyList[0].HP);
+                                if (FightingEnemyList.Count > 0)
+                                {
+                                    FightingEnemyList[0].Attack(p);
+                                }
+                                                                
                             }
                         }
-                        if (FightingEnemyList[0].checkIfDead() == false && p.PlayerTeam[i].checkIfDead() == true)
+                        if (FightingEnemyList.Count == 0 && p.PlayerTeam[i].checkIfDead() == true)
                         {
-                            WinFight = true;
-                            WinCount += 1;
                             InFight = false;
-                            p.PlayerTeam[i].levelUp(p);
-                            break;
+                            cocoliaFightWin = true;
+                            Console.Clear();
+                            UI.DisplayEnd(init);
+
                         }
-                        else if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == false)
+                        else if (FightingEnemyList.Count > 0 && p.PlayerTeam[i].checkIfDead() == false)
                         {
                             InFight = false;
                             p.PlayerTeam[i].HP = p.PlayerTeam[i].MaxHP;
                             p.PlayerTeam[i].ATK = p.PlayerTeam[i].BaseATK;
+                            init.EnemyList[4].HP = init.EnemyList[4].MaxHP;
+                            init.EnemyList[4].AttackPattern = 0;
+                            
                             break;
                         }
                     }
                 }
             }
-            Console.Clear();
-            Map.DisplayMap(p.PlayerTeam, init.map);
+            if( cocoliaFightWin == false)
+            {
+                Console.Clear();
+                Map.DisplayMap(p.PlayerTeam, init.map);
+            }
         }
     }
 }

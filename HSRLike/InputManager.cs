@@ -40,22 +40,33 @@ namespace HSRLike
                             
                                 case ConsoleKey.A:
                                     if (p.Inventory.Count >= 1) { p.Inventory[0].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.Z:
                                     if (p.Inventory.Count >= 2) { p.Inventory[1].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.E:
-                                    if (p.Inventory.Count >= 3) { p.Inventory[2].use(p); } 
-                                    p.Inventory[2].use(p);
+                                    if (p.Inventory.Count >= 3) { p.Inventory[2].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.R:
                                     if (p.Inventory.Count >= 4) { p.Inventory[3].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.T:
                                     if (p.Inventory.Count >= 5) { p.Inventory[4].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.Y:
                                     if (p.Inventory.Count >= 6) { p.Inventory[5].use(p); }
+                                    Console.Clear();
+                                    UI.DisplayInventory(p);
                                     break;
                                 case ConsoleKey.Escape:
                                     isDisplayingInventory = false;
@@ -121,6 +132,8 @@ namespace HSRLike
                     case ConsoleKey.F:
                         switch (Map.interactionRadar(p))
                         {
+                            case -1:
+                                break;
                             case <= 3: // NPCs (Cocolia boss included, condition in startDialog())
                                 init.NPCList[Map.interactionRadar(p)].startDialog(init, init.NPCList[Map.interactionRadar(p)], p);
                                 break;

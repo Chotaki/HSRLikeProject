@@ -45,10 +45,12 @@ namespace HSRLike
 
             Random rnd = new Random();
 
-            dps1 = DpsList[rnd.Next(DpsList.Count)];
+            /*dps1 = DpsList[rnd.Next(DpsList.Count)];*/
+            dps1 = DpsList[1];
             DpsList.Remove(dps1);
 
-            dps2 = DpsList[rnd.Next(DpsList.Count)];
+            /*dps2 = DpsList[rnd.Next(DpsList.Count)];*/
+            dps2 = DpsList[2];
 
             healer = HealerList[rnd.Next(HealerList.Count)];
 

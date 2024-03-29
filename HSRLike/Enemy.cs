@@ -19,12 +19,15 @@ namespace HSRLikeProject
         private static bool _boss;
         private List<int> _types;
         private int _attackPattern;
+        private int _maxHp;
+
         public string Name { get { return _name; } }
         public int AttackPattern { get { return _attackPattern; } set => _attackPattern = value; }
         public int HP { get => _hp; set => _hp = value; }
         public int Atk { get => _atk; set =>  _atk = value; }
         public bool Alive { get => _alive; set => _alive = value; }
         public List<int> Types { get => _types; }
+        public int MaxHP { get => _maxHp; set => _maxHp = value; }
 
         public List<EnemySkill> skillList = new List<EnemySkill> { };
         public Dictionary<int, string> enemyTypes = new Dictionary<int, string>
@@ -42,6 +45,7 @@ namespace HSRLikeProject
         {
             _id = eId;
             _name = eName;
+            _maxHp = eHp;
             _hp = eHp;
             _atk = eAtk;
             _alive = eAlive;
@@ -187,20 +191,7 @@ namespace HSRLikeProject
                             //to do : afficher le nom de l'attaque en fonction de son attack pattern :)
                             this.AttackPattern = 1;
                             damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter].Def / 100);
-                            p.PlayerTeam[p.CurrentCharacter].takeDamage(damage);
-                            for (int i = 1; i < 3; i++)
-                            {
-                                if (p.PlayerTeam[p.CurrentCharacter + i].checkIfDead() == false && p.CurrentCharacter + i <= p.PlayerTeam.Length)
-                                {
-                                    damage = (int)Math.Round(this.Atk * this.skillList[this.AttackPattern].damageMultiplier - p.PlayerTeam[p.CurrentCharacter + i].Def / 100);
-                                    p.PlayerTeam[p.CurrentCharacter + i].takeDamage(damage);                         
-                                    
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
+                            p.PlayerTeam[p.CurrentCharacter].takeDamage(damage); 
                             isAttackDone = true;
                         }
                         else if (result == 10 && this.AttackPattern != 2)
@@ -254,16 +245,36 @@ namespace HSRLikeProject
 
         public void die(Player p) //*élimine l'ennemi s'il n'a plus d'hp ou qu'il disparaît cf. magoretThirdSkill*
         {
-                Console.WriteLine("{0} est mort au combat", p.FightingEnemyList[0].Name);
-                p.FightingEnemyList.Remove(p.FightingEnemyList[0]);
-        }
-       
-        public void levelBalance (Initialize init)
-        {
-            for (int i = 0;  i < init.EnemyList.Count - 1; i++)
+            for (int i = 0;i < p.FightingEnemyList.Count ; i++)
             {
-                init.EnemyList[i].HP += 67;
+                if (p.FightingEnemyList[i].HP <= 0)
+                {
+
+                    p.FightingEnemyList[i].Alive = false;
+                    p.FightingEnemyList.Remove(p.FightingEnemyList[i]);
+                    i--;
+                }
+            }
+        }
+
+        public void levelBalance(Initialize init)
+        {
+            for (int i = 0; i < init.EnemyList.Count - 1; i++)
+            {
+                init.EnemyList[i].MaxHP += 67;
                 init.EnemyList[i].Atk += 25;
+                init.EnemyList[i].HP = init.EnemyList[i].MaxHP;
+                init.EnemyList[i].AttackPattern = 0;
+                if (i != 3) 
+                {
+                    init.EnemyList[i].Alive = true; 
+                }
+                if (i == 0 && init.EnemyList[0].Types.Count == 0)
+                {
+                    init.EnemyList[i].Types.Add(5);
+                    init.EnemyList[i].Types.Add(4);
+                    init.EnemyList[i].Types.Add(3);
+                }
             }
         }
 

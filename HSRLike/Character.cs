@@ -497,21 +497,20 @@ namespace HSRLikeProject
             int damage;
             int gainedEnergy = 20;
 
-            for (int i = 0; i < p.FightingEnemyList[0].Types.Count; i++)
-            {
-                if (this.CharacterType == p.FightingEnemyList[0].Types[i])
+
+                if (p.FightingEnemyList[0].Types.Contains(this.Type))
                 {
                     // If the enemiy's "weakness" is the character's "element", +10% damage
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier * 1.1);
                     p.FightingEnemyList[0].takeDamage(damage);
-                    break;
+                    
                 } else
                 {
                     damage = (int)Math.Round(this.ATK * this.SkillList[0].multiplier);
                     p.FightingEnemyList[0].takeDamage(damage);
-                    break;
+                  
                 }
-            }
+            
 
             this.Energy += gainedEnergy;
             if (this.Energy > 100) { this.Energy = 100; }
@@ -525,9 +524,8 @@ namespace HSRLikeProject
             // 0-Single Target (scale : atk)
             if (this.SkillList[1].attackType == 0)
             {
-                for (int i = 0; i < p.FightingEnemyList[0].Types.Count; i++)
-                {
-                    if (this.Type == p.FightingEnemyList[0].Types[i])
+
+                    if (p.FightingEnemyList[0].Types.Contains(this.Type))
                     {
                         // If the enemy's "weakness" is the character's "element", +10% damage
                         damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
@@ -538,142 +536,132 @@ namespace HSRLikeProject
                         damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
                         p.FightingEnemyList[0].takeDamage(damage);
                     }
-                }
+                
             }
 
             // 1-Blast (if 4-Trailblazer : damage = damage | if 7-Acheron : damage = 60% atk)
             if (this.SkillList[1].attackType == 1 && this.Id == 4)
             {
-                for (int i = 0; i < p.FightingEnemyList[0].Types.Count; i++)
-                {
-                    int enemyCount = p.FightingEnemyList.Count;
+                int enemyCount = p.FightingEnemyList.Count;
 
-                    switch (enemyCount)
-                    {
-                        case 1:
-                            for (int j = 0; j < p.FightingEnemyList[0].Types.Count; j++)
+                switch (enemyCount)
+                {
+                    case 1:
+
+                            if (p.FightingEnemyList[0].Types.Contains(this.Type))
                             {
-                                if (this.Type == p.FightingEnemyList[0].Types[j])
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                                p.FightingEnemyList[0].takeDamage(damage);
+                            }
+                            else
+                            {
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                                p.FightingEnemyList[0].takeDamage(damage);
+                            }
+                            
+                        break;
+                    case 2:
+                            if (p.FightingEnemyList[0].Types.Contains(this.Type))
+                            {
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                                for (int k = 0; k < 2; k++)
                                 {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    p.FightingEnemyList[0].takeDamage(damage);
+                                    p.FightingEnemyList[k].takeDamage(damage);
                                 }
                             }
-                            break;
-                        case 2:
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
+                            else
                             {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                                for (int k = 0; k < 2; k++)
                                 {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    for (int k = 0; k < 2; k++)
-                                    {
-                                        p.FightingEnemyList[k].takeDamage(damage);
-                                    }
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    for (int k = 0; k < 2; k++)
-                                    {
-                                        p.FightingEnemyList[k].takeDamage(damage);
-                                    }
+                                    p.FightingEnemyList[k].takeDamage(damage);
                                 }
                             }
-                            break;
-                        case >= 3 :
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
+                            
+                        break;
+                    case >= 3 :
+
+                            if (p.FightingEnemyList[0].Types.Contains(this.Type))
                             {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                                for (int k = 0; k < 3; k++)
                                 {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    for (int k = 0; k < 3; k++)
-                                    {
-                                        p.FightingEnemyList[k].takeDamage(damage);
-                                    }
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    for (int k = 0; k < 3; k++)
-                                    {
-                                        p.FightingEnemyList[k].takeDamage(damage);
-                                    }
+                                    p.FightingEnemyList[k].takeDamage(damage);
                                 }
                             }
-                            break;
-                    }
+                            else
+                            {
+                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                                for (int k = 0; k < 3; k++)
+                                {
+                                    p.FightingEnemyList[k].takeDamage(damage);
+                                }
+                            }
+                          
+                        break;
+                    
                 }
             } else if (this.SkillList[1].attackType == 1 && this.Id == 3)
             {
-                for (int i = 0; i < p.FightingEnemyList.Count; i++)
-                {
-                    int enemyCount = p.FightingEnemyList.Count;
+                
+                int enemyCount = p.FightingEnemyList.Count;
 
-                    switch (enemyCount)
-                    {
-                        case 1:
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
-                            {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                }
-                            }
-                            break;
-                        case 2:
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
-                            {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    int blastDamage = (int)Math.Round(this.ATK * 0.7);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                    p.FightingEnemyList[1].takeDamage(blastDamage);
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    int blastDamage = (int)Math.Round(this.ATK * 0.6);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                    p.FightingEnemyList[1].takeDamage(blastDamage);
-                                }
-                            }
-                            break;
-                        case >= 3:
-                            for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
-                            {
-                                if (this.Type == p.FightingEnemyList[i].Types[j])
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                    int blastDamage = (int)Math.Round(this.ATK * 0.7);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                    p.FightingEnemyList[1].takeDamage(blastDamage);
-                                    p.FightingEnemyList[2].takeDamage(blastDamage);
-                                }
-                                else
-                                {
-                                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                    int blastDamage = (int)Math.Round(this.ATK * 0.6);
-                                    p.FightingEnemyList[0].takeDamage(damage);
-                                    p.FightingEnemyList[1].takeDamage(blastDamage);
-                                    p.FightingEnemyList[2].takeDamage(blastDamage);
-                                }
-                            }
-                            break;
-                    }
+                switch (enemyCount)
+                {
+                    case 1:
+
+                        if (p.FightingEnemyList[0].Types.Contains(this.Type))
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                        }
+                        else
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                        }
+                            
+                        break;
+                    case 2:
+
+                        if (p.FightingEnemyList[0].Types.Contains(this.Type))
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                            int blastDamage = (int)Math.Round(this.ATK * 0.7);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                            p.FightingEnemyList[1].takeDamage(blastDamage);
+                        }
+                        else
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                            int blastDamage = (int)Math.Round(this.ATK * 0.6);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                            p.FightingEnemyList[1].takeDamage(blastDamage);
+                        }
+                            
+                        break;
+                    case >= 3:
+
+                        if (p.FightingEnemyList[0].Types.Contains(this.Type))
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                            int blastDamage = (int)Math.Round(this.ATK * 0.7);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                            p.FightingEnemyList[1].takeDamage(blastDamage);
+                            p.FightingEnemyList[2].takeDamage(blastDamage);
+                        }
+                        else
+                        {
+                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                            int blastDamage = (int)Math.Round(this.ATK * 0.6);
+                            p.FightingEnemyList[0].takeDamage(damage);
+                            p.FightingEnemyList[1].takeDamage(blastDamage);
+                            p.FightingEnemyList[2].takeDamage(blastDamage);
+                        }
+                            
+                        break;
                 }
+                
             }
 
             // 2-AoE (scale : atk)
@@ -681,19 +669,18 @@ namespace HSRLikeProject
             {
                 for (int i = 0; i < p.FightingEnemyList.Count; i++)
                 {
-                    for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
+
+                    if (p.FightingEnemyList[i].Types.Contains(this.Type))
                     {
-                        if (this.Type == p.FightingEnemyList[i].Types[j])
-                        {
-                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                            p.FightingEnemyList[i].takeDamage(damage);
-                        }
-                        else
-                        {
-                            damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                            p.FightingEnemyList[i].takeDamage(damage);
-                        }
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                        p.FightingEnemyList[i].takeDamage(damage);
                     }
+                    else
+                    {
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                        p.FightingEnemyList[i].takeDamage(damage);
+                    }
+                    
                 }
             }
 
@@ -742,21 +729,18 @@ namespace HSRLikeProject
 
                 for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < p.FightingEnemyList.Count; j++)
+
+                    if (p.FightingEnemyList[0].Types.Contains(this.Type))
                     {
-                        for (int k = 0; k < p.FightingEnemyList[0].Types.Count; k++)
-                        {
-                            if (this.Type == p.FightingEnemyList[0].Types[k])
-                            {
-                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                                p.FightingEnemyList[rnd.Next(p.FightingEnemyList.Count - 1)].takeDamage(damage);
-                            } else
-                            {
-                                damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                                p.FightingEnemyList[rnd.Next(p.FightingEnemyList.Count - 1)].takeDamage(damage);
-                            }
-                        }
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                        p.FightingEnemyList[rnd.Next(p.FightingEnemyList.Count - 1)].takeDamage(damage);
+                    } else
+                    {
+                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                        p.FightingEnemyList[rnd.Next(p.FightingEnemyList.Count - 1)].takeDamage(damage);
                     }
+                        
+                    
                 }
             }
 
@@ -771,36 +755,34 @@ namespace HSRLikeProject
             // 0-Single Target (atk | if 7-Aventurine, scale : def)
             if (this.SkillList[2].attackType == 0 && this.Id != 7)
             {
-                for (int i = 0; i < p.FightingEnemyList[0].Types.Count; i++)
+
+                if (p.FightingEnemyList[0].Types.Contains(this.Type))
                 {
-                    if (this.Type == p.FightingEnemyList[0].Types[i])
-                    {
-                        // If the enemy's "weakness" is the character's "element", +10% damage
-                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
-                        p.FightingEnemyList[0].takeDamage(damage);
-                    }
-                    else
-                    {
-                        damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
-                        p.FightingEnemyList[0].takeDamage(damage);
-                    }
+                    // If the enemy's "weakness" is the character's "element", +10% damage
+                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier * 1.1);
+                    p.FightingEnemyList[0].takeDamage(damage);
                 }
+                else
+                {
+                    damage = (int)Math.Round(this.ATK * this.SkillList[1].multiplier);
+                    p.FightingEnemyList[0].takeDamage(damage);
+                }
+                
             } else if (this.SkillList[2].attackType == 0 && this.Id == 7)
             {
-                for (int i = 0; i < p.FightingEnemyList[0].Types.Count; i++)
+
+                if (p.FightingEnemyList[0].Types.Contains(this.Type))
                 {
-                    if (this.Type == p.FightingEnemyList[0].Types[i])
-                    {
-                        // If the enemy's "weakness" is the character's "element", +10% damage
-                        damage = (int)Math.Round(this.Def * this.SkillList[1].multiplier * 1.1);
-                        p.FightingEnemyList[0].takeDamage(damage);
-                    }
-                    else
-                    {
-                        damage = (int)Math.Round(this.Def * this.SkillList[1].multiplier);
-                        p.FightingEnemyList[0].takeDamage(damage);
-                    }
+                    // If the enemy's "weakness" is the character's "element", +10% damage
+                    damage = (int)Math.Round(this.Def * this.SkillList[1].multiplier * 1.1);
+                    p.FightingEnemyList[0].takeDamage(damage);
                 }
+                else
+                {
+                    damage = (int)Math.Round(this.Def * this.SkillList[1].multiplier);
+                    p.FightingEnemyList[0].takeDamage(damage);
+                }
+                
             }
 
             // 2-AoE (atk)
@@ -808,19 +790,18 @@ namespace HSRLikeProject
             {
                 for (int i = 0; i < p.FightingEnemyList.Count; i++)
                 {
-                    for (int j = 0; j < p.FightingEnemyList[i].Types.Count; j++)
+                    
+                    if (p.FightingEnemyList[0].Types.Contains(this.Type))
                     {
-                        if (this.Type == p.FightingEnemyList[i].Types[j])
-                        {
-                            damage = (int)Math.Round(this.ATK * this.SkillList[2].multiplier * 1.1);
-                            p.FightingEnemyList[i].takeDamage(damage);
-                        }
-                        else
-                        {
-                            damage = (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
-                            p.FightingEnemyList[i].takeDamage(damage);
-                        }
+                        damage = (int)Math.Round(this.ATK * this.SkillList[2].multiplier * 1.1);
+                        p.FightingEnemyList[i].takeDamage(damage);
                     }
+                    else
+                    {
+                        damage = (int)Math.Round(this.ATK * this.SkillList[2].multiplier);
+                        p.FightingEnemyList[i].takeDamage(damage);
+                    }
+                    
                 }
             }
 
@@ -929,7 +910,7 @@ namespace HSRLikeProject
         public void levelUp(Player p)
         {
             for (int i = 0; i < p.PlayerTeam.Length; i++) { 
-                if (p.WinFight == true && p.WinCount <= 10)
+                if (p.WinFight == true && p.WinCount < 10)
                 {
                     p.PlayerTeam[i].Lvl += 1;
 
