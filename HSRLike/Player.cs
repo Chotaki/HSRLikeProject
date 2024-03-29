@@ -70,6 +70,7 @@ namespace HSRLikeProject
                 // Fight against normal mobs
                 if (fightType == 0)
                 {
+                    Console.Clear();
                     /* Tentative de création d'équipe ennemi de taille et composition aléatoire :
                     Random rnd = new Random();
                     EnemyCount = rnd.Next(1, 5);
@@ -91,11 +92,8 @@ namespace HSRLikeProject
                     FightingEnemyList.Add(init.EnemyList[1]);
                     FightingEnemyList.Add(init.EnemyList[2]);
 
-                    for (int i = 0; i < FightingEnemyList.Count; i++)
-                    {
-                        Console.WriteLine(FightingEnemyList[i].Name);
-                    }
-
+                    UI.DisplayFight(p);
+                    
                     for (int i = 0;i < FightingEnemyList.Count; i++)
                     {
                         for (int j = 0; j < p.PlayerTeam.Length; j++)
@@ -162,6 +160,10 @@ namespace HSRLikeProject
                 else if (fightType == 1)
                 {
                     FightingEnemyList.Add(init.EnemyList[3]);
+
+                    Console.Clear();
+                    UI.DisplayFight(p);
+
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
@@ -208,7 +210,12 @@ namespace HSRLikeProject
                 // Fight against Cocolia
                 else if (fightType == 2)
                 {
+
                     FightingEnemyList.Add(init.EnemyList[4]);
+
+                    Console.Clear();
+                    UI.DisplayFight(p);
+
                     for (int i = 0; i < PlayerTeam.Length; i++)
                     {
                         if (FightingEnemyList[0].checkIfDead() == true && p.PlayerTeam[i].checkIfDead() == true)
@@ -254,6 +261,8 @@ namespace HSRLikeProject
                     }
                 }
             }
+            Console.Clear();
+            Map.DisplayMap(p.PlayerTeam, init.map);
         }
     }
 }

@@ -126,7 +126,7 @@ namespace HSRLike
             Console.ForegroundColor = ConsoleColor.Gray;
 
             espacement = 6;
-            for (int i = 0; i < p.EnemyCount; i++)
+            for (int i = 0; i < p.FightingEnemyList.Count; i++)
             {
                 Console.SetCursorPosition(160, 10 + espacement);
                 Console.Write(p.FightingEnemyList[i].Name);
