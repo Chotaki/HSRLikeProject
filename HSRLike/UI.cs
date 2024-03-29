@@ -70,7 +70,7 @@ namespace HSRLike
             Console.SetCursorPosition(70, 12 + espacement);
             Console.Write("Description :");
             Console.SetCursorPosition(70, 13 +espacement);
-            Console.Write(p.PlayerTeam[p.CurrentCharacter].SkillList[i].desc);
+            Console.Write(p.PlayerTeam[selection].SkillList[i].desc);
                 espacement += 6;
             }
 
