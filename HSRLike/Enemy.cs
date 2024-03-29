@@ -115,7 +115,7 @@ namespace HSRLikeProject
             mimicSkill.name = "Morsure du coffre";
 
             List<EnemySkill> mimicSkills = new List<EnemySkill>() { mimicSkill };
-            Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { 7 }, mimicSkills);
+            Enemy mimic = new Enemy(4, "Mimic", 150, 20, true, false, new List<int> { }, mimicSkills);
             enemyList.Add(mimic);
 
             //Cocolia

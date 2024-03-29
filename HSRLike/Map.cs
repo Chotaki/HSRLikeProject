@@ -14,6 +14,9 @@ namespace HSRLikeProject
     public class Map
     {
 
+        private bool[] _fights = new[] {false, false,  false, false, false, false, false, false}; 
+
+        public bool[] Fights { get => _fights; set => _fights = value; }
 
         public static void DisplayMap(Character[] playerTeam, string[] lines)
         {
@@ -115,9 +118,7 @@ namespace HSRLikeProject
             Console.SetCursorPosition(155, 30);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("#");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-
-            //Enemy
+            Console.ForegroundColor = ConsoleColor.DarkGray;      
 
 
         }
@@ -151,7 +152,6 @@ namespace HSRLikeProject
             p.Position[0] -= 1;
             p.Position[1] += 1;
         }
-
 
         public static void Move(int moveSide, int moveUpDown, Player p, Initialize init) 
         {
@@ -275,6 +275,58 @@ namespace HSRLikeProject
             return 0;
         }
 
+        public void startFight(Player p, Initialize init)
+        {
+
+            if (p.Position[0] > 115 && p.Position[0] < 118 && p.Position[1] > 4 && p.Position[1] < 7 && Fights[0] == false) 
+            {
+                p.fight(init,p,0);
+                Fights[0] = true;
+            }
+
+            else if (p.Position[0] > 66 && p.Position[0] < 71 && p.Position[1] > 13 && p.Position[1] < 18 && Fights[1] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[1] = true;
+            }
+
+            else if (p.Position[0] > 170 && p.Position[0] < 179 && p.Position[1] > 5 && p.Position[1] < 10 && Fights[2] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[2] = true;
+            }
+
+            else if (p.Position[0] > 145 && p.Position[0] < 150 && p.Position[1] > 8 && p.Position[1] < 13 && Fights[3] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[3] = true;
+            }
+
+            else if (p.Position[0] > 100 && p.Position[0] < 110 && p.Position[1] > 18 && p.Position[1] < 23 && Fights[4] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[4] = true;
+            }
+
+            else if (p.Position[0] > 130 && p.Position[0] < 135 && p.Position[1] > 30 && p.Position[1] < 35 && Fights[5] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[5] = true;
+            }
+
+            else if (p.Position[0] > 90 && p.Position[0] < 95 && p.Position[1] > 32 && p.Position[1] < 37 && Fights[6] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[6] = true;
+            }
+
+            else if (p.Position[0] > 115 && p.Position[0] < 118 && p.Position[1] > 4 && p.Position[1] < 7 && Fights[7] == false)
+            {
+                p.fight(init, p, 0);
+                Fights[7] = true;
+            }
+            
+        }
     }
 }
 
